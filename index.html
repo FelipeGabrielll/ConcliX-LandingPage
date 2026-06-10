@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <!--
+    ============================================================
+    ConcliX — Landing Page
+    Arquivo: index.html
+    Descrição: Estrutura semântica principal da Single Page
+               Application. Toda a navegação é âncora interna
+               com rolagem suave gerenciada pelo script.js.
+    Tecnologias: HTML5 semântico, CSS3 (style.css), JavaScript ES6+
+    Autor: Equipe ConcliX
+    ============================================================
+  -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="ConcliX — Sistema conciliador de marketplaces. Audite e valide seus repasses financeiros automaticamente." />
+  <title>ConcliX — Conciliação Inteligente de Marketplaces</title>
+
+  <!-- Tipografia: Syne (display) + DM Sans (corpo) via Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       HEADER — Navegacao principal e identidade da marca
+       Recebe a classe .header--scrolled via JavaScript ao rolar.
+       ============================================================ -->
+  <header class="header" id="header" role="banner">
+    <div class="container header__inner">
+
+      <!-- Logotipo textual da marca -->
+      <a href="#hero" class="header__logo" aria-label="ConcliX — Pagina inicial">
+        Concli<span class="header__logo-accent">X</span>
+      </a>
+
+      <!-- Botao de menu mobile (hamburguer) — controlado pelo script.js -->
+      <button class="header__menu-toggle" id="menuToggle" aria-label="Abrir menu de navegacao" aria-expanded="false" aria-controls="mainNav">
+        <span class="header__menu-bar"></span>
+        <span class="header__menu-bar"></span>
+        <span class="header__menu-bar"></span>
+      </button>
+
+      <!-- Navegacao principal com ancoras internas -->
+      <nav class="header__nav" id="mainNav" role="navigation" aria-label="Navegacao principal">
+        <ul class="header__nav-list">
+          <li><a href="#sistema" class="header__nav-link">O Sistema</a></li>
+          <li><a href="#como-funciona" class="header__nav-link">Como Funciona</a></li>
+          <li><a href="#integracao" class="header__nav-link">Integracao Bling</a></li>
+        </ul>
+        <!-- CTA de acesso ao sistema -->
+        <a href="#contato" class="btn btn--primary header__cta">Contratar Agora</a>
+      </nav>
+
+    </div>
+  </header>
+
+  <!-- ============================================================
+       MAIN — Conteudo principal da pagina
+       ============================================================ -->
+  <main id="main-content">
+
+    <!-- ----------------------------------------------------------
+         SECAO 1: HERO
+         Apresentacao de alto impacto com headline focada na dor
+         do cliente, subtitulo e chamada para acao principal.
+         ---------------------------------------------------------- -->
+    <section class="hero" id="hero" aria-labelledby="hero-title">
+      <div class="container hero__inner">
+
+        <div class="hero__badge">Conciliacao Financeira para E-commerce</div>
+
+        <h1 class="hero__title" id="hero-title">
+          Pare de perder dinheiro com repasses incorretos nos marketplaces.
+        </h1>
+
+        <p class="hero__subtitle">
+          O ConcliX audita cada centavo liquidado pelas plataformas, cruza com sua regra de negocio via Bling ERP e dispara alertas automaticos quando o repasse nao bate.
+        </p>
+
+        <div class="hero__actions">
+          <a href="#use-case" class="btn btn--primary">Ver Simulacao ao Vivo</a>
+          <a href="#sistema" class="btn btn--ghost">Conhecer o Sistema</a>
+        </div>
+
+        <!-- Metricas de credibilidade -->
+        <div class="hero__metrics" aria-label="Metricas do sistema">
+          <div class="hero__metric">
+            <span class="hero__metric-value">99,4%</span>
+            <span class="hero__metric-label">Precisao nas auditorias</span>
+          </div>
+          <div class="hero__metric-divider" aria-hidden="true"></div>
+          <div class="hero__metric">
+            <span class="hero__metric-value">&lt; 2 min</span>
+            <span class="hero__metric-label">Da venda ao alerta</span>
+          </div>
+          <div class="hero__metric-divider" aria-hidden="true"></div>
+          <div class="hero__metric">
+            <span class="hero__metric-value">Zero</span>
+            <span class="hero__metric-label">Configuracao manual de regras</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Elemento decorativo de fundo -->
+      <div class="hero__bg-grid" aria-hidden="true"></div>
+    </section>
+
+    <!-- ----------------------------------------------------------
+         SECAO 2: FEATURES (RECURSOS FUNCIONAIS)
+         Grid de cards detalhando os pilares do produto.
+         ---------------------------------------------------------- -->
+    <section class="features" id="sistema" aria-labelledby="features-title">
+      <div class="container">
+
+        <header class="section-header">
+          <p class="section-eyebrow">Recursos Funcionais</p>
+          <h2 class="section-title" id="features-title">O que o ConcliX faz por voce</h2>
+          <p class="section-desc">Tres camadas de protecao financeira integradas e operando de forma continua.</p>
+        </header>
+
+        <div class="features__grid">
+
+          <!-- Card 1: Auditoria Inteligente -->
+          <article class="feature-card" aria-labelledby="feature-audit-title">
+            <div class="feature-card__icon-wrap" aria-hidden="true">
+              <svg class="feature-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+                <rect x="9" y="3" width="6" height="4" rx="1"/>
+                <path d="m9 12 2 2 4-4"/>
+              </svg>
+            </div>
+            <h3 class="feature-card__title" id="feature-audit-title">Auditoria Inteligente de Repasses</h3>
+            <p class="feature-card__desc">
+              Cada transacao liquidada pelo marketplace e interceptada e comparada com o valor esperado, calculado a partir das regras de negocio cadastradas no Bling ERP.
+            </p>
+            <ul class="feature-card__list" aria-label="Detalhes da auditoria">
+              <li>Validacao em tempo real por pedido</li>
+              <li>Suporte a multiplos marketplaces simultaneamente</li>
+              <li>Historico auditavel com rastreabilidade completa</li>
+            </ul>
+          </article>
+
+          <!-- Card 2: Sistema de Alertas -->
+          <article class="feature-card feature-card--accent" aria-labelledby="feature-alert-title">
+            <div class="feature-card__icon-wrap" aria-hidden="true">
+              <svg class="feature-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                <line x1="12" y1="9" x2="12" y2="13"/>
+                <line x1="12" y1="17" x2="12.01" y2="17"/>
+              </svg>
+            </div>
+            <h3 class="feature-card__title" id="feature-alert-title">Sistema de Alertas de Divergencia</h3>
+            <p class="feature-card__desc">
+              Quando o valor liquidado e inferior ao esperado, o ConcliX aciona notificacoes automaticas para o lojista — sem depender de revisoes manuais ou planilhas.
+            </p>
+            <ul class="feature-card__list" aria-label="Detalhes dos alertas">
+              <li>Notificacoes por e-mail e dashboard</li>
+              <li>Classificacao de severidade da divergencia</li>
+              <li>Registro de todas as ocorrencias para contestacao</li>
+            </ul>
+          </article>
+
+          <!-- Card 3: Relatorios Financeiros -->
+          <article class="feature-card" aria-labelledby="feature-report-title">
+            <div class="feature-card__icon-wrap" aria-hidden="true">
+              <svg class="feature-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="18" y1="20" x2="18" y2="10"/>
+                <line x1="12" y1="20" x2="12" y2="4"/>
+                <line x1="6"  y1="20" x2="6"  y2="14"/>
+              </svg>
+            </div>
+            <h3 class="feature-card__title" id="feature-report-title">Relatorios Financeiros Consolidados</h3>
+            <p class="feature-card__desc">
+              Visao consolidada de todas as operacoes auditadas, com filtros por marketplace, periodo e status de conciliacao, pronta para subsidiar decisoes estrategicas.
+            </p>
+            <ul class="feature-card__list" aria-label="Detalhes dos relatorios">
+              <li>Dashboard com indicadores de divergencia acumulada</li>
+              <li>Exportacao para analise externa</li>
+              <li>Comparativo de performance por canal de venda</li>
+            </ul>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ----------------------------------------------------------
+         SECAO 3: COMO FUNCIONA
+         Fluxo passo a passo da mecanica principal do produto.
+         ---------------------------------------------------------- -->
+    <section class="how-it-works" id="como-funciona" aria-labelledby="how-title">
+      <div class="container">
+
+        <header class="section-header">
+          <p class="section-eyebrow">Mecanica do Sistema</p>
+          <h2 class="section-title" id="how-title">Como o ConcliX opera</h2>
+          <p class="section-desc">Um pipeline de validacao continuo, do repasse do marketplace ao alerta no seu painel.</p>
+        </header>
+
+        <ol class="steps" aria-label="Fluxo de operacao do ConcliX">
+
+          <li class="step">
+            <div class="step__number" aria-hidden="true">01</div>
+            <div class="step__content">
+              <h3 class="step__title">Marketplace realiza o repasse</h3>
+              <p class="step__desc">O marketplace liquida o valor da venda e transmite os dados de pagamento ao lojista. O ConcliX intercepta esse evento em tempo real via integracao de API.</p>
+            </div>
+          </li>
+
+          <li class="step">
+            <div class="step__number" aria-hidden="true">02</div>
+            <div class="step__content">
+              <h3 class="step__title">Consulta ao Bling ERP</h3>
+              <p class="step__desc">O sistema consulta o Bling ERP para obter o valor de referencia esperado para aquela venda — preco, taxas negociadas e regras de negocio configuradas pelo lojista.</p>
+            </div>
+          </li>
+
+          <li class="step">
+            <div class="step__number" aria-hidden="true">03</div>
+            <div class="step__content">
+              <h3 class="step__title">Validacao cruzada</h3>
+              <p class="step__desc">O motor de auditoria compara o valor liquidado com o valor esperado. Se o repasse estiver dentro da tolerancia definida, a transacao e marcada como conciliada.</p>
+            </div>
+          </li>
+
+          <li class="step">
+            <div class="step__number" aria-hidden="true">04</div>
+            <div class="step__content">
+              <h3 class="step__title">Alerta automatico de divergencia</h3>
+              <p class="step__desc">Se houver divergencia (ex: repasse de R$ 1.200 para uma expectativa de R$ 1.500), o sistema classifica a ocorrencia e notifica o lojista imediatamente com o detalhamento completo.</p>
+            </div>
+          </li>
+
+        </ol>
+
+      </div>
+    </section>
+
+    <!-- ----------------------------------------------------------
+         SECAO 4: INTEGRACAO BLING ERP
+         Detalhamento tecnico da sincronizacao com o ERP.
+         ---------------------------------------------------------- -->
+    <section class="integration" id="integracao" aria-labelledby="integration-title">
+      <div class="container integration__inner">
+
+        <!-- Painel tecnico ilustrativo -->
+        <div class="integration__visual" aria-hidden="true">
+          <div class="integration__panel">
+            <div class="integration__panel-bar">
+              <span class="integration__panel-dot"></span>
+              <span class="integration__panel-dot"></span>
+              <span class="integration__panel-dot"></span>
+              <span class="integration__panel-label">bling-sync.service</span>
+            </div>
+            <pre class="integration__code"><code><span class="code-comment">// Sincronizacao com Bling ERP</span>
+<span class="code-keyword">const</span> referencia = <span class="code-keyword">await</span> bling
+  .pedidos
+  .buscar(pedidoId);
+
+<span class="code-comment">// Calculo do valor esperado</span>
+<span class="code-keyword">const</span> esperado = calcularLiquido(
+  referencia.valorBruto,
+  referencia.taxaPlataforma,
+  referencia.frete
+);
+
+<span class="code-comment">// Validacao de divergencia</span>
+<span class="code-keyword">if</span> (repasse &lt; esperado) {
+  alertas.disparar({
+    tipo: <span class="code-string">'DIVERGENCIA'</span>,
+    pedidoId,
+    delta: esperado - repasse
+  });
+}</code></pre>
+          </div>
+        </div>
+
+        <!-- Texto explicativo -->
+        <div class="integration__content">
+          <p class="section-eyebrow">Integracao Bling ERP</p>
+          <h2 class="section-title" id="integration-title">Sincronizacao automatizada com o seu ERP</h2>
+          <p class="integration__desc">
+            O ConcliX se conecta diretamente ao Bling ERP para ler os valores de referencia de cada pedido — preco de venda, taxas contratuais com o marketplace e regras de frete — sem necessidade de entrada manual de dados.
+          </p>
+
+          <ul class="integration__features" aria-label="Caracteristicas da integracao">
+            <li class="integration__feature-item">
+              <svg class="integration__check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M3 8l3.5 3.5L13 4"/>
+              </svg>
+              Conexao via API oficial do Bling — sem intermediarios
+            </li>
+            <li class="integration__feature-item">
+              <svg class="integration__check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M3 8l3.5 3.5L13 4"/>
+              </svg>
+              Regras de negocio gerenciadas no proprio Bling
+            </li>
+            <li class="integration__feature-item">
+              <svg class="integration__check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M3 8l3.5 3.5L13 4"/>
+              </svg>
+              Sincronizacao em tempo real a cada evento de repasse
+            </li>
+            <li class="integration__feature-item">
+              <svg class="integration__check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M3 8l3.5 3.5L13 4"/>
+              </svg>
+              Zero conflito com operacoes ja em curso no ERP
+            </li>
+          </ul>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ----------------------------------------------------------
+         SECAO 5: USE CASE (SIMULACAO INTERATIVA)
+         Demonstracao ao vivo da logica de auditoria do ConcliX.
+         O JavaScript gerencia toda a animacao e interatividade.
+         ---------------------------------------------------------- -->
+    <section class="use-case" id="use-case" aria-labelledby="usecase-title">
+      <div class="container">
+
+        <header class="section-header">
+          <p class="section-eyebrow">Exemplo Pratico</p>
+          <h2 class="section-title" id="usecase-title">Veja o ConcliX em acao</h2>
+          <p class="section-desc">Simule uma venda com divergencia de repasse e observe o fluxo de alerta em tempo real.</p>
+        </header>
+
+        <!-- Painel de simulacao interativa -->
+        <div class="simulator" role="region" aria-label="Simulador de auditoria de repasse">
+
+          <!-- Painel de entrada: dados da venda -->
+          <div class="simulator__panel simulator__panel--input">
+            <h3 class="simulator__panel-title">Dados da Venda</h3>
+
+            <div class="simulator__field">
+              <label class="simulator__label" for="sim-produto">Produto</label>
+              <input class="simulator__input" type="text" id="sim-produto" value="Smartphone XR Pro 256GB" readonly aria-readonly="true" />
+            </div>
+
+            <div class="simulator__field">
+              <label class="simulator__label" for="sim-marketplace">Marketplace</label>
+              <select class="simulator__input simulator__select" id="sim-marketplace" aria-label="Selecione o marketplace">
+                <option value="ml">Mercado Livre</option>
+                <option value="amazon">Amazon</option>
+                <option value="shopee">Shopee</option>
+              </select>
+            </div>
+
+            <div class="simulator__row">
+              <div class="simulator__field">
+                <label class="simulator__label" for="sim-esperado">Valor Esperado (R$)</label>
+                <input class="simulator__input" type="number" id="sim-esperado" value="1500" min="100" max="9999" aria-describedby="sim-esperado-hint" />
+                <span class="simulator__hint" id="sim-esperado-hint">Consultado via Bling ERP</span>
+              </div>
+              <div class="simulator__field">
+                <label class="simulator__label" for="sim-recebido">Repasse Recebido (R$)</label>
+                <input class="simulator__input" type="number" id="sim-recebido" value="1200" min="100" max="9999" aria-describedby="sim-recebido-hint" />
+                <span class="simulator__hint" id="sim-recebido-hint">Informado pelo marketplace</span>
+              </div>
+            </div>
+
+            <button class="btn btn--primary simulator__btn" id="btnSimular" type="button" aria-controls="sim-resultado">
+              Executar Auditoria
+            </button>
+          </div>
+
+          <!-- Painel de saida: resultado da auditoria -->
+          <div class="simulator__panel simulator__panel--output" id="sim-resultado" aria-live="polite" aria-atomic="true">
+            <h3 class="simulator__panel-title">Resultado da Auditoria</h3>
+
+            <div class="sim-status sim-status--idle" id="simStatus" role="status">
+              <div class="sim-status__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M12 6v6l4 2"/>
+                </svg>
+              </div>
+              <p class="sim-status__text">Aguardando execucao da auditoria...</p>
+            </div>
+
+            <div class="sim-log" id="simLog" aria-label="Log de execucao da auditoria">
+              <!-- Linhas de log injetadas pelo script.js -->
+            </div>
+
+            <div class="sim-delta" id="simDelta" aria-label="Resultado financeiro da auditoria" hidden>
+              <!-- Resultado financeiro injetado pelo script.js -->
+            </div>
+
+          </div>
+
+        </div>
+        <!-- /simulator -->
+
+      </div>
+    </section>
+
+    <!-- ----------------------------------------------------------
+         SECAO 6: CONTATO
+         Formulario de contato e CTA final.
+         ---------------------------------------------------------- -->
+    <section class="contact" id="contato" aria-labelledby="contact-title">
+      <div class="container contact__inner">
+
+        <div class="contact__content">
+          <p class="section-eyebrow">Acesse o Sistema</p>
+          <h2 class="section-title" id="contact-title">Pronto para proteger suas receitas?</h2>
+          <p class="contact__desc">
+            Solicite acesso ao ConcliX e implemente a auditoria automatica de repasses na sua operacao em menos de 24 horas.
+          </p>
+        </div>
+
+        <div class="contact__form-wrap">
+          <div class="contact__form" role="form" aria-label="Formulario de solicitacao de acesso">
+
+            <div class="contact__field-group">
+              <div class="contact__field">
+                <label class="contact__label" for="contact-nome">Nome completo</label>
+                <input class="contact__input" type="text" id="contact-nome" name="nome" placeholder="Seu nome" autocomplete="name" />
+              </div>
+              <div class="contact__field">
+                <label class="contact__label" for="contact-email">E-mail corporativo</label>
+                <input class="contact__input" type="email" id="contact-email" name="email" placeholder="voce@empresa.com" autocomplete="email" />
+              </div>
+            </div>
+
+            <div class="contact__field">
+              <label class="contact__label" for="contact-empresa">Empresa / Loja</label>
+              <input class="contact__input" type="text" id="contact-empresa" name="empresa" placeholder="Nome da sua operacao" />
+            </div>
+
+            <div class="contact__field">
+              <label class="contact__label" for="contact-msg">Mensagem (opcional)</label>
+              <textarea class="contact__input contact__textarea" id="contact-msg" name="mensagem" rows="3" placeholder="Conte sobre sua operacao nos marketplaces..."></textarea>
+            </div>
+
+            <button class="btn btn--primary contact__submit" type="button" id="btnContato">
+              Solicitar Acesso ao ConcliX
+            </button>
+
+            <p class="contact__disclaimer">
+              Nenhum dado e compartilhado com terceiros. Retorno em ate 1 dia util.
+            </p>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+  <!-- /main -->
+
+  <!-- ============================================================
+       FOOTER — Rodape com direitos autorais e links uteis
+       ============================================================ -->
+  <footer class="footer" role="contentinfo">
+    <div class="container footer__inner">
+
+      <div class="footer__brand">
+        <span class="footer__logo">Concli<span class="header__logo-accent">X</span></span>
+        <p class="footer__tagline">Auditoria inteligente de repasses para e-commerce.</p>
+      </div>
+
+      <nav class="footer__nav" aria-label="Links do rodape">
+        <div class="footer__nav-group">
+          <h4 class="footer__nav-title">Produto</h4>
+          <ul class="footer__nav-list">
+            <li><a href="#sistema" class="footer__nav-link">O Sistema</a></li>
+            <li><a href="#como-funciona" class="footer__nav-link">Como Funciona</a></li>
+            <li><a href="#integracao" class="footer__nav-link">Integracao Bling</a></li>
+            <li><a href="#use-case" class="footer__nav-link">Demonstracao</a></li>
+          </ul>
+        </div>
+        <div class="footer__nav-group">
+          <h4 class="footer__nav-title">Contato</h4>
+          <ul class="footer__nav-list">
+            <li><a href="#contato" class="footer__nav-link">Solicitar Acesso</a></li>
+            <li><a href="mailto:contato@conclix.com.br" class="footer__nav-link">contato@conclix.com.br</a></li>
+          </ul>
+        </div>
+      </nav>
+
+    </div>
+
+    <div class="footer__bottom">
+      <div class="container">
+        <p class="footer__copy">
+          &copy; <span id="footerYear"></span> ConcliX. Todos os direitos reservados.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
