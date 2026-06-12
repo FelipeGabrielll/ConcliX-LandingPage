@@ -1,506 +1,792 @@
 <!DOCTYPE html>
+<!-- DOCTYPE informa ao navegador que este é um documento HTML5.
+     Sem ele, navegadores entram em "modo quirks" e interpretam
+     o CSS de forma inconsistente entre si.                    -->
+
+<!-- lang="pt-BR" declara o idioma da página.
+     Leitores de tela usam isso para pronunciar corretamente.
+     Motores de busca usam para indexar no país certo.        -->
 <html lang="pt-BR">
+
 <head>
-  <!--
-    ============================================================
-    ConcliX — Landing Page
-    Arquivo: index.html
-    Descrição: Estrutura semântica principal da Single Page
-               Application. Toda a navegação é âncora interna
-               com rolagem suave gerenciada pelo script.js.
-    Tecnologias: HTML5 semântico, CSS3 (style.css), JavaScript ES6+
-    Autor: Equipe ConcliX
-    ============================================================
-  -->
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="ConcliX — Sistema conciliador de marketplaces. Audite e valide seus repasses financeiros automaticamente." />
+  <!-- ── CONFIGURAÇÕES DO DOCUMENTO ───────────────────────────
+       O <head> não exibe nada na tela — contém metadados,
+       configurações e carregamento de recursos externos.     -->
+
+  <!-- charset UTF-8 suporta todos os caracteres latinos,
+       incluindo ã, ç, é, ê — essencial para texto em português -->
+  <meta charset="UTF-8">
+
+  <!-- viewport controla como a página escala em dispositivos
+       móveis. width=device-width usa a largura real da tela.
+       initial-scale=1.0 impede zoom automático indesejado.  -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Título exibido na aba do navegador e nos resultados
+       de busca do Google. Deve ser único e descritivo.      -->
   <title>ConcliX — Conciliação Inteligente de Marketplaces</title>
 
-  <!-- Tipografia: Syne (display) + DM Sans (corpo) via Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet" />
+  <!-- Meta description: aparece no Google abaixo do título.
+       Não afeta o ranking, mas influencia o clique do usuário. -->
+  <meta name="description" content="ConcliX — Sistema conciliador de marketplaces. Audite e valide repasses financeiros automaticamente.">
 
-  <link rel="stylesheet" href="style.css" />
+  <!-- preconnect avisa o navegador para abrir a conexão com
+       o servidor do Google Fonts antecipadamente, reduzindo
+       o tempo de carregamento das fontes.                   -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <!-- Carrega as fontes Space Grotesk (títulos) e Inter (texto).
+       wght@600;700 = pesos 600 e 700 da Space Grotesk.
+       wght@400;500 = pesos 400 e 500 da Inter.
+       display=swap: exibe fonte do sistema enquanto carrega,
+       trocando depois — evita texto invisível na tela.      -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Vincula a folha de estilos CSS ao HTML.
+       rel="stylesheet" define o tipo de relação.
+       O navegador baixa e processa o CSS antes de renderizar
+       a página, evitando "flash" de conteúdo sem estilo.   -->
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+<!-- O <body> contém todo o conteúdo visível da página.
+     A ordem dos elementos aqui define a ordem visual e
+     também a ordem de leitura para leitores de tela.       -->
 
-  <!-- ============================================================
-       HEADER — Navegacao principal e identidade da marca
-       Recebe a classe .header--scrolled via JavaScript ao rolar.
-       ============================================================ -->
-  <header class="header" id="header" role="banner">
-    <div class="container header__inner">
 
-      <!-- Logotipo textual da marca -->
-      <a href="#hero" class="header__logo" aria-label="ConcliX — Pagina inicial">
-        Concli<span class="header__logo-accent">X</span>
-      </a>
+<!-- ════════════════════════════════════════════════════════
+     CABEÇALHO DO SITE
+     <header> é um elemento semântico — informa ao navegador
+     e aos robôs de busca que este bloco é o cabeçalho.
+     id="cabecalho" é o gancho usado pelo JavaScript para
+     adicionar a classe "rolado" ao rolar a página.
+════════════════════════════════════════════════════════ -->
+<header id="cabecalho">
 
-      <!-- Botao de menu mobile (hamburguer) — controlado pelo script.js -->
-      <button class="header__menu-toggle" id="menuToggle" aria-label="Abrir menu de navegacao" aria-expanded="false" aria-controls="mainNav">
-        <span class="header__menu-bar"></span>
-        <span class="header__menu-bar"></span>
-        <span class="header__menu-bar"></span>
+  <!-- Duas classes no mesmo elemento:
+       "container" limita a largura máxima e centraliza.
+       "container-nav" adiciona display flex para alinhar
+       logo + menu + botão em linha horizontal.            -->
+  <div class="container container-nav">
+
+    <!-- Logo em texto puro (sem imagem).
+         href="#" rola suavemente até o topo da página.
+         O <span> envolve o "X" para colorir só essa letra
+         via CSS (.logo span { color: var(--realce-h); })   -->
+    <a href="#" class="logo">Concli<span>X</span></a>
+
+    <!-- <nav> é semântico: marca esta área como navegação
+         principal. id="menuNav" é usado pelo JS para
+         abrir/fechar o menu em mobile.
+         Os href="#ancora" rolam até a seção correspondente
+         via scroll-behavior: smooth definido no CSS.      -->
+    <nav id="menuNav">
+      <a href="#conciliacao">Conciliação</a>
+      <a href="#integracoes">Integrações</a>
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+
+    <!-- Grupo direito do cabeçalho: botão CTA + hambúrguer -->
+    <div class="fim-nav">
+
+      <!-- CTA (Call to Action) principal do cabeçalho.
+           Usamos <a> e não <button> porque navega para
+           outra parte da página (href="#contato").        -->
+      <a href="#contato" class="botao botao-primario">Agendar demo</a>
+
+      <!-- Botão hambúrguer: visível apenas em mobile (CSS).
+           id="botaoMenu" = gancho do JavaScript.
+           Os três <span> vazios são as "barras" do ícone —
+           estilizados e animados puramente em CSS.        -->
+      <button id="botaoMenu" class="hamburguer">
+        <span></span><span></span><span></span>
       </button>
-
-      <!-- Navegacao principal com ancoras internas -->
-      <nav class="header__nav" id="mainNav" role="navigation" aria-label="Navegacao principal">
-        <ul class="header__nav-list">
-          <li><a href="#sistema" class="header__nav-link">O Sistema</a></li>
-          <li><a href="#como-funciona" class="header__nav-link">Como Funciona</a></li>
-          <li><a href="#integracao" class="header__nav-link">Integracao Bling</a></li>
-        </ul>
-        <!-- CTA de acesso ao sistema -->
-        <a href="#contato" class="btn btn--primary header__cta">Contratar Agora</a>
-      </nav>
-
     </div>
-  </header>
 
-  <!-- ============================================================
-       MAIN — Conteudo principal da pagina
-       ============================================================ -->
-  <main id="main-content">
+  </div>
+</header>
 
-    <!-- ----------------------------------------------------------
-         SECAO 1: HERO
-         Apresentacao de alto impacto com headline focada na dor
-         do cliente, subtitulo e chamada para acao principal.
-         ---------------------------------------------------------- -->
-    <section class="hero" id="hero" aria-labelledby="hero-title">
-      <div class="container hero__inner">
 
-        <div class="hero__badge">Conciliacao Financeira para E-commerce</div>
+<!-- ════════════════════════════════════════════════════════
+     SEÇÃO DESTAQUE (hero)
+     Primeira seção visível — o impacto inicial do site.
+     <section> é semântico e agrupa conteúdo relacionado.
+     Não tem id pois nenhum link de âncora aponta para ela
+     (o usuário já está no topo ao carregar a página).
+════════════════════════════════════════════════════════ -->
+<section class="destaque">
 
-        <h1 class="hero__title" id="hero-title">
-          Pare de perder dinheiro com repasses incorretos nos marketplaces.
-        </h1>
+  <!-- "container grade-destaque" aplica duas classes:
+       container = limita largura e centraliza.
+       grade-destaque = CSS Grid de 2 colunas (texto | painel). -->
+  <div class="container grade-destaque">
 
-        <p class="hero__subtitle">
-          O ConcliX audita cada centavo liquidado pelas plataformas, cruza com sua regra de negocio via Bling ERP e dispara alertas automaticos quando o repasse nao bate.
-        </p>
+    <!-- Coluna esquerda: texto principal -->
+    <div class="texto-destaque">
 
-        <div class="hero__actions">
-          <a href="#use-case" class="btn btn--primary">Ver Simulacao ao Vivo</a>
-          <a href="#sistema" class="btn btn--ghost">Conhecer o Sistema</a>
-        </div>
+      <!-- Etiqueta (eyebrow): pequeno label acima do h1.
+           Usamos <span> pois é inline e não carrega
+           significado semântico especial.                -->
+      <span class="etiqueta">Serviço financeiro para marketplaces</span>
 
-        <!-- Metricas de credibilidade -->
-        <div class="hero__metrics" aria-label="Metricas do sistema">
-          <div class="hero__metric">
-            <span class="hero__metric-value">99,4%</span>
-            <span class="hero__metric-label">Precisao nas auditorias</span>
-          </div>
-          <div class="hero__metric-divider" aria-hidden="true"></div>
-          <div class="hero__metric">
-            <span class="hero__metric-value">&lt; 2 min</span>
-            <span class="hero__metric-label">Da venda ao alerta</span>
-          </div>
-          <div class="hero__metric-divider" aria-hidden="true"></div>
-          <div class="hero__metric">
-            <span class="hero__metric-value">Zero</span>
-            <span class="hero__metric-label">Configuracao manual de regras</span>
-          </div>
-        </div>
+      <!-- h1: deve existir apenas UM por página.
+           É o título principal para SEO e acessibilidade.
+           <em> (ênfase) aqui é usado visualmente para
+           colorir "esforço zero" — font-style: normal
+           no CSS cancela o itálico padrão do <em>.      -->
+      <h1>Conciliação financeira de marketplaces com <em>esforço zero</em></h1>
 
+      <!-- Parágrafo de subtítulo. <strong> indica importância
+           semântica e deixa o texto em negrito.         -->
+      <p>Automatize a conferência dos seus repasses e elimine inconsistências. <strong>Foque no crescimento enquanto cuidamos da sua conciliação financeira.</strong></p>
+
+      <!-- Grupo de botões lado a lado (flex no CSS).
+           Dois CTAs: primário (conversão) e secundário
+           (para quem ainda quer conhecer mais).         -->
+      <div class="grupo-cta">
+        <a href="#contato" class="botao botao-primario">Agendar demonstração</a>
+        <a href="#como-funciona" class="botao botao-fantasma">Saiba mais</a>
       </div>
-
-      <!-- Elemento decorativo de fundo -->
-      <div class="hero__bg-grid" aria-hidden="true"></div>
-    </section>
-
-    <!-- ----------------------------------------------------------
-         SECAO 2: FEATURES (RECURSOS FUNCIONAIS)
-         Grid de cards detalhando os pilares do produto.
-         ---------------------------------------------------------- -->
-    <section class="features" id="sistema" aria-labelledby="features-title">
-      <div class="container">
-
-        <header class="section-header">
-          <p class="section-eyebrow">Recursos Funcionais</p>
-          <h2 class="section-title" id="features-title">O que o ConcliX faz por voce</h2>
-          <p class="section-desc">Tres camadas de protecao financeira integradas e operando de forma continua.</p>
-        </header>
-
-        <div class="features__grid">
-
-          <!-- Card 1: Auditoria Inteligente -->
-          <article class="feature-card" aria-labelledby="feature-audit-title">
-            <div class="feature-card__icon-wrap" aria-hidden="true">
-              <svg class="feature-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
-                <rect x="9" y="3" width="6" height="4" rx="1"/>
-                <path d="m9 12 2 2 4-4"/>
-              </svg>
-            </div>
-            <h3 class="feature-card__title" id="feature-audit-title">Auditoria Inteligente de Repasses</h3>
-            <p class="feature-card__desc">
-              Cada transacao liquidada pelo marketplace e interceptada e comparada com o valor esperado, calculado a partir das regras de negocio cadastradas no Bling ERP.
-            </p>
-            <ul class="feature-card__list" aria-label="Detalhes da auditoria">
-              <li>Validacao em tempo real por pedido</li>
-              <li>Suporte a multiplos marketplaces simultaneamente</li>
-              <li>Historico auditavel com rastreabilidade completa</li>
-            </ul>
-          </article>
-
-          <!-- Card 2: Sistema de Alertas -->
-          <article class="feature-card feature-card--accent" aria-labelledby="feature-alert-title">
-            <div class="feature-card__icon-wrap" aria-hidden="true">
-              <svg class="feature-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
-                <line x1="12" y1="9" x2="12" y2="13"/>
-                <line x1="12" y1="17" x2="12.01" y2="17"/>
-              </svg>
-            </div>
-            <h3 class="feature-card__title" id="feature-alert-title">Sistema de Alertas de Divergencia</h3>
-            <p class="feature-card__desc">
-              Quando o valor liquidado e inferior ao esperado, o ConcliX aciona notificacoes automaticas para o lojista — sem depender de revisoes manuais ou planilhas.
-            </p>
-            <ul class="feature-card__list" aria-label="Detalhes dos alertas">
-              <li>Notificacoes por e-mail e dashboard</li>
-              <li>Classificacao de severidade da divergencia</li>
-              <li>Registro de todas as ocorrencias para contestacao</li>
-            </ul>
-          </article>
-
-          <!-- Card 3: Relatorios Financeiros -->
-          <article class="feature-card" aria-labelledby="feature-report-title">
-            <div class="feature-card__icon-wrap" aria-hidden="true">
-              <svg class="feature-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <line x1="18" y1="20" x2="18" y2="10"/>
-                <line x1="12" y1="20" x2="12" y2="4"/>
-                <line x1="6"  y1="20" x2="6"  y2="14"/>
-              </svg>
-            </div>
-            <h3 class="feature-card__title" id="feature-report-title">Relatorios Financeiros Consolidados</h3>
-            <p class="feature-card__desc">
-              Visao consolidada de todas as operacoes auditadas, com filtros por marketplace, periodo e status de conciliacao, pronta para subsidiar decisoes estrategicas.
-            </p>
-            <ul class="feature-card__list" aria-label="Detalhes dos relatorios">
-              <li>Dashboard com indicadores de divergencia acumulada</li>
-              <li>Exportacao para analise externa</li>
-              <li>Comparativo de performance por canal de venda</li>
-            </ul>
-          </article>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ----------------------------------------------------------
-         SECAO 3: COMO FUNCIONA
-         Fluxo passo a passo da mecanica principal do produto.
-         ---------------------------------------------------------- -->
-    <section class="how-it-works" id="como-funciona" aria-labelledby="how-title">
-      <div class="container">
-
-        <header class="section-header">
-          <p class="section-eyebrow">Mecanica do Sistema</p>
-          <h2 class="section-title" id="how-title">Como o ConcliX opera</h2>
-          <p class="section-desc">Um pipeline de validacao continuo, do repasse do marketplace ao alerta no seu painel.</p>
-        </header>
-
-        <ol class="steps" aria-label="Fluxo de operacao do ConcliX">
-
-          <li class="step">
-            <div class="step__number" aria-hidden="true">01</div>
-            <div class="step__content">
-              <h3 class="step__title">Marketplace realiza o repasse</h3>
-              <p class="step__desc">O marketplace liquida o valor da venda e transmite os dados de pagamento ao lojista. O ConcliX intercepta esse evento em tempo real via integracao de API.</p>
-            </div>
-          </li>
-
-          <li class="step">
-            <div class="step__number" aria-hidden="true">02</div>
-            <div class="step__content">
-              <h3 class="step__title">Consulta ao Bling ERP</h3>
-              <p class="step__desc">O sistema consulta o Bling ERP para obter o valor de referencia esperado para aquela venda — preco, taxas negociadas e regras de negocio configuradas pelo lojista.</p>
-            </div>
-          </li>
-
-          <li class="step">
-            <div class="step__number" aria-hidden="true">03</div>
-            <div class="step__content">
-              <h3 class="step__title">Validacao cruzada</h3>
-              <p class="step__desc">O motor de auditoria compara o valor liquidado com o valor esperado. Se o repasse estiver dentro da tolerancia definida, a transacao e marcada como conciliada.</p>
-            </div>
-          </li>
-
-          <li class="step">
-            <div class="step__number" aria-hidden="true">04</div>
-            <div class="step__content">
-              <h3 class="step__title">Alerta automatico de divergencia</h3>
-              <p class="step__desc">Se houver divergencia (ex: repasse de R$ 1.200 para uma expectativa de R$ 1.500), o sistema classifica a ocorrencia e notifica o lojista imediatamente com o detalhamento completo.</p>
-            </div>
-          </li>
-
-        </ol>
-
-      </div>
-    </section>
-
-    <!-- ----------------------------------------------------------
-         SECAO 4: INTEGRACAO BLING ERP
-         Detalhamento tecnico da sincronizacao com o ERP.
-         ---------------------------------------------------------- -->
-    <section class="integration" id="integracao" aria-labelledby="integration-title">
-      <div class="container integration__inner">
-
-        <!-- Painel tecnico ilustrativo -->
-        <div class="integration__visual" aria-hidden="true">
-          <div class="integration__panel">
-            <div class="integration__panel-bar">
-              <span class="integration__panel-dot"></span>
-              <span class="integration__panel-dot"></span>
-              <span class="integration__panel-dot"></span>
-              <span class="integration__panel-label">bling-sync.service</span>
-            </div>
-            <pre class="integration__code"><code><span class="code-comment">// Sincronizacao com Bling ERP</span>
-<span class="code-keyword">const</span> referencia = <span class="code-keyword">await</span> bling
-  .pedidos
-  .buscar(pedidoId);
-
-<span class="code-comment">// Calculo do valor esperado</span>
-<span class="code-keyword">const</span> esperado = calcularLiquido(
-  referencia.valorBruto,
-  referencia.taxaPlataforma,
-  referencia.frete
-);
-
-<span class="code-comment">// Validacao de divergencia</span>
-<span class="code-keyword">if</span> (repasse &lt; esperado) {
-  alertas.disparar({
-    tipo: <span class="code-string">'DIVERGENCIA'</span>,
-    pedidoId,
-    delta: esperado - repasse
-  });
-}</code></pre>
-          </div>
-        </div>
-
-        <!-- Texto explicativo -->
-        <div class="integration__content">
-          <p class="section-eyebrow">Integracao Bling ERP</p>
-          <h2 class="section-title" id="integration-title">Sincronizacao automatizada com o seu ERP</h2>
-          <p class="integration__desc">
-            O ConcliX se conecta diretamente ao Bling ERP para ler os valores de referencia de cada pedido — preco de venda, taxas contratuais com o marketplace e regras de frete — sem necessidade de entrada manual de dados.
-          </p>
-
-          <ul class="integration__features" aria-label="Caracteristicas da integracao">
-            <li class="integration__feature-item">
-              <svg class="integration__check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <path d="M3 8l3.5 3.5L13 4"/>
-              </svg>
-              Conexao via API oficial do Bling — sem intermediarios
-            </li>
-            <li class="integration__feature-item">
-              <svg class="integration__check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <path d="M3 8l3.5 3.5L13 4"/>
-              </svg>
-              Regras de negocio gerenciadas no proprio Bling
-            </li>
-            <li class="integration__feature-item">
-              <svg class="integration__check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <path d="M3 8l3.5 3.5L13 4"/>
-              </svg>
-              Sincronizacao em tempo real a cada evento de repasse
-            </li>
-            <li class="integration__feature-item">
-              <svg class="integration__check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <path d="M3 8l3.5 3.5L13 4"/>
-              </svg>
-              Zero conflito com operacoes ja em curso no ERP
-            </li>
-          </ul>
-
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ----------------------------------------------------------
-         SECAO 5: USE CASE (SIMULACAO INTERATIVA)
-         Demonstracao ao vivo da logica de auditoria do ConcliX.
-         O JavaScript gerencia toda a animacao e interatividade.
-         ---------------------------------------------------------- -->
-    <section class="use-case" id="use-case" aria-labelledby="usecase-title">
-      <div class="container">
-
-        <header class="section-header">
-          <p class="section-eyebrow">Exemplo Pratico</p>
-          <h2 class="section-title" id="usecase-title">Veja o ConcliX em acao</h2>
-          <p class="section-desc">Simule uma venda com divergencia de repasse e observe o fluxo de alerta em tempo real.</p>
-        </header>
-
-        <!-- Painel de simulacao interativa -->
-        <div class="simulator" role="region" aria-label="Simulador de auditoria de repasse">
-
-          <!-- Painel de entrada: dados da venda -->
-          <div class="simulator__panel simulator__panel--input">
-            <h3 class="simulator__panel-title">Dados da Venda</h3>
-
-            <div class="simulator__field">
-              <label class="simulator__label" for="sim-produto">Produto</label>
-              <input class="simulator__input" type="text" id="sim-produto" value="Smartphone XR Pro 256GB" readonly aria-readonly="true" />
-            </div>
-
-            <div class="simulator__field">
-              <label class="simulator__label" for="sim-marketplace">Marketplace</label>
-              <select class="simulator__input simulator__select" id="sim-marketplace" aria-label="Selecione o marketplace">
-                <option value="ml">Mercado Livre</option>
-                <option value="amazon">Amazon</option>
-                <option value="shopee">Shopee</option>
-              </select>
-            </div>
-
-            <div class="simulator__row">
-              <div class="simulator__field">
-                <label class="simulator__label" for="sim-esperado">Valor Esperado (R$)</label>
-                <input class="simulator__input" type="number" id="sim-esperado" value="1500" min="100" max="9999" aria-describedby="sim-esperado-hint" />
-                <span class="simulator__hint" id="sim-esperado-hint">Consultado via Bling ERP</span>
-              </div>
-              <div class="simulator__field">
-                <label class="simulator__label" for="sim-recebido">Repasse Recebido (R$)</label>
-                <input class="simulator__input" type="number" id="sim-recebido" value="1200" min="100" max="9999" aria-describedby="sim-recebido-hint" />
-                <span class="simulator__hint" id="sim-recebido-hint">Informado pelo marketplace</span>
-              </div>
-            </div>
-
-            <button class="btn btn--primary simulator__btn" id="btnSimular" type="button" aria-controls="sim-resultado">
-              Executar Auditoria
-            </button>
-          </div>
-
-          <!-- Painel de saida: resultado da auditoria -->
-          <div class="simulator__panel simulator__panel--output" id="sim-resultado" aria-live="polite" aria-atomic="true">
-            <h3 class="simulator__panel-title">Resultado da Auditoria</h3>
-
-            <div class="sim-status sim-status--idle" id="simStatus" role="status">
-              <div class="sim-status__icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-                  <circle cx="12" cy="12" r="10"/>
-                  <path d="M12 6v6l4 2"/>
-                </svg>
-              </div>
-              <p class="sim-status__text">Aguardando execucao da auditoria...</p>
-            </div>
-
-            <div class="sim-log" id="simLog" aria-label="Log de execucao da auditoria">
-              <!-- Linhas de log injetadas pelo script.js -->
-            </div>
-
-            <div class="sim-delta" id="simDelta" aria-label="Resultado financeiro da auditoria" hidden>
-              <!-- Resultado financeiro injetado pelo script.js -->
-            </div>
-
-          </div>
-
-        </div>
-        <!-- /simulator -->
-
-      </div>
-    </section>
-
-    <!-- ----------------------------------------------------------
-         SECAO 6: CONTATO
-         Formulario de contato e CTA final.
-         ---------------------------------------------------------- -->
-    <section class="contact" id="contato" aria-labelledby="contact-title">
-      <div class="container contact__inner">
-
-        <div class="contact__content">
-          <p class="section-eyebrow">Acesse o Sistema</p>
-          <h2 class="section-title" id="contact-title">Pronto para proteger suas receitas?</h2>
-          <p class="contact__desc">
-            Solicite acesso ao ConcliX e implemente a auditoria automatica de repasses na sua operacao em menos de 24 horas.
-          </p>
-        </div>
-
-        <div class="contact__form-wrap">
-          <div class="contact__form" role="form" aria-label="Formulario de solicitacao de acesso">
-
-            <div class="contact__field-group">
-              <div class="contact__field">
-                <label class="contact__label" for="contact-nome">Nome completo</label>
-                <input class="contact__input" type="text" id="contact-nome" name="nome" placeholder="Seu nome" autocomplete="name" />
-              </div>
-              <div class="contact__field">
-                <label class="contact__label" for="contact-email">E-mail corporativo</label>
-                <input class="contact__input" type="email" id="contact-email" name="email" placeholder="voce@empresa.com" autocomplete="email" />
-              </div>
-            </div>
-
-            <div class="contact__field">
-              <label class="contact__label" for="contact-empresa">Empresa / Loja</label>
-              <input class="contact__input" type="text" id="contact-empresa" name="empresa" placeholder="Nome da sua operacao" />
-            </div>
-
-            <div class="contact__field">
-              <label class="contact__label" for="contact-msg">Mensagem (opcional)</label>
-              <textarea class="contact__input contact__textarea" id="contact-msg" name="mensagem" rows="3" placeholder="Conte sobre sua operacao nos marketplaces..."></textarea>
-            </div>
-
-            <button class="btn btn--primary contact__submit" type="button" id="btnContato">
-              Solicitar Acesso ao ConcliX
-            </button>
-
-            <p class="contact__disclaimer">
-              Nenhum dado e compartilhado com terceiros. Retorno em ate 1 dia util.
-            </p>
-
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-  </main>
-  <!-- /main -->
-
-  <!-- ============================================================
-       FOOTER — Rodape com direitos autorais e links uteis
-       ============================================================ -->
-  <footer class="footer" role="contentinfo">
-    <div class="container footer__inner">
-
-      <div class="footer__brand">
-        <span class="footer__logo">Concli<span class="header__logo-accent">X</span></span>
-        <p class="footer__tagline">Auditoria inteligente de repasses para e-commerce.</p>
-      </div>
-
-      <nav class="footer__nav" aria-label="Links do rodape">
-        <div class="footer__nav-group">
-          <h4 class="footer__nav-title">Produto</h4>
-          <ul class="footer__nav-list">
-            <li><a href="#sistema" class="footer__nav-link">O Sistema</a></li>
-            <li><a href="#como-funciona" class="footer__nav-link">Como Funciona</a></li>
-            <li><a href="#integracao" class="footer__nav-link">Integracao Bling</a></li>
-            <li><a href="#use-case" class="footer__nav-link">Demonstracao</a></li>
-          </ul>
-        </div>
-        <div class="footer__nav-group">
-          <h4 class="footer__nav-title">Contato</h4>
-          <ul class="footer__nav-list">
-            <li><a href="#contato" class="footer__nav-link">Solicitar Acesso</a></li>
-            <li><a href="mailto:contato@conclix.com.br" class="footer__nav-link">contato@conclix.com.br</a></li>
-          </ul>
-        </div>
-      </nav>
 
     </div>
 
-    <div class="footer__bottom">
-      <div class="container">
-        <p class="footer__copy">
-          &copy; <span id="footerYear"></span> ConcliX. Todos os direitos reservados.
-        </p>
+    <!-- Coluna direita: painel demo simulado em HTML/CSS puro.
+         Representa o painel real do produto ConcliX.
+         TODO: substituir por screenshot real quando disponível. -->
+    <div class="painel-demo">
+
+      <!-- Barra de título estilo macOS com os 3 pontos coloridos -->
+      <div class="barra-painel">
+        <!-- Cada ponto é um <span> vazio estilizado em CSS.
+             Classes r/y/g definem a cor (vermelho/amarelo/verde) -->
+        <span class="ponto r"></span>
+        <span class="ponto y"></span>
+        <span class="ponto g"></span>
+        ConcliX — Painel de Auditorias
+      </div>
+
+      <!-- Grade de 3 KPIs (Indicadores-chave de desempenho).
+           <small> = texto de tamanho reduzido (legenda).
+           <b> = texto em negrito (sem peso semântico).
+           <em class="sucesso/erro"> = variação colorida      -->
+      <div class="grade-indicadores">
+        <div class="indicador">
+          <small>Repasses auditados</small>
+          <b>R$ 248.390</b>
+          <em class="sucesso">▲ 99,4% precisão</em>
+        </div>
+        <div class="indicador">
+          <small>Divergências</small>
+          <b>R$ 1.482,70</b>
+          <em class="erro">▼ 3 alertas</em>
+        </div>
+        <div class="indicador">
+          <small>Tempo de alerta</small>
+          <!-- &lt; é a entidade HTML para o caractere "<".
+               Usar < direto quebraria o HTML pois o navegador
+               interpretaria como abertura de uma tag.        -->
+          <b>&lt; 2 min</b>
+          <em class="sucesso">▲ automático</em>
+        </div>
+      </div>
+
+      <!-- Log de auditorias: lista de linhas com status.
+           Cada <p> recebe classe "sucesso" ou "erro" para
+           colorir a borda esquerda via CSS.               -->
+      <div class="registro">
+        <p class="sucesso"><b>✓ OK</b> Mercado Livre — #MLA2847 — R$ 312,00</p>
+        <p class="erro"><b>⚠ ALERTA</b> Shopee — #SPE9134 — divergência R$ 24,80</p>
+        <p class="sucesso"><b>✓ OK</b> Amazon — #AMZ5512 — R$ 189,90</p>
+        <p class="sucesso"><b>✓ OK</b> Magalu — #MGR0074 — R$ 97,50</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════════════
+     SEÇÃO PROVA SOCIAL
+     Faixa estreita com um depoimento de destaque logo
+     abaixo do hero — estratégia de conversão: apresentar
+     evidência social imediatamente após a proposta.
+════════════════════════════════════════════════════════ -->
+<section class="prova-social">
+  <div class="container">
+
+    <!-- <blockquote> é o elemento semântico correto para
+         citações de outras pessoas ou fontes externas.
+         <footer> dentro do blockquote indica a autoria
+         (quem disse a frase) — uso semântico correto do
+         elemento <footer>, que não se limita ao rodapé
+         da página.                                       -->
+    <blockquote>
+      "O ConcliX veio para apoiar nosso crescimento com uma solução sob medida, garantindo <strong>transparência</strong>, <strong>controle</strong> e <strong>acompanhamento preciso</strong> nas vendas dos marketplaces."
+      <footer><strong>Carlos Mendes</strong> — Gestor Financeiro, E-commerce Store</footer>
+    </blockquote>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════════════
+     SEÇÃO PROPOSTA DE VALOR
+     id="conciliacao" é o destino do link href="#conciliacao"
+     no menu de navegação. Toda seção com âncora de menu
+     precisa de um id correspondente.
+════════════════════════════════════════════════════════ -->
+<section class="proposta-valor" id="conciliacao">
+  <div class="container">
+
+    <!-- cabecalho-secao: bloco centralizado com etiqueta +
+         título + subtítulo + botão CTA.
+         "etiqueta clara" = duas classes: estilo base da
+         etiqueta + variante de cor para fundo claro.    -->
+    <div class="cabecalho-secao">
+      <span class="etiqueta clara">Por que o ConcliX?</span>
+      <h2>Sua conciliação de marketplaces <strong>sem erros e sem esforço</strong></h2>
+      <p>O ConcliX audita cada centavo liquidado pelas plataformas e dispara alertas quando o repasse não bate.</p>
+      <a href="#contato" class="botao botao-primario">Agendar demonstração</a>
+    </div>
+
+    <!-- Grade de 3 cartões: layout CSS Grid (grade-3).
+         O cartão do meio recebe "cartao-escuro" para
+         criar contraste visual e destacar o benefício
+         central (Repasse Certo).                        -->
+    <div class="grade-3">
+      <div class="cartao">
+        <div class="icone">⚡</div>
+        <h3>Esforço Zero</h3>
+        <p>Controle financeiro automático 24h. Sem planilhas, sem trabalho manual.</p>
+      </div>
+      <div class="cartao cartao-escuro">
+        <div class="icone">✓</div>
+        <h3>Repasse Certo</h3>
+        <p>Pare de perder dinheiro. Garantimos que você receba exatamente o que é seu.</p>
+      </div>
+      <div class="cartao">
+        <div class="icone">📊</div>
+        <h3>Visão 360°</h3>
+        <p>Relatórios de todos os canais em um lugar. Decisões baseadas em dados reais.</p>
       </div>
     </div>
-  </footer>
 
-  <script src="script.js"></script>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════════════
+     SEÇÃO INTEGRAÇÕES
+════════════════════════════════════════════════════════ -->
+<section class="integracoes" id="integracoes">
+  <div class="container">
+
+    <div class="cabecalho-secao">
+      <span class="etiqueta">Ecossistema Conectado</span>
+      <h2>Integramos com os principais <strong>marketplaces</strong> e <strong>ERPs</strong> do país</h2>
+    </div>
+
+    <!-- rotulo-grupo: pequeno rótulo de categoria acima
+         de cada grupo de logos (Marketplaces / ERPs).   -->
+    <p class="rotulo-grupo">Marketplaces</p>
+
+    <!-- Lista de chips/pílulas com os nomes dos marketplaces.
+         Usamos <span> dentro de <div class="logos"> pois são
+         apenas itens visuais sem link ou ação associada.
+         "mais" = variante de borda tracejada para o "+ outros". -->
+    <div class="logos">
+      <span>Mercado Livre</span><span>Amazon</span><span>Shopee</span><span>Magalu</span>
+      <span>Americanas</span><span>Casas Bahia</span><span>Shoptime</span><span>Netshoes</span>
+      <span>Zattini</span><span>Ponto</span><span>Extra</span><span>Leroy Merlin</span>
+      <span>Carrefour</span><span>Centauro</span><span>Madeira Madeira</span>
+      <span class="mais">+ outros</span>
+    </div>
+
+    <p class="rotulo-grupo">ERPs</p>
+
+    <!-- "realce" destaca o Bling ERP como integração principal -->
+    <div class="logos">
+      <span class="realce">Bling ERP</span><span>Tiny</span><span>Omie</span><span>TOTVS</span><span>Linx</span>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════════════
+     SEÇÃO RELATÓRIOS
+     Layout de 2 colunas: lista de relatórios + imagem.
+     "container grade-relatorios" aplica o container de
+     largura máxima E o CSS Grid de 2 colunas ao mesmo div.
+════════════════════════════════════════════════════════ -->
+<section class="relatorios" id="relatorios">
+  <div class="container grade-relatorios">
+
+    <!-- Coluna esquerda: cabeçalho + grade de cartões -->
+    <div>
+      <!-- "cabecalho-secao esquerda" = variante alinhada à
+           esquerda (ao invés de centralizada).          -->
+      <div class="cabecalho-secao esquerda">
+        <span class="etiqueta">Relatórios e Insights</span>
+        <h2>Ações estratégicas e relatórios para uma <strong>visão 360°</strong></h2>
+      </div>
+
+      <!-- grade-2: dois cartões de relatório por linha -->
+      <div class="grade-2">
+        <div class="cartao-relatorio">• Resumo mensal de resultados</div>
+        <div class="cartao-relatorio">• Resumo financeiro por canal</div>
+        <div class="cartao-relatorio">• Despesas por canal de venda</div>
+        <div class="cartao-relatorio">• Análise de campanhas e promoções</div>
+        <div class="cartao-relatorio">• Bloqueios, estornos e devoluções</div>
+        <div class="cartao-relatorio">• Categorização de despesas gerais</div>
+        <div class="cartao-relatorio">• Transferências, saldos e distribuição</div>
+        <div class="cartao-relatorio">• Lançamentos para apoio na DRE</div>
+      </div>
+    </div>
+
+    <!-- Coluna direita: espaço reservado para screenshot real.
+         O CSS aplica borda tracejada e altura mínima de 360px. -->
+    <div class="reservado">[ Screenshot dos relatórios ]</div>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════════════
+     SEÇÃO BENEFÍCIOS
+════════════════════════════════════════════════════════ -->
+<section class="beneficios" id="beneficios">
+  <div class="container">
+
+    <div class="cabecalho-secao">
+      <span class="etiqueta clara">Vantagens para o Seller</span>
+      <h2>Esforço zero na conciliação <strong>para o seller</strong></h2>
+      <p>Menos riscos de erros financeiros e mais estimativa dos seus recebimentos</p>
+      <a href="#contato" class="botao botao-primario">Agendar uma demonstração</a>
+    </div>
+
+    <!-- grade-beneficios: CSS Grid de 2 colunas.
+         O último benefício recebe a classe "completo"
+         que aplica grid-column: 1 / -1 no CSS, fazendo-o
+         ocupar toda a largura (as 2 colunas).           -->
+    <div class="grade-beneficios">
+
+      <!-- Cada benefício: ícone (<span>) + conteúdo (<div>).
+           O CSS usa display flex para alinhá-los lado a lado. -->
+      <div class="beneficio">
+        <span class="icone">⏱</span>
+        <div><h3>Economia de tempo e mão de obra</h3><p>Elimine horas gastas em planilhas. Sua equipe foca no que importa.</p></div>
+      </div>
+      <div class="beneficio">
+        <span class="icone">📈</span>
+        <div><h3>Mais estimativa financeira</h3><p>Saiba com precisão quanto vai receber de cada marketplace.</p></div>
+      </div>
+      <div class="beneficio">
+        <span class="icone">🛡</span>
+        <div><h3>Controle total dos recebimentos</h3><p>Visibilidade de cada repasse, taxa e desconto das plataformas.</p></div>
+      </div>
+      <div class="beneficio">
+        <span class="icone">💡</span>
+        <div><h3>Redução de erros e custos</h3><p>Identifique divergências antes que virem prejuízos. Recupere o que é seu.</p></div>
+      </div>
+
+      <!-- "completo" = ocupa as 2 colunas via grid-column: 1/-1 -->
+      <div class="beneficio completo">
+        <span class="icone">👥</span>
+        <div><h3>Apoio técnico especializado</h3><p>Time com domínio em conciliação financeira para e-commerce ao seu lado.</p></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════════════
+     SEÇÃO PÚBLICO-ALVO
+     "container grade-publico" aplica grid de 2 colunas
+     diretamente no container (imagem | texto).
+════════════════════════════════════════════════════════ -->
+<section class="publico" id="para-quem">
+  <div class="container grade-publico">
+
+    <!-- "reservado escuro" = variante com fundo escuro
+         (usa a cor --primaria com transparência).       -->
+    <div class="reservado escuro">[ Imagem da equipe / produto ]</div>
+
+    <!-- Coluna de texto -->
+    <div class="texto-publico">
+      <span class="etiqueta">Para quem é o ConcliX?</span>
+
+      <!-- <strong> dentro do h2 formata em negrito sem quebrar
+           a linha — funciona como destaque inline no título. -->
+      <h2>Para empresas que vendem em marketplaces e precisam de <strong>segurança</strong>, <strong>automação</strong> e <strong>controle financeiro</strong></h2>
+
+      <p>Se você enfrenta desafios como:</p>
+
+      <!-- <ul> = lista não ordenada (sem numeração).
+           O CSS adiciona "✓" antes de cada <li> via ::before,
+           sem precisar escrever o símbolo no HTML.      -->
+      <ul class="lista-verificacao">
+        <li>Dificuldade para conferir repasses dos marketplaces</li>
+        <li>Erros frequentes nos pagamentos recebidos</li>
+        <li>Falta de tempo para analisar relatórios financeiros</li>
+        <li>Perdas financeiras por falta de conciliação detalhada</li>
+      </ul>
+
+      <!-- <strong> filho direto de <p> filho direto de
+           .texto-publico — seletor CSS específico para este
+           parágrafo de conclusão. display: block no CSS
+           faz ele ocupar linha própria.                 -->
+      <p><strong>Nós somos a solução certa para você!</strong></p>
+
+      <a href="#contato" class="botao botao-primario">Quero conciliar com esforço zero</a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════════════
+     SEÇÃO COMO FUNCIONA (5 passos)
+     "container grade-metodo" = grid 2 colunas (imagem | passos).
+════════════════════════════════════════════════════════ -->
+<section class="metodo" id="como-funciona">
+  <div class="container grade-metodo">
+
+    <!-- Imagem reservada (lado esquerdo em desktop,
+         move para cima em mobile via order: -1 no CSS) -->
+    <div class="reservado">[ Foto da equipe / produto em uso ]</div>
+
+    <!-- Coluna dos passos -->
+    <div>
+      <div class="cabecalho-secao esquerda">
+        <span class="etiqueta">Método Exclusivo do ConcliX</span>
+        <h2>Como o <strong>ConcliX</strong> opera na prática</h2>
+      </div>
+
+      <!-- <ol> = lista ORDENADA (com numeração).
+           Aqui os números são visuais (01, 02...) inseridos
+           manualmente no <span>, não os números automáticos
+           do navegador (que foram desativados no CSS via
+           list-style: none).                            -->
+      <ol class="passos">
+        <!-- Cada passo: <span> com número + <div> com conteúdo.
+             O CSS cria a linha vertical conectora entre os
+             círculos usando o pseudo-elemento ::before do .passos. -->
+        <li>
+          <span>01</span>
+          <div><h3>Importamos os dados das suas vendas</h3><p>Conexão direta com as APIs dos marketplaces. Sem uploads manuais.</p></div>
+        </li>
+        <li>
+          <span>02</span>
+          <div><h3>Conciliação financeira automática</h3><p>Cada repasse é cruzado com sua regra de negócio via Bling ERP.</p></div>
+        </li>
+        <li>
+          <span>03</span>
+          <div><h3>Identificamos inconsistências</h3><p>Alertas automáticos em menos de 2 minutos quando o repasse não bate.</p></div>
+        </li>
+        <li>
+          <span>04</span>
+          <div><h3>Relatórios financeiros detalhados</h3><p>Dashboards completos com insights para decisões estratégicas.</p></div>
+        </li>
+        <li>
+          <span>05</span>
+          <div><h3>Suporte contínuo especializado</h3><p>Time técnico disponível para garantir que tudo esteja correto.</p></div>
+        </li>
+      </ol>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════════════
+     SEÇÃO DEPOIMENTOS
+════════════════════════════════════════════════════════ -->
+<section class="depoimentos" id="clientes">
+  <div class="container">
+
+    <div class="cabecalho-secao">
+      <span class="etiqueta clara">Clientes que confiam no ConcliX</span>
+      <h2>Esforço zero e assertividade comprovados por <strong>sellers de alto volume</strong></h2>
+    </div>
+
+    <!-- Logos dos clientes em linha flex centralizada.
+         TODO: substituir os textos por imagens SVG/PNG reais. -->
+    <div class="logos-clientes">
+      <span>Cliente 1</span><span>Cliente 2</span><span>Cliente 3</span>
+      <span>Cliente 4</span><span>Cliente 5</span><span>Cliente 6</span>
+    </div>
+
+    <!-- grade-2 = 2 cartões de depoimento lado a lado -->
+    <div class="grade-2">
+
+      <!-- <blockquote> = citação de uma pessoa real.
+           <footer> DENTRO do blockquote = atribuição da fala
+           (quem disse). Este <footer> é diferente do <footer>
+           principal da página — não recebe os estilos escuros
+           pois o CSS usa .cartao-depoimento footer (escopo
+           específico) e .rodape-site (para o rodapé da página). -->
+      <blockquote class="cartao-depoimento">
+        <p>"Graças aos relatórios do ConcliX, tivemos uma base <strong>assertiva</strong> de onde investir mais e onde estávamos errando."</p>
+        <footer>
+          <!-- Avatar com a inicial do nome (gerado via CSS/texto) -->
+          <div class="avatar">A</div>
+          <div>
+            <strong>Ana Paula Rodrigues</strong>
+            <span>Proprietária, Loja Online</span>
+          </div>
+        </footer>
+      </blockquote>
+
+      <blockquote class="cartao-depoimento">
+        <p>"O principal benefício é não se debruçar horas em um relatório. <strong>Nada melhor do que automatizar.</strong>"</p>
+        <footer>
+          <div class="avatar">R</div>
+          <div>
+            <strong>Ricardo Santos</strong>
+            <span>Analista Financeiro, E-commerce</span>
+          </div>
+        </footer>
+      </blockquote>
+
+    </div>
+
+    <!-- CTA centralizado abaixo dos depoimentos -->
+    <div class="cta-centro">
+      <a href="#contato" class="botao botao-primario">Agendar demonstração</a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════════════
+     SEÇÃO FAQ (Perguntas Frequentes)
+     Usa o elemento nativo <details>/<summary> do HTML5 —
+     funciona como acordeão SEM JavaScript: o navegador
+     controla abertura e fechamento automaticamente.
+     O atributo "open" é adicionado/removido pelo próprio
+     navegador ao clicar, e o CSS usa details[open] para
+     estilizar o estado aberto.
+════════════════════════════════════════════════════════ -->
+<section class="faq" id="faq">
+  <div class="container">
+
+    <div class="cabecalho-secao">
+      <span class="etiqueta">Dúvidas Frequentes</span>
+      <h2>Perguntas Frequentes (FAQ)</h2>
+    </div>
+
+    <!-- lista-faq: container com gap entre os <details> -->
+    <div class="lista-faq">
+
+      <!-- Cada <details> é uma pergunta+resposta.
+           <summary> = parte clicável (a pergunta).
+           <p> = resposta (fica oculto até clicar).     -->
+      <details><summary>O que é o ConcliX?</summary><p>Sistema especializado em conciliação de repasses. Monitora continuamente, cruza com as regras do seu ERP e alerta quando há divergências.</p></details>
+      <details><summary>Para quem é indicado?</summary><p>Sellers que precisam de controle financeiro preciso sem dedicar horas à conferência manual. Ideal para volumes médio e alto.</p></details>
+      <details><summary>Quais marketplaces são integrados?</summary><p>Mercado Livre, Amazon, Shopee, Magalu, Americanas, Casas Bahia, Ponto, Extra, Shoptime, Netshoes, Zattini, Leroy Merlin, Carrefour, Centauro, Madeira Madeira e outros.</p></details>
+      <details><summary>Quais são os principais benefícios?</summary><p>Auditoria 24/7, identificação de taxas indevidas, relatórios por canal, alertas em tempo real e economia de horas de trabalho manual.</p></details>
+      <details><summary>O que acontece se um repasse estiver errado?</summary><p>Você recebe um alerta com os dados para contestar junto ao marketplace e recuperar o valor devido.</p></details>
+      <details><summary>Consigo acompanhar as análises?</summary><p>Sim. Acesso completo à plataforma com dashboards em tempo real e relatórios periódicos por canal.</p></details>
+      <details><summary>Preciso de configuração ou treinamento?</summary><p>Não. Nossa equipe cuida de toda a configuração inicial sem necessidade de conhecimento técnico.</p></details>
+      <details><summary>Integra com ERPs?</summary><p>Sim. Bling ERP, Tiny, Omie, TOTVS, Linx e outros. A integração com Bling é nativa.</p></details>
+      <details><summary>Substitui um contador?</summary><p>Não. Complementa o trabalho contábil com dados precisos e relatórios estruturados.</p></details>
+      <details><summary>Quanto custa?</summary><p>Os valores variam conforme volume e complexidade. Entre em contato para uma proposta personalizada.</p></details>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════════════
+     SEÇÃO CHAMADA FINAL (CTA de fechamento)
+     Última oportunidade de conversão antes do formulário.
+     "container cta-centro" = container centralizado +
+     centralização de texto e alinhamento flex da seção.
+════════════════════════════════════════════════════════ -->
+<section class="chamada-final">
+  <div class="container cta-centro">
+    <span class="etiqueta">Comece agora</span>
+    <h2>Evite prejuízos e simplifique sua conciliação financeira agora mesmo!</h2>
+    <p>Não perca tempo conferindo repasses manualmente. O ConcliX faz isso por você! <strong>Garanta uma gestão financeira eficiente e segura!</strong></p>
+    <!-- botao-grande aumenta o padding para CTA de alta intenção -->
+    <a href="#contato" class="botao botao-primario botao-grande">Quero falar com um especialista →</a>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════════════
+     SEÇÃO FORMULÁRIO DE CONTATO
+     id="contato" é o destino de todos os href="#contato"
+     da página (botões CTA do menu, hero, benefícios, etc).
+════════════════════════════════════════════════════════ -->
+<section class="contato" id="contato">
+  <div class="container">
+
+    <div class="cabecalho-secao">
+      <span class="etiqueta">Acesse o Sistema</span>
+      <h2>Pronto para proteger suas receitas?</h2>
+      <p>Nenhum dado é compartilhado com terceiros. Retorno em até 1 dia útil.</p>
+    </div>
+
+    <!-- novalidate desativa as mensagens de erro padrão do
+         navegador (aquelas caixas feias). A validação visual
+         é feita pelo CSS (:focus) e o feedback ao enviar é
+         feito pelo JavaScript (script.js).
+         id="formularioContato" = gancho do JavaScript.     -->
+    <form id="formularioContato" novalidate>
+
+      <!-- linha-formulario = CSS Grid de 2 colunas lado a lado -->
+      <div class="linha-formulario">
+        <!-- "campo" agrupa label + input em coluna flex -->
+        <div class="campo">
+          <label>Nome *</label>
+          <!-- type="text" = campo de texto livre.
+               required = campo obrigatório (validação HTML5).
+               placeholder = texto guia que some ao digitar. -->
+          <input type="text" name="nome" placeholder="Seu nome completo" required>
+        </div>
+        <div class="campo">
+          <label>E-mail *</label>
+          <!-- type="email" valida automaticamente o formato
+               de e-mail (deve conter @ e domínio válido).  -->
+          <input type="email" name="email" placeholder="seu@email.com" required>
+        </div>
+      </div>
+
+      <div class="linha-formulario">
+        <div class="campo">
+          <label>Empresa *</label>
+          <input type="text" name="empresa" placeholder="Nome da empresa" required>
+        </div>
+        <div class="campo">
+          <label>Telefone *</label>
+          <!-- type="tel" abre teclado numérico em mobile    -->
+          <input type="tel" name="telefone" placeholder="(00) 00000-0000" required>
+        </div>
+      </div>
+
+      <div class="linha-formulario">
+        <div class="campo">
+          <label>Já vende em marketplace? *</label>
+          <!-- <select> = lista suspensa (dropdown).
+               required impede envio sem selecionar opção.  -->
+          <select name="marketplace" required>
+            <!-- value="" + disabled + selected = opção
+                 placeholder que não pode ser selecionada
+                 e começa selecionada por padrão.           -->
+            <option value="" disabled selected>Selecione</option>
+            <option>Sim</option>
+            <option>Não</option>
+            <option>Em fase de contrato</option>
+          </select>
+        </div>
+        <div class="campo">
+          <label>Como conheceu o ConcliX?</label>
+          <!-- Sem required: campo opcional (sem asterisco)  -->
+          <select name="origem">
+            <option value="" disabled selected>Selecione</option>
+            <option>Google</option><option>Indicação</option><option>Redes Sociais</option>
+            <option>Evento</option><option>Anúncio</option><option>Blog</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Campo único (largura total) para texto livre       -->
+      <div class="campo">
+        <label>Conte-nos o seu desafio *</label>
+        <!-- <textarea> = caixa de texto multilinha.
+             rows="4" define a altura inicial (4 linhas).
+             O CSS permite redimensionar apenas verticalmente. -->
+        <textarea name="desafio" rows="4" placeholder="Descreva sua principal dificuldade com conciliação..." required></textarea>
+      </div>
+
+      <!-- Texto de aviso legal abaixo dos campos           -->
+      <p class="privacidade">Ao enviar, você concorda com nossa <a href="#">Política de Privacidade</a>.</p>
+
+      <!-- type="submit" dispara o evento "submit" do formulário,
+           capturado pelo JavaScript para mostrar o feedback. -->
+      <button type="submit" class="botao botao-primario botao-grande">Fale agora</button>
+
+    </form>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════════════
+     RODAPÉ DO SITE
+     <footer> é semântico — marca o rodapé da página.
+     class="rodape-site" é necessário para o CSS não confundir
+     com os <footer> semânticos dentro dos <blockquote>
+     de depoimentos (que têm seletor específico).
+════════════════════════════════════════════════════════ -->
+<footer class="rodape-site">
+
+  <!-- grade-rodape = CSS Grid 1fr 2fr (logo+contato | links) -->
+  <div class="container grade-rodape">
+
+    <!-- Coluna esquerda: logo, descrição e contatos -->
+    <div>
+      <a href="#" class="logo">Concli<span>X</span></a>
+      <p>Simplifique sua conciliação financeira de marketplaces agora mesmo.</p>
+      <!-- Links de contato direto: WhatsApp e e-mail.
+           wa.me é o link universal do WhatsApp.
+           mailto: abre o cliente de e-mail do usuário.   -->
+      <a href="https://wa.me/5500000000000" class="link-contato">💬 (44) 3033-0000</a>
+      <a href="mailto:comercial@conclix.com.br" class="link-contato">✉ comercial@conclix.com.br</a>
+    </div>
+
+    <!-- Coluna direita: <nav> semântico com 3 grupos de links.
+         links-rodape = CSS Grid de 3 colunas (Produto|Empresa|Contato) -->
+    <nav class="links-rodape">
+      <div>
+        <h4>Produto</h4>
+        <a href="#conciliacao">Conciliação</a>
+        <a href="#integracoes">Integrações</a>
+        <a href="#relatorios">Relatórios</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div>
+        <h4>Empresa</h4>
+        <a href="#">Blog</a>
+        <a href="#">Trabalhe conosco</a>
+        <a href="#">Privacidade</a>
+      </div>
+      <div>
+        <h4>Contato</h4>
+        <a href="#contato">Agendar demo</a>
+        <a href="mailto:comercial@conclix.com.br">E-mail</a>
+      </div>
+    </nav>
+
+  </div>
+
+  <!-- Barra inferior: copyright + botão -->
+  <div class="container rodape-inferior">
+    <p>
+      <!-- &copy; é a entidade HTML para o símbolo ©         -->
+      &copy;
+      <!-- <span id="ano"> começa vazio. O JavaScript insere
+           o ano atual aqui via .textContent = new Date().getFullYear()
+           — assim o copyright nunca fica desatualizado.   -->
+      <span id="ano"></span> ConcliX. Todos os direitos reservados.
+    </p>
+    <a href="#contato" class="botao botao-fantasma botao-pequeno">Experimente agora</a>
+  </div>
+
+</footer>
+
+
+<!-- <script> carrega o JavaScript ao final do <body>.
+     Colocar aqui (e não no <head>) garante que todo o HTML
+     já foi lido pelo navegador antes do JS tentar acessar
+     os elementos por getElementById — evita erros de
+     "elemento não encontrado".                            -->
+<script src="script.js"></script>
+
 </body>
 </html>
