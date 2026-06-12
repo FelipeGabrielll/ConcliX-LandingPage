@@ -1,1380 +1,622 @@
-/*
-  ============================================================
-  ConcliX — Folha de Estilos Principal
-  Arquivo: style.css
-  Descricao: Sistema de design completo baseado na paleta de
-             branding definida. Implementa Mobile-First com
-             Flexbox e CSS Grid. Sem uso de frameworks externos.
+/* ═══════════════════════════════════════════════════════════════
+   ConcliX — Folha de Estilos Principal
+   Organização: Variáveis → Reset → Layout → Componentes → Seções
+═══════════════════════════════════════════════════════════════ */
 
-  TOKENS DE DESIGN (Variaveis CSS Globais):
-  Todas as decisoes de cor, tipo, espaco e raio derivam das
-  variaveis declaradas em :root, garantindo coerencia visual
-  e manutencao centralizada.
-  ============================================================
-*/
 
-/* ============================================================
-   RESET E VARIAVEIS GLOBAIS
-   ============================================================ */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
+/* ── VARIÁVEIS GLOBAIS (CSS Custom Properties) ─────────────────
+   :root representa o elemento raiz do documento (<html>).
+   Definir variáveis aqui as torna acessíveis em qualquer lugar
+   do CSS via var(--nome-da-variavel).
+   Vantagem: alterar UMA linha muda toda a aparência do site.
+─────────────────────────────────────────────────────────────── */
 :root {
-  /* --- Paleta de Cores (Branding ConcliX) --- */
-  --color-primary:     #2F2235; /* Fundo escuro: header, footer, secoes de destaque  */
-  --color-secondary:   #3F3244; /* Navegacao, divisores, elementos intermediarios     */
-  --color-accent:      #60495A; /* CTA, botoes primarios, icones de alerta            */
-  --color-accent-hover:#7a5c72; /* Estado hover dos botoes e links de acao            */
-  --color-mid:         #A9ACA9; /* Fundos de cards, bordas suaves                     */
-  --color-light:       #BFC3BA; /* Fundo geral da pagina, textos sobre fundos escuros */
-  --color-white:       #FFFFFF;
+  /* Paleta de cores da marca ConcliX */
+  --primaria:    #2F2235;   /* roxo escuro — fundo principal, cabeçalho, hero  */
+  --secundaria:  #3F3244;   /* roxo médio  — fundos alternativos, formulário   */
+  --realce:      #60495A;   /* roxo claro  — botões, ícones, destaque          */
+  --realce-h:    #7A5C72;   /* roxo hover  — estado :hover dos botões          */
+  --clara:       #BFC3BA;   /* bege/cinza  — textos e bordas em fundo escuro   */
+  --branco:      #FFFFFF;   /* branco puro — fundo de seções claras e cartões  */
 
-  /* --- Cores Semanticas (derivadas da paleta) --- */
-  --color-text-dark:   #1a1020; /* Texto sobre fundos claros                          */
-  --color-text-body:   #3d3643; /* Texto de paragrafos e descricoes                   */
-  --color-text-muted:  #6b626f; /* Textos secundarios, hints, placeholders            */
-  --color-alert:       #b44b4b; /* Indicadores de divergencia e alertas criticos      */
-  --color-ok:          #3a7d4f; /* Indicadores de conciliacao bem-sucedida            */
+  /* Cores de texto (usadas em seções brancas) */
+  --texto-d:     #1A1020;   /* texto muito escuro — títulos h1/h2/h3           */
+  --texto-b:     #3D3643;   /* texto base — parágrafos em fundo claro          */
+  --texto-m:     #6B6270;   /* texto médio/suave — subtítulos, legendas        */
 
-  /* --- Tipografia --- */
-  --font-display: 'Syne', sans-serif;      /* Titulos e numeros de impacto */
-  --font-body:    'DM Sans', sans-serif;   /* Corpo, labels, UI elements   */
+  /* Cores de status do painel de auditorias */
+  --sucesso:     #3A7D4F;   /* verde escuro — borda esquerda de linha OK       */
+  --erro:        #B44B4B;   /* vermelho     — borda esquerda de linha ALERTA   */
+  --sucesso-b:   #4CAF74;   /* verde claro  — texto do badge de sucesso        */
+  --erro-b:      #E06060;   /* vermelho claro — texto do badge de erro         */
 
-  /* --- Escala Tipografica (clamp = responsivo sem media queries de tipo) --- */
-  --text-xs:   0.75rem;   /* 12px — hints, disclaimers        */
-  --text-sm:   0.875rem;  /* 14px — labels, captions          */
-  --text-base: 1rem;      /* 16px — corpo de texto            */
-  --text-md:   1.125rem;  /* 18px — listas e destaques        */
-  --text-lg:   1.25rem;   /* 20px — subtitulos de cards       */
-  --text-xl:   1.5rem;    /* 24px — titulos de secao menores  */
-  --text-2xl:  clamp(1.75rem, 3vw, 2.25rem);   /* Titulos de secao principais */
-  --text-hero: clamp(2.25rem, 5vw, 3.75rem);   /* Headline do Hero            */
+  /* Tipografia fluida com clamp()
+     clamp(min, preferido, max): o valor cresce com a tela,
+     mas nunca sai dos limites mínimo e máximo definidos.     */
+  --fs-destaque: clamp(2.25rem, 5vw, 3.75rem); /* tamanho do h1 do hero      */
+  --fs-h2:       clamp(1.75rem, 3vw, 2.25rem); /* tamanho dos h2 de seção    */
 
-  /* --- Espacamento --- */
-  --space-1:  0.25rem;
-  --space-2:  0.5rem;
-  --space-3:  0.75rem;
-  --space-4:  1rem;
-  --space-5:  1.25rem;
-  --space-6:  1.5rem;
-  --space-8:  2rem;
-  --space-10: 2.5rem;
-  --space-12: 3rem;
-  --space-16: 4rem;
-  --space-20: 5rem;
-  --space-24: 6rem;
+  /* Medidas de layout */
+  --altura-cab:  68px;      /* altura fixa do cabeçalho (usado em calc())     */
+  --largura-max: 1140px;    /* largura máxima do container de conteúdo        */
+  --espacamento: 1.5rem;    /* padding lateral padrão (24px)                  */
+  --raio:        8px;       /* border-radius padrão para cantos arredondados  */
 
-  /* --- Bordas e Sombras --- */
-  --radius-sm:  4px;
-  --radius-md:  8px;
-  --radius-lg:  16px;
-  --radius-xl:  24px;
+  /* Animações */
+  --transicao:   150ms ease; /* duração e curva padrão de todas as transições */
 
-  --shadow-sm:  0 1px 3px rgba(0,0,0,0.12);
-  --shadow-md:  0 4px 16px rgba(0,0,0,0.15);
-  --shadow-lg:  0 8px 32px rgba(0,0,0,0.18);
-
-  /* --- Transicoes --- */
-  --transition-fast:   150ms ease;
-  --transition-normal: 280ms ease;
-  --transition-slow:   450ms ease;
-
-  /* --- Container --- */
-  --container-max: 1140px;
-  --container-pad: var(--space-6);
+  /* Sombras */
+  --sombra:      0 4px 16px rgba(0,0,0,.15);  /* sombra sutil — cards, botões */
+  --sombra-g:    0 8px 32px rgba(0,0,0,.18);  /* sombra maior — hover de card  */
 }
 
-/* ============================================================
-   BASE
-   ============================================================ */
-html {
-  scroll-behavior: smooth;
-  font-size: 16px;
-  -webkit-text-size-adjust: 100%;
-}
 
-body {
-  font-family: var(--font-body);
-  font-size: var(--text-base);
-  color: var(--color-text-body);
-  background-color: var(--color-light);
-  line-height: 1.65;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+/* ── RESET BÁSICO ───────────────────────────────────────────────
+   Navegadores aplicam estilos padrão diferentes.
+   Este reset padroniza o comportamento entre todos eles.
+─────────────────────────────────────────────────────────────── */
 
-img,
-svg {
-  display: block;
-  max-width: 100%;
-}
+/* box-sizing: border-box faz com que padding e border sejam
+   incluídos na largura/altura declarada — evita surpresas de
+   elementos "vazando" para fora do container.
+   * seleciona todos os elementos; ::before e ::after são
+   pseudo-elementos gerados pelo CSS (ex: o ✓ da lista).      */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
+/* scroll-behavior: smooth faz a página rolar suavemente ao
+   clicar nos links de âncora (ex: href="#contato")            */
+html { scroll-behavior: smooth; }
 
-ul,
-ol {
-  list-style: none;
-}
+/* -webkit-font-smoothing: antialiased melhora a renderização
+   das fontes em telas de alta resolução (macOS/iOS).          */
+body { font-family: 'Inter', sans-serif; color: var(--texto-b); background: var(--branco); line-height: 1.65; -webkit-font-smoothing: antialiased; }
 
-button {
-  font-family: inherit;
-  cursor: pointer;
-  border: none;
-  background: none;
-}
+/* Aplica a fonte de títulos (Space Grotesk) em todos os
+   headings de uma vez; line-height menor pois títulos grandes
+   ficam estranhos com espaçamento de parágrafo (1.65).        */
+h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; line-height: 1.15; color: var(--texto-d); }
 
-input,
-select,
-textarea {
-  font-family: inherit;
-  font-size: inherit;
-}
+/* Remove sublinhado e herda a cor do elemento pai nos links    */
+a { color: inherit; text-decoration: none; }
 
-/* ============================================================
-   UTILITARIOS GLOBAIS
-   ============================================================ */
+/* Remove os marcadores (bolinhas/números) de listas            */
+ul, ol { list-style: none; }
 
-/* Container centralizado com padding lateral responsivo */
-.container {
-  width: 100%;
-  max-width: var(--container-max);
-  margin-inline: auto;
-  padding-inline: var(--container-pad);
-}
+/* display: block em imagens remove o espaço em branco gerado
+   pelo comportamento inline padrão; max-width: 100% impede
+   que a imagem ultrapasse o container.                        */
+img, svg { display: block; max-width: 100%; }
 
-/* ============================================================
-   COMPONENTE: BOTOES
-   Sistema de dois variantes: primario (solido) e fantasma (borda).
-   ============================================================ */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-2);
-  padding: var(--space-3) var(--space-6);
-  border-radius: var(--radius-md);
-  font-family: var(--font-body);
-  font-size: var(--text-sm);
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  transition: background-color var(--transition-fast),
-              color var(--transition-fast),
-              border-color var(--transition-fast),
-              transform var(--transition-fast),
-              box-shadow var(--transition-fast);
-  white-space: nowrap;
-}
 
-.btn:focus-visible {
-  outline: 2px solid var(--color-accent);
-  outline-offset: 3px;
-}
+/* ── LAYOUT GLOBAL ─────────────────────────────────────────────
+   .container centra e limita o conteúdo horizontalmente.
+   padding-inline aplica padding apenas nos lados esquerdo e
+   direito (propriedade lógica, equivale a padding-left +
+   padding-right, mas respeita idiomas RTL).                   */
+.container { max-width: var(--largura-max); margin: 0 auto; padding-inline: var(--espacamento); }
 
-/* Variante primaria: fundo solido de destaque */
-.btn--primary {
-  background-color: var(--color-accent);
-  color: var(--color-white);
-  border: 2px solid var(--color-accent);
-}
+/* padding-block aplica padding no topo e na base da seção
+   (equivale a padding-top + padding-bottom).                  */
+section { padding-block: 5rem; }
 
-.btn--primary:hover,
-.btn--primary:focus-visible {
-  background-color: var(--color-accent-hover);
-  border-color: var(--color-accent-hover);
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-md);
-}
 
-/* Variante fantasma: borda sem fundo solido */
-.btn--ghost {
-  background-color: transparent;
-  color: var(--color-light);
-  border: 2px solid rgba(191, 195, 186, 0.4);
-}
-
-.btn--ghost:hover,
-.btn--ghost:focus-visible {
-  background-color: rgba(191, 195, 186, 0.1);
-  border-color: var(--color-light);
-}
-
-/* ============================================================
-   COMPONENTE: CABECALHO DE SECAO
-   Padrao recorrente: eyebrow + titulo + descricao centralizada.
-   ============================================================ */
-.section-header {
-  text-align: center;
-  max-width: 640px;
-  margin-inline: auto;
-  margin-bottom: var(--space-12);
-}
-
-/* Eyebrow: label curto acima do titulo */
-.section-eyebrow {
+/* ── ETIQUETA DE SEÇÃO ─────────────────────────────────────────
+   Pequeno label em maiúsculas acima dos títulos h2.
+   display: inline-block permite definir padding num elemento
+   que originalmente seria inline (como <span>).
+   border-radius: 100px cria o formato de pílula (valor grande
+   garante cantos totalmente arredondados independente da altura). */
+.etiqueta {
   display: inline-block;
-  font-size: var(--text-xs);
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-accent);
-  background-color: rgba(96, 73, 90, 0.12);
-  padding: var(--space-1) var(--space-3);
-  border-radius: 100px;
-  margin-bottom: var(--space-4);
+  font-size: .75rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+  background: rgba(96,73,90,.12); color: var(--realce);
+  padding: .25rem .75rem; border-radius: 100px; margin-bottom: 1rem;
 }
 
-.section-title {
-  font-family: var(--font-display);
-  font-size: var(--text-2xl);
-  font-weight: 800;
-  line-height: 1.2;
-  color: var(--color-text-dark);
-  margin-bottom: var(--space-4);
-}
-
-.section-desc {
-  font-size: var(--text-md);
-  color: var(--color-text-muted);
-  line-height: 1.7;
-}
-
-/* ============================================================
-   HEADER — Cabecalho fixo com scroll-aware
-   ============================================================ */
-.header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  background-color: var(--color-primary);
-  /* Borda inferior invisivel por padrao */
-  border-bottom: 1px solid transparent;
-  transition: border-color var(--transition-normal),
-              box-shadow var(--transition-normal),
-              background-color var(--transition-normal);
-}
-
-/* Estado ao rolar: borda + sombra ativadas via JavaScript */
-.header--scrolled {
-  border-bottom-color: var(--color-secondary);
-  box-shadow: 0 2px 20px rgba(0,0,0,0.3);
-}
-
-.header__inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 68px;
-  gap: var(--space-6);
-}
-
-/* Logotipo */
-.header__logo {
-  font-family: var(--font-display);
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: var(--color-light);
-  letter-spacing: -0.02em;
-  flex-shrink: 0;
-  transition: opacity var(--transition-fast);
-}
+/* Variante clara: usada em seções com fundo branco.
+   O seletor .etiqueta.clara exige que o elemento tenha
+   AMBAS as classes: class="etiqueta clara"                    */
+.etiqueta.clara { background: rgba(47,34,53,.1); color: var(--primaria); }
 
-.header__logo:hover {
-  opacity: 0.85;
-}
 
-/* Letra "X" em destaque na cor accent */
-.header__logo-accent {
-  color: var(--color-accent-hover);
-}
+/* ── CABEÇALHO DE SEÇÃO ────────────────────────────────────────
+   Bloco centralizado com etiqueta + título + subtítulo + botão.
+   display: flex com flex-direction: column empilha os filhos
+   verticalmente; align-items: center centraliza horizontalmente. */
+.cabecalho-secao { text-align: center; max-width: 640px; margin: 0 auto 3rem; display: flex; flex-direction: column; align-items: center; }
+.cabecalho-secao h2 { font-size: var(--fs-h2); margin-bottom: 1rem; }
+.cabecalho-secao p { font-size: 1.125rem; color: var(--texto-m); margin-bottom: 1.5rem; }
 
-/* Navegacao principal */
-.header__nav {
-  display: flex;
-  align-items: center;
-  gap: var(--space-6);
-}
+/* Variante alinhada à esquerda — usada nas seções de grid
+   (relatórios, como funciona) onde o texto fica numa coluna.  */
+.cabecalho-secao.esquerda { text-align: left; align-items: flex-start; max-width: none; margin: 0 0 2rem; }
 
-.header__nav-list {
-  display: flex;
-  align-items: center;
-  gap: var(--space-5);
-}
 
-.header__nav-link {
-  font-size: var(--text-sm);
-  font-weight: 500;
-  color: rgba(191, 195, 186, 0.75);
-  transition: color var(--transition-fast);
-  padding: var(--space-1) 0;
-  position: relative;
+/* ── BOTÕES ─────────────────────────────────────────────────────
+   display: inline-flex permite centralizar o ícone e o texto
+   lado a lado usando flexbox, sem ocupar 100% da largura.
+   border: 2px solid transparent reserva espaço para a borda
+   do estado hover sem que o layout "pule" ao aparecer.        */
+.botao {
+  display: inline-flex; align-items: center; gap: .5rem;
+  padding: .75rem 1.5rem; border-radius: var(--raio); border: 2px solid transparent;
+  font-size: .875rem; font-weight: 600; letter-spacing: .02em; text-transform: uppercase;
+  cursor: pointer; transition: background var(--transicao), transform var(--transicao), box-shadow var(--transicao);
 }
 
-/* Sublinhado animado no hover dos links de navegacao */
-.header__nav-link::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background-color: var(--color-accent-hover);
-  transition: width var(--transition-normal);
-}
+/* Botão primário: fundo colorido sólido                        */
+.botao-primario { background: var(--realce); color: var(--branco); border-color: var(--realce); }
 
-.header__nav-link:hover {
-  color: var(--color-light);
-}
+/* :hover ativa quando o cursor passa por cima.
+   translateY(-1px) sobe 1px — efeito de "levantar" o botão.  */
+.botao-primario:hover { background: var(--realce-h); border-color: var(--realce-h); transform: translateY(-1px); box-shadow: var(--sombra); }
 
-.header__nav-link:hover::after {
-  width: 100%;
-}
+/* Botão fantasma: fundo transparente, apenas contorno         */
+.botao-fantasma { background: transparent; color: var(--clara); border-color: rgba(191,195,186,.4); }
+.botao-fantasma:hover { background: rgba(191,195,186,.08); border-color: var(--clara); }
 
-/* Botao hamburguer (mobile) — ocultado em telas grandes */
-.header__menu-toggle {
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 5px;
-  width: 36px;
-  height: 36px;
-  padding: var(--space-2);
-  border-radius: var(--radius-sm);
-  transition: background-color var(--transition-fast);
-}
+/* Modificadores de tamanho (sobrescrevem o padding do .botao)  */
+.botao-grande { padding: 1rem 2rem; font-size: 1rem; }
+.botao-pequeno { padding: .5rem 1rem; font-size: .75rem; }
 
-.header__menu-toggle:hover {
-  background-color: var(--color-secondary);
-}
 
-.header__menu-bar {
-  display: block;
-  width: 20px;
-  height: 2px;
-  background-color: var(--color-light);
-  border-radius: 2px;
-  transition: transform var(--transition-normal), opacity var(--transition-normal);
+/* ── RESERVADO ─────────────────────────────────────────────────
+   Área tracejada que indica onde uma imagem será inserida.
+   border: 2px dashed cria a borda pontilhada/tracejada.       */
+.reservado {
+  width: 100%; min-height: 360px; border-radius: 16px;
+  border: 2px dashed rgba(191,195,186,.25); background: rgba(255,255,255,.04);
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(191,195,186,.45); font-size: .875rem; text-align: center;
 }
 
-/* Animacao do hamburguer para X quando menu esta aberto */
-.header__menu-toggle.is-open .header__menu-bar:nth-child(1) {
-  transform: translateY(7px) rotate(45deg);
-}
-.header__menu-toggle.is-open .header__menu-bar:nth-child(2) {
-  opacity: 0;
-}
-.header__menu-toggle.is-open .header__menu-bar:nth-child(3) {
-  transform: translateY(-7px) rotate(-45deg);
-}
+/* Variante escura: usada na seção de público-alvo (fundo roxo) */
+.reservado.escuro { background: rgba(47,34,53,.35); border-color: rgba(96,73,90,.25); }
 
-/* ============================================================
-   SECAO: HERO
-   ============================================================ */
-.hero {
-  position: relative;
-  background-color: var(--color-primary);
-  padding-top: calc(68px + var(--space-20));
-  padding-bottom: var(--space-24);
-  overflow: hidden;
-}
 
-.hero__inner {
-  position: relative;
-  z-index: 2;
-}
+/* ── CLASSES AUXILIARES ─────────────────────────────────────────
+   Pequenos helpers reutilizáveis em várias seções.             */
+.cta-centro { text-align: center; }
 
-/* Badge/tag acima do titulo principal */
-.hero__badge {
-  display: inline-block;
-  font-size: var(--text-xs);
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--color-accent-hover);
-  border: 1px solid rgba(96, 73, 90, 0.5);
-  padding: var(--space-2) var(--space-4);
-  border-radius: 100px;
-  margin-bottom: var(--space-6);
-}
+/* flex-wrap: wrap permite que os botões quebrem para a próxima
+   linha em telas pequenas (sem overflow horizontal).          */
+.grupo-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
 
-/* Titulo principal do hero */
-.hero__title {
-  font-family: var(--font-display);
-  font-size: var(--text-hero);
-  font-weight: 800;
-  line-height: 1.1;
-  color: var(--color-white);
-  max-width: 780px;
-  margin-bottom: var(--space-6);
-  letter-spacing: -0.02em;
-}
 
-/* Subtitulo do hero */
-.hero__subtitle {
-  font-size: clamp(var(--text-base), 2vw, var(--text-lg));
-  color: rgba(191, 195, 186, 0.8);
-  max-width: 600px;
-  line-height: 1.75;
-  margin-bottom: var(--space-10);
-}
+/* ═══════════════════════════════════════════════════
+   CABEÇALHO DO SITE
+═══════════════════════════════════════════════════ */
 
-/* Grupo de botoes CTA */
-.hero__actions {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: var(--space-4);
-  margin-bottom: var(--space-16);
+/* position: fixed mantém o cabeçalho visível durante a rolagem.
+   inset: 0 0 auto é atalho para top:0, right:0, bottom:auto,
+   left:0 — ocupa toda a largura no topo da viewport.
+   z-index: 100 garante que fique acima de todos os outros
+   elementos (quanto maior o número, mais "acima" na pilha).   */
+header {
+  position: fixed; inset: 0 0 auto;
+  height: var(--altura-cab); background: var(--primaria); z-index: 100;
+  transition: box-shadow var(--transicao);
 }
 
-/* Metricas de credibilidade do hero */
-.hero__metrics {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: var(--space-6);
-}
+/* Classe adicionada pelo JavaScript quando o usuário rola >20px.
+   A sombra indica visualmente que o cabeçalho está flutuando.  */
+header.rolado { box-shadow: var(--sombra); border-bottom: 1px solid rgba(191,195,186,.12); }
 
-.hero__metric {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-1);
-}
+/* Container interno do cabeçalho: usa flex para alinhar
+   logo + nav + botões em linha horizontal.                    */
+.container-nav { height: 100%; display: flex; align-items: center; gap: 2rem; }
 
-.hero__metric-value {
-  font-family: var(--font-display);
-  font-size: var(--text-xl);
-  font-weight: 700;
-  color: var(--color-white);
-  line-height: 1;
-}
+/* Logo em texto com fonte de display (Space Grotesk)          */
+.logo { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 700; letter-spacing: -.02em; color: var(--clara); }
 
-.hero__metric-label {
-  font-size: var(--text-xs);
-  color: rgba(191, 195, 186, 0.6);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-}
+/* O <span> dentro do logo recebe cor de destaque (o "X")      */
+.logo span { color: var(--realce-h); }
 
-/* Divisor vertical entre metricas */
-.hero__metric-divider {
-  width: 1px;
-  height: 36px;
-  background-color: rgba(191, 195, 186, 0.2);
-  align-self: center;
-}
+/* flex: 1 faz o nav crescer e ocupar todo o espaço disponível
+   entre o logo e os botões do lado direito.                   */
+nav#menuNav { flex: 1; }
+nav#menuNav a { font-size: .875rem; font-weight: 500; color: rgba(191,195,186,.75); margin-right: 2rem; position: relative; transition: color var(--transicao); }
+nav#menuNav a:hover { color: var(--clara); }
 
-/* Grid de fundo decorativo (pontilhado) */
-.hero__bg-grid {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background-image:
-    radial-gradient(circle at 80% 20%, rgba(96, 73, 90, 0.25) 0%, transparent 50%),
-    radial-gradient(circle at 20% 80%, rgba(63, 50, 68, 0.3) 0%, transparent 45%);
-  pointer-events: none;
-}
+/* margin-left: auto empurra este grupo para a direita          */
+.fim-nav { display: flex; align-items: center; gap: 1rem; margin-left: auto; }
 
-/* ============================================================
-   SECAO: FEATURES
-   ============================================================ */
-.features {
-  padding-block: var(--space-24);
-  background-color: var(--color-light);
-}
+/* Botão hambúrguer não utilizado em desktop                   */
+.hamburguer { display: none; }
 
-/* Grid de tres colunas, colapsa para 1 no mobile */
-.features__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: var(--space-6);
-}
 
-/* Card de feature */
-.feature-card {
-  background-color: var(--color-white);
-  border: 1px solid rgba(169, 172, 169, 0.4);
-  border-radius: var(--radius-lg);
-  padding: var(--space-8);
-  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
-}
+/* ═══════════════════════════════════════════════════
+   SEÇÃO DESTAQUE (hero)
+═══════════════════════════════════════════════════ */
 
-.feature-card:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-lg);
-}
+/* padding-top usa calc() para somar a altura do cabeçalho fixo
+   (68px) com o espaçamento da seção (5rem = 80px), evitando
+   que o conteúdo fique escondido atrás do cabeçalho.         */
+.destaque { background: var(--primaria); padding-top: calc(var(--altura-cab) + 5rem); padding-bottom: 5rem; }
 
-/* Variante em destaque (card central) com fundo escuro */
-.feature-card--accent {
-  background-color: var(--color-primary);
-  border-color: var(--color-secondary);
-  color: var(--color-light);
-}
+/* Grid de 2 colunas iguais: texto à esquerda, painel à direita */
+.grade-destaque { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
 
-.feature-card--accent .feature-card__title {
-  color: var(--color-white);
-}
+/* Coluna de texto: flex para empilhar e alinhar à esquerda     */
+.texto-destaque { display: flex; flex-direction: column; align-items: flex-start; }
+.texto-destaque .etiqueta { background: rgba(191,195,186,.1); color: var(--clara); }
 
-.feature-card--accent .feature-card__desc {
-  color: rgba(191, 195, 186, 0.75);
-}
+/* font-size usa a variável de tipografia fluida (clamp)        */
+.texto-destaque h1 { font-size: var(--fs-destaque); font-weight: 700; color: var(--branco); margin-bottom: 1.5rem; letter-spacing: -.02em; }
 
-.feature-card--accent .feature-card__list li {
-  color: rgba(191, 195, 186, 0.7);
-  border-top-color: rgba(63, 50, 68, 0.8);
-}
+/* <em> dentro do h1 recebe cor de realce sem ficar em itálico  */
+.texto-destaque h1 em { color: var(--realce-h); font-style: normal; }
+.texto-destaque p { font-size: 1.125rem; color: rgba(191,195,186,.85); margin-bottom: 2rem; }
 
-.feature-card--accent .feature-card__list li::before {
-  background-color: var(--color-accent-hover);
-}
 
-/* Icone do card */
-.feature-card__icon-wrap {
-  width: 48px;
-  height: 48px;
-  background-color: rgba(96, 73, 90, 0.12);
-  border-radius: var(--radius-md);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: var(--space-5);
-}
+/* ── Painel Demo (simulação de dashboard) ── */
 
-.feature-card--accent .feature-card__icon-wrap {
-  background-color: rgba(96, 73, 90, 0.3);
-}
+/* overflow: hidden garante que o conteúdo interno respeite
+   o border-radius do container pai.                           */
+.painel-demo { background: #1A1020; border-radius: 16px; border: 1px solid rgba(96,73,90,.35); overflow: hidden; box-shadow: var(--sombra-g); }
 
-.feature-card__icon {
-  width: 22px;
-  height: 22px;
-  color: var(--color-accent);
-}
+/* Barra de título do painel (imita macOS com os 3 pontos)      */
+.barra-painel { display: flex; align-items: center; gap: .75rem; padding: .75rem 1.25rem; background: rgba(47,34,53,.8); border-bottom: 1px solid rgba(96,73,90,.2); font-family: monospace; font-size: .7rem; color: rgba(191,195,186,.45); }
 
-.feature-card--accent .feature-card__icon {
-  color: var(--color-accent-hover);
-}
+/* Cada ponto colorido (vermelho, amarelo, verde) é um <span>   */
+.ponto { width: 10px; height: 10px; border-radius: 50%; }
 
-.feature-card__title {
-  font-family: var(--font-display);
-  font-size: var(--text-lg);
-  font-weight: 700;
-  color: var(--color-text-dark);
-  margin-bottom: var(--space-3);
-  line-height: 1.3;
-}
+/* border-radius: 50% em elemento quadrado = círculo perfeito   */
+.ponto.r { background: var(--erro); }    /* vermelho — fechar  */
+.ponto.y { background: #C8A127; }        /* amarelo  — minimizar */
+.ponto.g { background: var(--sucesso); } /* verde    — maximizar */
 
-.feature-card__desc {
-  font-size: var(--text-sm);
-  color: var(--color-text-muted);
-  line-height: 1.7;
-  margin-bottom: var(--space-5);
-}
+/* Grade dos 3 KPIs (Key Performance Indicators) lado a lado    */
+.grade-indicadores { display: grid; grid-template-columns: repeat(3,1fr); gap: .75rem; padding: 1.25rem; }
 
-/* Lista de itens dentro do card */
-.feature-card__list {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
+/* Cada indicador é um card com fonte monospace (estilo terminal) */
+.indicador { background: rgba(63,50,68,.5); border: 1px solid rgba(96,73,90,.3); border-radius: var(--raio); padding: 1rem; display: flex; flex-direction: column; gap: .25rem; }
+.indicador small { font-family: monospace; font-size: .62rem; text-transform: uppercase; letter-spacing: .08em; color: rgba(191,195,186,.45); }
+.indicador b { font-family: 'Space Grotesk', sans-serif; font-size: 1.125rem; color: var(--clara); }
+.indicador em { font-size: .62rem; font-style: normal; font-weight: 600; }
+.indicador em.sucesso { color: var(--sucesso-b); }
+.indicador em.erro    { color: var(--erro-b); }
 
-.feature-card__list li {
-  font-size: var(--text-sm);
-  color: var(--color-text-muted);
-  padding: var(--space-3) 0;
-  border-top: 1px solid rgba(169, 172, 169, 0.35);
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-}
+/* Log de auditorias em tempo real (lista de linhas)            */
+.registro { display: flex; flex-direction: column; gap: .5rem; padding: 0 1.25rem 1.25rem; }
 
-/* Marcador circular antes de cada item */
-.feature-card__list li::before {
-  content: '';
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: var(--color-accent);
-  flex-shrink: 0;
-}
+/* Cada linha do log tem fonte monospace e borda colorida
+   à esquerda para indicar status (verde = OK, vermelho = alerta).
+   border-left: 3px solid transparent reserva o espaço da borda
+   sem exibir cor, para não causar deslocamento visual.        */
+.registro p { display: flex; align-items: center; gap: .75rem; font-family: monospace; font-size: .72rem; color: rgba(191,195,186,.7); padding: .5rem .75rem; border-radius: 4px; background: rgba(47,34,53,.5); border-left: 3px solid transparent; }
+.registro p.sucesso { border-left-color: var(--sucesso); }
+.registro p.erro    { border-left-color: var(--erro); }
 
-/* ============================================================
-   SECAO: COMO FUNCIONA (STEPS)
-   ============================================================ */
-.how-it-works {
-  padding-block: var(--space-24);
-  background-color: var(--color-secondary);
-}
+/* Badge colorido dentro de cada linha (ex: "✓ OK", "⚠ ALERTA") */
+.registro p b { font-size: .62rem; padding: 2px 6px; border-radius: 4px; white-space: nowrap; flex-shrink: 0; }
+.registro p.sucesso b { background: rgba(58,125,79,.18); color: var(--sucesso-b); }
+.registro p.erro    b { background: rgba(180,75,75,.18); color: var(--erro-b); }
 
-.how-it-works .section-eyebrow {
-  background-color: rgba(96, 73, 90, 0.3);
-  color: var(--color-accent-hover);
-}
 
-.how-it-works .section-title {
-  color: var(--color-white);
-}
+/* ═══════════════════════════════════════════════════
+   SEÇÃO PROVA SOCIAL (depoimento em destaque)
+═══════════════════════════════════════════════════ */
 
-.how-it-works .section-desc {
-  color: rgba(191, 195, 186, 0.65);
-}
+/* padding-block: 3rem é um ritmo menor que as outras seções
+   pois esta é apenas uma faixa de depoimento de destaque.     */
+.prova-social { background: var(--secundaria); padding-block: 3rem; }
+.prova-social blockquote { max-width: 780px; margin: 0 auto; text-align: center; font-size: 1.125rem; font-style: italic; color: rgba(191,195,186,.88); line-height: 1.75; }
 
-/* Lista numerada de etapas */
-.steps {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  max-width: 720px;
-  margin-inline: auto;
-  position: relative;
-}
+/* <footer> dentro do <blockquote> = atribuição do depoimento.
+   display: block porque footer é inline por padrão neste contexto. */
+.prova-social blockquote footer { display: block; font-style: normal; margin-top: 1.25rem; font-size: .875rem; color: rgba(191,195,186,.55); }
+.prova-social blockquote footer strong { display: block; font-size: 1rem; color: var(--clara); margin-bottom: .25rem; }
 
-/* Linha vertical conectora entre os steps */
-.steps::before {
-  content: '';
-  position: absolute;
-  left: 23px;
-  top: 24px;
-  bottom: 24px;
-  width: 1px;
-  background: linear-gradient(
-    to bottom,
-    transparent,
-    rgba(96, 73, 90, 0.5) 10%,
-    rgba(96, 73, 90, 0.5) 90%,
-    transparent
-  );
-}
 
-.step {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--space-6);
-  padding: var(--space-6) 0;
-  position: relative;
-}
+/* ═══════════════════════════════════════════════════
+   SEÇÃO PROPOSTA DE VALOR (3 cartões)
+═══════════════════════════════════════════════════ */
+.proposta-valor { background: var(--branco); }
+.proposta-valor h2, .proposta-valor h3 { color: var(--texto-d); }
+.proposta-valor .cabecalho-secao p { color: var(--texto-b); }
 
-/* Numero do step com fundo e borda */
-.step__number {
-  flex-shrink: 0;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background-color: var(--color-primary);
-  border: 2px solid var(--color-accent);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-display);
-  font-size: var(--text-sm);
-  font-weight: 700;
-  color: var(--color-accent-hover);
-  letter-spacing: 0.04em;
-  position: relative;
-  z-index: 1;
-}
+/* repeat(3, 1fr) cria 3 colunas de tamanho igual (1 fração cada) */
+.grade-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-top: 2.5rem; }
 
-.step__content {
-  padding-top: var(--space-2);
-}
+/* Cartão base: flex column para empilhar ícone → título → texto */
+.cartao { background: var(--branco); border: 1px solid rgba(47,34,53,.12); border-radius: 16px; padding: 2rem; display: flex; flex-direction: column; gap: 1rem; transition: transform var(--transicao), box-shadow var(--transicao); }
 
-.step__title {
-  font-family: var(--font-display);
-  font-size: var(--text-lg);
-  font-weight: 700;
-  color: var(--color-white);
-  margin-bottom: var(--space-2);
-}
+/* Hover levanta o cartão 3px e adiciona sombra maior            */
+.cartao:hover { transform: translateY(-3px); box-shadow: var(--sombra-g); }
 
-.step__desc {
-  font-size: var(--text-sm);
-  color: rgba(191, 195, 186, 0.7);
-  line-height: 1.7;
-}
+/* Variante escura: cartão central (fundo roxo sobre fundo branco) */
+.cartao-escuro { background: var(--primaria); border-color: var(--secundaria); }
+.cartao-escuro h3 { color: var(--branco); }
+.cartao-escuro p  { color: rgba(191,195,186,.8); }
+.cartao-escuro .icone { background: rgba(122,92,114,.2); color: var(--realce-h); }
 
-/* ============================================================
-   SECAO: INTEGRACAO BLING ERP
-   ============================================================ */
-.integration {
-  padding-block: var(--space-24);
-  background-color: var(--color-primary);
-}
+.cartao h3 { font-size: 1.25rem; }
+.cartao p  { font-size: 1rem; color: var(--texto-b); }
 
-.integration__inner {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-16);
-  align-items: center;
-}
+/* Quadrado com ícone centralizado usando flex                   */
+.icone { width: 48px; height: 48px; border-radius: var(--raio); background: rgba(96,73,90,.1); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; }
 
-/* Painel estilo editor de codigo */
-.integration__panel {
-  background-color: #1a1020;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  box-shadow: var(--shadow-lg);
-  border: 1px solid rgba(96, 73, 90, 0.35);
-}
 
-/* Barra de titulo do painel */
-.integration__panel-bar {
-  background-color: var(--color-secondary);
-  padding: var(--space-3) var(--space-4);
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-}
+/* ═══════════════════════════════════════════════════
+   SEÇÃO INTEGRAÇÕES
+═══════════════════════════════════════════════════ */
+.integracoes { background: var(--primaria); }
+.integracoes h2 { color: var(--branco); }
+.integracoes .etiqueta { background: rgba(191,195,186,.1); color: var(--clara); }
 
-/* Pontos decorativos da barra (semaforo) */
-.integration__panel-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: var(--color-accent);
-  opacity: 0.6;
-}
+/* Rótulo de grupo (ex: "MARKETPLACES", "ERPS") — letra pequena
+   em maiúsculas com espaçamento largo entre letras.           */
+.rotulo-grupo { font-size: .75rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: rgba(191,195,186,.45); margin-bottom: 1rem; }
 
-.integration__panel-dot:nth-child(1) { background-color: #b44b4b; opacity: 0.8; }
-.integration__panel-dot:nth-child(2) { background-color: #c8a127; opacity: 0.8; }
-.integration__panel-dot:nth-child(3) { background-color: #3a7d4f; opacity: 0.8; }
-
-.integration__panel-label {
-  font-family: 'Courier New', monospace;
-  font-size: var(--text-xs);
-  color: rgba(191, 195, 186, 0.5);
-  margin-left: var(--space-2);
-}
+/* Contêiner de chips/pílulas dos logos                         */
+.logos { display: flex; flex-wrap: wrap; gap: .75rem; margin-bottom: 2.5rem; }
+.logos span { background: rgba(63,50,68,.6); border: 1px solid rgba(96,73,90,.3); border-radius: var(--raio); padding: .6rem 1.25rem; font-size: .875rem; color: rgba(191,195,186,.75); transition: background var(--transicao), color var(--transicao); }
+.logos span:hover { background: rgba(96,73,90,.4); color: var(--clara); }
 
-/* Bloco de codigo com syntax highlighting CSS */
-.integration__code {
-  padding: var(--space-6);
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 0.82rem;
-  line-height: 1.85;
-  color: rgba(191, 195, 186, 0.85);
-  overflow-x: auto;
-  white-space: pre;
-}
+/* Chip em destaque: Bling ERP (integração principal)           */
+.logos .realce { background: rgba(96,73,90,.4); border-color: var(--realce-h); color: var(--clara); font-weight: 600; }
 
-.code-comment { color: rgba(169, 172, 169, 0.45); font-style: italic; }
-.code-keyword { color: #c678dd; }
-.code-string  { color: #98c379; }
-
-/* Conteudo textual da secao de integracao */
-.integration__content .section-eyebrow {
-  background-color: rgba(96, 73, 90, 0.25);
-  color: var(--color-accent-hover);
-}
+/* Chip "+" outros: borda tracejada para indicar lista parcial  */
+.logos .mais { border-style: dashed; color: rgba(191,195,186,.35); font-style: italic; }
 
-.integration__content .section-title {
-  color: var(--color-white);
-  text-align: left;
-}
 
-.integration__desc {
-  font-size: var(--text-base);
-  color: rgba(191, 195, 186, 0.7);
-  line-height: 1.8;
-  margin-bottom: var(--space-6);
-}
+/* ═══════════════════════════════════════════════════
+   SEÇÃO RELATÓRIOS
+═══════════════════════════════════════════════════ */
+.relatorios { background: var(--secundaria); }
+.relatorios h2 { color: var(--branco); }
+.relatorios .etiqueta { background: rgba(191,195,186,.1); color: var(--clara); }
 
-/* Lista de features com checkmarks */
-.integration__features {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-}
+/* Grade de 2 colunas: lista de relatórios + imagem reservada   */
+.grade-relatorios { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
 
-.integration__feature-item {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  font-size: var(--text-sm);
-  color: rgba(191, 195, 186, 0.8);
-}
+/* grade-2 é reutilizada também nos depoimentos                 */
+.grade-2 { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
 
-/* Icone de check */
-.integration__check {
-  width: 16px;
-  height: 16px;
-  color: #3a7d4f;
-  flex-shrink: 0;
-}
+/* Cada item da lista de relatórios                             */
+.cartao-relatorio { padding: 1rem; background: rgba(47,34,53,.5); border: 1px solid rgba(96,73,90,.22); border-radius: var(--raio); font-size: .875rem; color: rgba(191,195,186,.85); transition: background var(--transicao); }
+.cartao-relatorio:hover { background: rgba(96,73,90,.25); }
 
-/* ============================================================
-   SECAO: USE CASE / SIMULADOR
-   ============================================================ */
-.use-case {
-  padding-block: var(--space-24);
-  background-color: var(--color-light);
-}
 
-/* Wrapper do simulador em duas colunas */
-.simulator {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-6);
-  max-width: 900px;
-  margin-inline: auto;
-}
+/* ═══════════════════════════════════════════════════
+   SEÇÃO BENEFÍCIOS
+═══════════════════════════════════════════════════ */
+.beneficios { background: var(--branco); }
+.beneficios h2 { color: var(--texto-d); }
+.beneficios .cabecalho-secao p { color: var(--texto-b); }
 
-/* Painel generico do simulador */
-.simulator__panel {
-  background-color: var(--color-white);
-  border: 1px solid rgba(169, 172, 169, 0.4);
-  border-radius: var(--radius-lg);
-  padding: var(--space-8);
-}
+/* repeat(2, 1fr) = 2 colunas iguais para os benefícios        */
+.grade-beneficios { display: grid; grid-template-columns: repeat(2,1fr); gap: 1.25rem; margin-top: 2.5rem; }
 
-.simulator__panel--output {
-  background-color: var(--color-primary);
-  border-color: var(--color-secondary);
-}
+/* Cada benefício: ícone à esquerda, título+texto à direita     */
+.beneficio { display: flex; gap: 1.25rem; padding: 1.5rem; background: var(--branco); border: 1px solid rgba(47,34,53,.12); border-radius: 16px; transition: transform var(--transicao), box-shadow var(--transicao); }
+.beneficio:hover { transform: translateY(-2px); box-shadow: var(--sombra); }
 
-.simulator__panel-title {
-  font-family: var(--font-display);
-  font-size: var(--text-md);
-  font-weight: 700;
-  color: var(--color-text-dark);
-  margin-bottom: var(--space-6);
-  padding-bottom: var(--space-4);
-  border-bottom: 1px solid rgba(169, 172, 169, 0.3);
-}
+/* grid-column: 1 / -1 faz o último benefício ocupar toda a
+   largura da grade (da coluna 1 até a última coluna, -1).     */
+.beneficio.completo { grid-column: 1 / -1; }
 
-.simulator__panel--output .simulator__panel-title {
-  color: var(--color-light);
-  border-bottom-color: rgba(63, 50, 68, 0.8);
-}
+/* flex-shrink: 0 impede que o ícone encolha quando o texto
+   ao lado for muito longo.                                     */
+.beneficio .icone { flex-shrink: 0; width: 44px; height: 44px; border-radius: var(--raio); background: rgba(96,73,90,.1); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; }
+.beneficio h3 { font-size: 1rem; font-weight: 700; color: var(--texto-d); margin-bottom: .5rem; }
+.beneficio p  { font-size: .875rem; color: var(--texto-b); }
 
-/* Campo de formulario do simulador */
-.simulator__field {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-  margin-bottom: var(--space-4);
-}
 
-.simulator__label {
-  font-size: var(--text-xs);
-  font-weight: 600;
-  color: var(--color-text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-}
+/* ═══════════════════════════════════════════════════
+   SEÇÃO PÚBLICO-ALVO
+═══════════════════════════════════════════════════ */
+.publico { background: var(--primaria); }
 
-.simulator__input {
-  background-color: var(--color-light);
-  border: 1px solid rgba(169, 172, 169, 0.5);
-  border-radius: var(--radius-md);
-  padding: var(--space-3) var(--space-4);
-  color: var(--color-text-dark);
-  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
-  width: 100%;
-}
+/* Grade de 2 colunas: imagem reservada + texto                 */
+.grade-publico { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+.texto-publico .etiqueta { background: rgba(191,195,186,.1); color: var(--clara); }
+.texto-publico h2 { font-size: var(--fs-h2); color: var(--branco); margin-bottom: 1.25rem; }
 
-.simulator__input:focus {
-  outline: none;
-  border-color: var(--color-accent);
-  box-shadow: 0 0 0 3px rgba(96, 73, 90, 0.15);
-}
+/* Seletor ">" seleciona apenas filhos DIRETOS de .texto-publico.
+   Sem ">" pegaria todos os <p> dentro, incluindo os de outras
+   classes aninhadas — aqui só queremos os parágrafos diretos. */
+.texto-publico > p { font-size: 1.125rem; color: rgba(191,195,186,.7); margin-bottom: 1.25rem; }
 
-.simulator__input[readonly] {
-  cursor: default;
-  opacity: 0.75;
-}
+/* Lista de desafios com separadores horizontais               */
+.lista-verificacao { margin-bottom: 1.5rem; }
+.lista-verificacao li { padding: 1rem 0; font-size: 1rem; color: rgba(191,195,186,.85); border-bottom: 1px solid rgba(96,73,90,.18); }
 
-.simulator__select {
-  cursor: pointer;
-}
+/* ::before insere o ✓ como conteúdo gerado pelo CSS —
+   sem precisar escrever o símbolo em cada <li> do HTML.       */
+.lista-verificacao li::before { content: "✓ "; color: var(--sucesso); font-weight: 700; }
 
-/* Linha com dois campos lado a lado */
-.simulator__row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-3);
-}
+/* Seletor específico: <strong> filho direto de <p> filho direto
+   de .texto-publico — afeta apenas o texto de conclusão
+   "Nós somos a solução certa para você!", sem interferir nos
+   <strong> dentro do <h2> ou de outros parágrafos.            */
+.texto-publico > p > strong { font-size: 1.125rem; color: var(--clara); display: block; margin-bottom: 1.5rem; }
 
-.simulator__hint {
-  font-size: var(--text-xs);
-  color: var(--color-text-muted);
-}
 
-.simulator__btn {
-  width: 100%;
-  margin-top: var(--space-2);
-  padding-block: var(--space-4);
-}
+/* ═══════════════════════════════════════════════════
+   SEÇÃO COMO FUNCIONA (passos numerados)
+═══════════════════════════════════════════════════ */
+.metodo { background: var(--secundaria); }
+.metodo h2 { color: var(--branco); }
+.metodo .etiqueta { background: rgba(191,195,186,.1); color: var(--clara); }
 
-/* Status box do resultado */
-.sim-status {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: var(--space-8) var(--space-4);
-  gap: var(--space-3);
-  min-height: 100px;
-  transition: opacity var(--transition-normal);
-}
+/* Grade de 2 colunas: imagem reservada + lista de passos       */
+.grade-metodo { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
 
-.sim-status__icon {
-  width: 36px;
-  height: 36px;
-  color: rgba(191, 195, 186, 0.35);
-}
+/* Lista de passos com linha vertical conectora                 */
+.passos { margin-top: 2rem; display: flex; flex-direction: column; gap: 0; position: relative; }
 
-.sim-status__text {
-  font-size: var(--text-sm);
-  color: rgba(191, 195, 186, 0.4);
-}
+/* ::before cria a linha vertical que liga todos os círculos.
+   position: absolute posiciona em relação ao .passos (que tem
+   position: relative). left: 19px alinha com o centro dos
+   círculos numerados (40px de largura / 2 = 20px, menos 1px). */
+.passos::before { content: ''; position: absolute; left: 19px; top: 40px; width: 2px; height: calc(100% - 60px); background: rgba(96,73,90,.35); }
 
-/* Estados do status: idle, loading, ok, alert */
-.sim-status--ok .sim-status__icon    { color: #3a7d4f; }
-.sim-status--alert .sim-status__icon { color: var(--color-alert); }
-
-/* Log de execucao */
-.sim-log {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-  margin-top: var(--space-2);
-}
+.passos li { display: flex; gap: 1.25rem; padding-bottom: 1.5rem; position: relative; }
+.passos li:last-child { padding-bottom: 0; }
 
-/* Linha individual do log */
-.sim-log-line {
-  font-family: 'Courier New', monospace;
-  font-size: 0.75rem;
-  color: rgba(191, 195, 186, 0.55);
-  padding: var(--space-1) 0;
-  border-top: 1px solid rgba(63, 50, 68, 0.5);
-  display: flex;
-  gap: var(--space-3);
-  opacity: 0;
-  transform: translateX(-6px);
-  animation: logSlideIn var(--transition-normal) forwards;
-}
+/* Círculo numerado (01, 02, 03...).
+   z-index: 1 garante que o círculo fique acima da linha
+   vertical criada pelo ::before do .passos pai.               */
+.passos li > span { flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: var(--realce); color: var(--branco); font-family: 'Space Grotesk', sans-serif; font-size: .875rem; font-weight: 700; display: flex; align-items: center; justify-content: center; position: relative; z-index: 1; }
+.passos li h3 { font-size: 1rem; font-weight: 700; color: var(--branco); margin-bottom: .5rem; padding-top: 8px; }
+.passos li p  { font-size: .875rem; color: rgba(191,195,186,.65); }
 
-.sim-log-line--ok    { color: #3a7d4f; }
-.sim-log-line--alert { color: var(--color-alert); }
 
-.sim-log-line__time {
-  flex-shrink: 0;
-  color: rgba(191, 195, 186, 0.3);
-}
+/* ═══════════════════════════════════════════════════
+   SEÇÃO DEPOIMENTOS
+═══════════════════════════════════════════════════ */
+.depoimentos { background: var(--branco); }
+.depoimentos h2 { color: var(--texto-d); }
 
-/* Resultado de delta financeiro */
-.sim-delta {
-  margin-top: var(--space-5);
-  padding: var(--space-5);
-  border-radius: var(--radius-md);
-  text-align: center;
-}
+/* Logos dos clientes em linha centralizada                     */
+.logos-clientes { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-bottom: 3rem; }
+.logos-clientes span { background: rgba(191,195,186,.18); border: 1px solid rgba(47,34,53,.12); border-radius: var(--raio); padding: 1rem 2rem; font-size: .875rem; color: var(--texto-m); min-width: 120px; text-align: center; }
 
-.sim-delta--ok {
-  background-color: rgba(58, 125, 79, 0.15);
-  border: 1px solid rgba(58, 125, 79, 0.3);
-}
+/* Cartão de depoimento (<blockquote>)                          */
+.cartao-depoimento { background: var(--branco); border: 1px solid rgba(47,34,53,.12); border-radius: 16px; padding: 2rem; }
+.cartao-depoimento p { font-size: 1.125rem; color: var(--texto-b); font-style: italic; line-height: 1.75; margin-bottom: 1.5rem; }
 
-.sim-delta--alert {
-  background-color: rgba(180, 75, 75, 0.15);
-  border: 1px solid rgba(180, 75, 75, 0.3);
-}
+/* <footer> do cartão contém avatar + nome + cargo.
+   Seletor específico .cartao-depoimento footer evita conflito
+   com o rodapé principal da página (<footer class="rodape-site">). */
+.cartao-depoimento footer { display: flex; align-items: center; gap: 1rem; font-style: normal; }
+.cartao-depoimento footer strong { display: block; font-size: 1rem; color: var(--texto-d); }
+.cartao-depoimento footer span   { font-size: .875rem; color: var(--texto-m); }
 
-.sim-delta__value {
-  font-family: var(--font-display);
-  font-size: var(--text-2xl);
-  font-weight: 800;
-  line-height: 1.1;
-  margin-bottom: var(--space-1);
-}
+/* Avatar circular com inicial do nome da pessoa               */
+.avatar { width: 42px; height: 42px; border-radius: 50%; background: var(--realce); color: var(--branco); font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.125rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 
-.sim-delta--ok .sim-delta__value    { color: #4caf74; }
-.sim-delta--alert .sim-delta__value { color: #e06060; }
-
-.sim-delta__label {
-  font-size: var(--text-xs);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: rgba(191, 195, 186, 0.5);
-}
 
-/* Animacao de entrada das linhas de log */
-@keyframes logSlideIn {
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
+/* ═══════════════════════════════════════════════════
+   SEÇÃO FAQ (acordeão nativo HTML)
+═══════════════════════════════════════════════════ */
+.faq { background: var(--primaria); }
+.faq h2 { color: var(--branco); }
+.faq .etiqueta { background: rgba(191,195,186,.1); color: var(--clara); }
+.lista-faq { max-width: 780px; margin: 0 auto; display: flex; flex-direction: column; gap: .5rem; }
 
-/* ============================================================
-   SECAO: CONTATO
-   ============================================================ */
-.contact {
-  padding-block: var(--space-24);
-  background-color: var(--color-secondary);
-}
+/* <details> é um elemento HTML nativo de acordeão.
+   Nenhum JavaScript é necessário — o navegador controla
+   a abertura e fechamento automaticamente.                    */
+details { background: rgba(63,50,68,.5); border: 1px solid rgba(96,73,90,.28); border-radius: var(--raio); overflow: hidden; }
 
-.contact__inner {
-  display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: var(--space-16);
-  align-items: center;
-}
+/* <summary> é o título clicável do <details>.
+   list-style: none remove o triângulo padrão do navegador.   */
+details summary { padding: 1.25rem 1.5rem; font-family: 'Space Grotesk', sans-serif; font-size: 1rem; font-weight: 600; color: var(--clara); cursor: pointer; display: flex; justify-content: space-between; align-items: center; list-style: none; }
 
-.contact__content .section-eyebrow {
-  background-color: rgba(96, 73, 90, 0.3);
-  color: var(--color-accent-hover);
-}
+/* Remove o marcador padrão em Safari/Chrome                   */
+details summary::-webkit-details-marker { display: none; }
 
-.contact__content .section-title {
-  color: var(--color-white);
-  text-align: left;
-}
+/* ::after insere o "+" no lado direito do summary.
+   A transição faz girar para "×" quando aberto.              */
+details summary::after { content: '+'; font-size: 1.5rem; font-weight: 300; color: var(--realce-h); margin-left: 1rem; transition: transform var(--transicao); }
 
-.contact__desc {
-  font-size: var(--text-base);
-  color: rgba(191, 195, 186, 0.65);
-  line-height: 1.8;
-}
+/* details[open] é um seletor de atributo: seleciona o
+   <details> quando ele está com o atributo "open" presente
+   (o navegador adiciona "open" automaticamente ao abrir).    */
+details[open] summary { color: var(--branco); border-bottom: 1px solid rgba(96,73,90,.28); }
 
-/* Formulario de contato */
-.contact__form {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
-}
+/* Gira o "+" 45° para virar um "×" quando aberto             */
+details[open] summary::after { transform: rotate(45deg); }
 
-.contact__field-group {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-4);
-}
+/* Parágrafo de resposta (filho direto de <details>)           */
+details > p { padding: 1.25rem 1.5rem; font-size: 1rem; color: rgba(191,195,186,.78); line-height: 1.7; }
 
-.contact__field {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-}
 
-.contact__label {
-  font-size: var(--text-xs);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: rgba(191, 195, 186, 0.6);
-}
+/* ═══════════════════════════════════════════════════
+   SEÇÃO CHAMADA FINAL (CTA)
+═══════════════════════════════════════════════════ */
+.chamada-final { background: var(--realce); padding-block: 5rem; }
 
-.contact__input {
-  background-color: rgba(47, 34, 53, 0.6);
-  border: 1px solid rgba(96, 73, 90, 0.4);
-  border-radius: var(--radius-md);
-  padding: var(--space-3) var(--space-4);
-  color: var(--color-light);
-  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
-  width: 100%;
-}
+/* max-width centralizado para não esticar o texto demais      */
+.chamada-final .cta-centro { max-width: 700px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
+.chamada-final .etiqueta { background: rgba(255,255,255,.15); color: rgba(255,255,255,.9); }
+.chamada-final h2 { font-size: var(--fs-h2); color: var(--branco); margin-bottom: 1.25rem; text-align: center; }
+.chamada-final p  { font-size: 1.125rem; color: rgba(255,255,255,.82); margin-bottom: 2rem; text-align: center; }
 
-.contact__input::placeholder {
-  color: rgba(191, 195, 186, 0.3);
-}
+/* Botão desta seção inverte as cores: fundo primário escuro
+   em vez do fundo de realce padrão, para contrastar com o
+   fundo roxo claro da seção.                                  */
+.chamada-final .botao-primario       { background: var(--primaria); border-color: var(--primaria); }
+.chamada-final .botao-primario:hover { background: var(--secundaria); border-color: var(--secundaria); }
 
-.contact__input:focus {
-  outline: none;
-  border-color: var(--color-accent-hover);
-  box-shadow: 0 0 0 3px rgba(122, 92, 114, 0.2);
-}
 
-.contact__textarea {
-  resize: vertical;
-  min-height: 90px;
-}
+/* ═══════════════════════════════════════════════════
+   SEÇÃO FORMULÁRIO DE CONTATO
+═══════════════════════════════════════════════════ */
+.contato { background: var(--secundaria); }
+.contato h2 { color: var(--branco); }
+.contato .cabecalho-secao p { color: rgba(191,195,186,.65); }
+.contato .etiqueta { background: rgba(191,195,186,.1); color: var(--clara); }
 
-.contact__submit {
-  padding-block: var(--space-4);
-  font-size: var(--text-base);
-}
+/* O <form> em si tem layout de coluna para empilhar os campos  */
+form { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.25rem; }
 
-.contact__disclaimer {
-  font-size: var(--text-xs);
-  color: rgba(191, 195, 186, 0.4);
-  text-align: center;
-}
+/* Linha com 2 campos lado a lado (nome + email, empresa + tel)  */
+.linha-formulario { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
 
-/* Feedback visual do formulario */
-.contact__input.is-invalid {
-  border-color: var(--color-alert);
-  box-shadow: 0 0 0 3px rgba(180, 75, 75, 0.2);
-}
+/* Cada campo: label + input em coluna                          */
+.campo { display: flex; flex-direction: column; gap: .5rem; }
+.campo label { font-size: .875rem; font-weight: 600; color: rgba(191,195,186,.8); }
 
-.contact__error {
-  font-size: var(--text-xs);
-  color: #e06060;
-  margin-top: var(--space-1);
-}
+/* -webkit-appearance: none remove o estilo nativo do sistema
+   operacional em <select> e <input type="date">, permitindo
+   estilização personalizada.                                   */
+.campo input, .campo select, .campo textarea { padding: .75rem 1rem; border-radius: var(--raio); border: 1px solid rgba(96,73,90,.4); background: rgba(47,34,53,.6); color: var(--clara); font-size: 1rem; outline: none; transition: border-color var(--transicao); -webkit-appearance: none; appearance: none; }
+.campo input::placeholder, .campo textarea::placeholder { color: rgba(191,195,186,.3); }
 
-/* ============================================================
-   FOOTER
-   ============================================================ */
-.footer {
-  background-color: var(--color-primary);
-  border-top: 1px solid var(--color-secondary);
-}
+/* :focus ativa quando o usuário clica no campo.
+   box-shadow com 0 blur cria um "anel" de foco visível
+   (boa prática de acessibilidade).                            */
+.campo input:focus, .campo select:focus, .campo textarea:focus { border-color: var(--realce-h); box-shadow: 0 0 0 3px rgba(96,73,90,.15); }
 
-.footer__inner {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: var(--space-12);
-  padding-block: var(--space-12);
-}
+/* Opções do <select> herdam o fundo escuro da página           */
+.campo select option { background: var(--primaria); }
 
-.footer__logo {
-  font-family: var(--font-display);
-  font-size: 1.35rem;
-  font-weight: 800;
-  color: var(--color-light);
-  display: block;
-  margin-bottom: var(--space-3);
-}
+/* resize: vertical permite que o usuário redimensione apenas
+   verticalmente (sem estragar o layout horizontal).           */
+.campo textarea { resize: vertical; min-height: 120px; }
 
-.footer__tagline {
-  font-size: var(--text-sm);
-  color: rgba(191, 195, 186, 0.45);
-  max-width: 240px;
-  line-height: 1.6;
-}
+/* Texto de política de privacidade abaixo do formulário        */
+.privacidade   { font-size: .75rem; color: rgba(191,195,186,.45); }
+.privacidade a { color: var(--realce-h); text-decoration: underline; }
 
-.footer__nav {
-  display: flex;
-  gap: var(--space-16);
-}
 
-.footer__nav-title {
-  font-size: var(--text-xs);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: rgba(191, 195, 186, 0.45);
-  margin-bottom: var(--space-4);
-}
+/* ═══════════════════════════════════════════════════
+   RODAPÉ DO SITE
+═══════════════════════════════════════════════════ */
 
-.footer__nav-list {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-}
+/* padding-block: 4rem 2rem = topo 4rem, base 2rem (assimetria
+   intencional — mais espaço no topo, menos na base).          */
+.rodape-site { background: var(--primaria); padding-block: 4rem 2rem; border-top: 1px solid rgba(96,73,90,.2); }
 
-.footer__nav-link {
-  font-size: var(--text-sm);
-  color: rgba(191, 195, 186, 0.6);
-  transition: color var(--transition-fast);
-}
+/* Grade de 2 colunas: coluna estreita (logo+contato) e
+   coluna larga (links de navegação) — proporção 1:2.          */
+.grade-rodape { display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(96,73,90,.18); margin-bottom: 2rem; }
 
-.footer__nav-link:hover {
-  color: var(--color-light);
-}
+/* Parágrafo de descrição na coluna do logo                    */
+.grade-rodape > div > p { font-size: .875rem; color: rgba(191,195,186,.58); max-width: 280px; margin: 1rem 0 1.5rem; line-height: 1.7; }
 
-/* Barra inferior do footer com copyright */
-.footer__bottom {
-  border-top: 1px solid rgba(63, 50, 68, 0.6);
-  padding-block: var(--space-5);
-}
+/* Links de telefone e e-mail no rodapé                        */
+.link-contato       { display: block; font-size: .875rem; color: rgba(191,195,186,.55); margin-bottom: .75rem; transition: color var(--transicao); }
+.link-contato:hover { color: var(--clara); }
 
-.footer__copy {
-  font-size: var(--text-xs);
-  color: rgba(191, 195, 186, 0.3);
-  text-align: center;
-}
+/* Grade de 3 colunas para os grupos de links (Produto/Empresa/Contato) */
+.links-rodape { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; }
+.links-rodape h4 { font-size: .75rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: rgba(191,195,186,.45); margin-bottom: 1rem; }
+.links-rodape a       { display: block; font-size: .875rem; color: rgba(191,195,186,.58); margin-bottom: .75rem; transition: color var(--transicao); }
+.links-rodape a:hover { color: var(--clara); }
 
-/* ============================================================
-   RESPONSIVIDADE — Media Queries (Mobile-First)
-   ============================================================ */
-
-/* --- Tablet: ate 900px --- */
-@media (max-width: 900px) {
-
-  /* Grid de integracao colapsa para coluna unica */
-  .integration__inner {
-    grid-template-columns: 1fr;
-    gap: var(--space-10);
-  }
-
-  /* Painel de codigo aparece abaixo do texto */
-  .integration__visual {
-    order: 1;
-  }
-
-  .integration__content {
-    order: 0;
-  }
-
-  /* Contato: coluna unica */
-  .contact__inner {
-    grid-template-columns: 1fr;
-    gap: var(--space-10);
-  }
-
-  /* Footer: coluna unica */
-  .footer__inner {
-    flex-direction: column;
-    gap: var(--space-8);
-  }
-}
+/* Barra inferior do rodapé: copyright à esquerda, botão à direita */
+.rodape-inferior   { display: flex; justify-content: space-between; align-items: center; }
+.rodape-inferior p { font-size: .75rem; color: rgba(191,195,186,.38); }
 
-/* --- Mobile: ate 640px --- */
-@media (max-width: 640px) {
-  :root {
-    --container-pad: var(--space-4);
-  }
-
-  /* Header: mostrar botao hamburguer e ocultar nav */
-  .header__menu-toggle {
-    display: flex;
-    z-index: 10;
-  }
-
-  /* Navegacao mobile: dropdown vertical */
-  .header__nav {
-    display: none;
-    position: absolute;
-    top: 68px;
-    left: 0;
-    right: 0;
-    flex-direction: column;
-    align-items: stretch;
-    background-color: var(--color-primary);
-    border-bottom: 1px solid var(--color-secondary);
-    padding: var(--space-4) var(--space-6);
-    gap: var(--space-2);
-  }
-
-  /* Exibe o nav mobile quando a classe .is-open e adicionada via JS */
-  .header__nav.is-open {
-    display: flex;
-  }
-
-  .header__nav-list {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0;
-  }
-
-  .header__nav-link {
-    display: block;
-    padding: var(--space-3) 0;
-    font-size: var(--text-base);
-    width: 100%;
-    border-bottom: 1px solid rgba(63, 50, 68, 0.5);
-  }
-
-  .header__cta {
-    margin-top: var(--space-3);
-    text-align: center;
-  }
-
-  /* Hero: reducao de espacamento */
-  .hero {
-    padding-top: calc(68px + var(--space-12));
-    padding-bottom: var(--space-16);
-  }
-
-  .hero__actions {
-    flex-direction: column;
-    align-items: stretch;
-    text-align: center;
-  }
-
-  .hero__actions .btn {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .hero__metrics {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--space-4);
-  }
-
-  .hero__metric-divider {
-    display: none;
-  }
-
-  /* Features: coluna unica */
-  .features__grid {
-    grid-template-columns: 1fr;
-  }
-
-  /* Steps: ajuste da linha conectora */
-  .steps::before {
-    left: 19px;
-  }
-
-  .step__number {
-    width: 40px;
-    height: 40px;
-    font-size: var(--text-xs);
-  }
-
-  /* Simulador: coluna unica */
-  .simulator {
-    grid-template-columns: 1fr;
-  }
-
-  .simulator__row {
-    grid-template-columns: 1fr;
-  }
-
-  /* Campo duplo de contato: coluna unica */
-  .contact__field-group {
-    grid-template-columns: 1fr;
-  }
-
-  /* Footer nav: coluna unica */
-  .footer__nav {
-    flex-direction: column;
-    gap: var(--space-8);
-  }
-
-  /* Reducao do espacamento das secoes no mobile */
-  .features,
-  .how-it-works,
-  .integration,
-  .use-case,
-  .contact {
-    padding-block: var(--space-16);
-  }
-
-  .section-header {
-    margin-bottom: var(--space-8);
-  }
-}
 
-/* ============================================================
-   PREFERENCIAS DE MOVIMENTO REDUZIDO (Acessibilidade)
-   Remove animacoes para usuarios com prefers-reduced-motion
-   ============================================================ */
+/* ACESSIBILIDADE — respeita a preferência do sistema operacional
+   por menos movimento.
+   !important garante que sobrescreve qualquer transição inline. */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-
-  html {
-    scroll-behavior: auto;
-  }
+  *, *::before, *::after { transition: none !important; }
 }
