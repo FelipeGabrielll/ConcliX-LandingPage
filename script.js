@@ -13,12 +13,22 @@
    sombra some.
 ─────────────────────────────────────────────────────────────── */
 
-// Captura o elemento <header id="cabecalho"> do HTML
+// const declara uma constante: o valor não pode ser reatribuído
+// (cabecalho sempre apontará para o mesmo elemento). Use const
+// como padrão; use let só quando precisar mudar o valor depois.
+// document.getElementById('id') percorre o DOM e retorna o
+// elemento que possui aquele id — ou null se não existir.
 const cabecalho = document.getElementById('cabecalho');
 
 // 'scroll' dispara a cada movimento de rolagem da página.
 // { passive: true } avisa ao navegador que nunca chamaremos
 // preventDefault() aqui, permitindo que ele otimize a rolagem.
+//
+// () => { } é uma "arrow function" (função de seta) — forma
+// moderna e compacta de escrever uma função anônima. Equivale a:
+//   function() { ... }
+// Usamos arrow functions em callbacks (funções passadas como
+// argumento para outra função, como addEventListener).
 window.addEventListener('scroll', () => {
 
   // classList.toggle(classe, condicao):
@@ -64,8 +74,12 @@ botaoMenu.addEventListener('click', () => {
 
 });
 
-// Seleciona todos os links <a> dentro do menuNav e fecha o menu
-// quando qualquer um deles for clicado (o usuário navegou).
+// querySelectorAll(seletor) retorna uma NodeList — uma lista com
+// TODOS os elementos que combinam com o seletor CSS informado.
+// Diferença em relação ao getElementById: este retorna UM elemento
+// pelo id; querySelectorAll retorna VÁRIOS usando qualquer seletor.
+// .forEach(link => { }) percorre cada elemento da lista e executa
+// o bloco uma vez por item, com o item disponível em "link".
 menuNav.querySelectorAll('a').forEach(link => {
   link.addEventListener('click', () => {
 
@@ -141,7 +155,10 @@ if (formulario) {
       // Reativa o botão
       botao.disabled = false;
 
-      // Remove o estilo de opacidade (volta ao padrão do CSS)
+      // Atribuir string vazia a uma propriedade de style remove
+      // aquele estilo inline do elemento, fazendo o CSS da folha
+      // de estilos voltar a valer. É diferente de opacity = '1':
+      // esse forçaria um valor fixo; '' devolve o controle ao CSS.
       botao.style.opacity = '';
 
       // Limpa todos os campos do formulário
