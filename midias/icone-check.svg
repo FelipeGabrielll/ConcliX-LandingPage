@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 56" width="56" height="56" fill="none">
+  <!-- Circulo externo -->
+  <circle cx="28" cy="28" r="19" stroke="#60495A" stroke-width="2"/>
+  <!-- Check interno -->
+  <polyline points="18,28 24,35 38,20"
+            stroke="#60495A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

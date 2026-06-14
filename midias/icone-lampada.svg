@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 56" width="56" height="56" fill="none">
+  <!-- Bulbo da lampada -->
+  <path d="M20 32 C16 28 16 20 20 16 C22 14 25 13 28 13 C31 13 34 14 36 16 C40 20 40 28 36 32 L34 36 L22 36 Z"
+        stroke="#60495A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Base da lampada (primeiro segmento) -->
+  <line x1="22" y1="39" x2="34" y2="39" stroke="#60495A" stroke-width="2" stroke-linecap="round"/>
+  <!-- Base da lampada (segundo segmento) -->
+  <line x1="23.5" y1="42.5" x2="32.5" y2="42.5" stroke="#60495A" stroke-width="2" stroke-linecap="round"/>
+  <!-- Ponta da base (arredondada) -->
+  <path d="M25 42.5 Q28 47 31 42.5" stroke="#60495A" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <!-- Filamento interno (detalhe) -->
+  <path d="M25 29 Q28 25 31 29" stroke="#60495A" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+</svg>

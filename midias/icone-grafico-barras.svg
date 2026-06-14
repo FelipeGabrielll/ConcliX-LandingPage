@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 56" width="56" height="56" fill="none">
+  <!-- Eixo X base -->
+  <line x1="10" y1="44" x2="46" y2="44" stroke="#60495A" stroke-width="2" stroke-linecap="round"/>
+  <!-- Barra 1 (baixa) -->
+  <rect x="14" y="32" width="8" height="12" rx="2" fill="#60495A"/>
+  <!-- Barra 2 (alta) -->
+  <rect x="26" y="18" width="8" height="26" rx="2" fill="#60495A"/>
+  <!-- Barra 3 (media) -->
+  <rect x="38" y="25" width="8" height="19" rx="2" fill="#60495A"/>
+</svg>

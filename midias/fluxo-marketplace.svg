@@ -1,0 +1,83 @@
+<svg viewBox="0 0 526 360" xmlns="http://www.w3.org/2000/svg" width="526" height="360" role="img">
+  <title>Fluxo Marketplace → ConcliX → Lojista</title>
+
+  <!-- Fundo -->
+  <rect width="526" height="360" fill="#1A1020"/>
+
+  <!-- Rótulo superior -->
+  <text x="263" y="28" text-anchor="middle" font-family="Arial, sans-serif"
+        font-size="8" font-weight="600" letter-spacing="2.5" fill="rgba(191,195,186,0.28)">FLUXO DE CONCILIAÇÃO</text>
+
+  <!-- ── COLUNA ESQUERDA: Marketplaces ── -->
+  <text x="82" y="48" text-anchor="middle" font-family="Arial, sans-serif"
+        font-size="7" letter-spacing="1.5" fill="rgba(191,195,186,0.28)">MARKETPLACES</text>
+
+  <!-- Mercado Livre -->
+  <rect x="10" y="56" width="144" height="32" rx="7" fill="#3F3244" stroke="#60495A" stroke-width="0.8"/>
+  <circle cx="28" cy="72" r="5" fill="#FFE000"/>
+  <text x="42" y="76" font-family="Arial, sans-serif" font-size="10.5" fill="#BFC3BA">Mercado Livre</text>
+
+  <!-- Amazon -->
+  <rect x="10" y="98" width="144" height="32" rx="7" fill="#3F3244" stroke="#60495A" stroke-width="0.8"/>
+  <circle cx="28" cy="114" r="5" fill="#FF9900"/>
+  <text x="42" y="118" font-family="Arial, sans-serif" font-size="10.5" fill="#BFC3BA">Amazon</text>
+
+  <!-- Shopee -->
+  <rect x="10" y="140" width="144" height="32" rx="7" fill="#3F3244" stroke="#60495A" stroke-width="0.8"/>
+  <circle cx="28" cy="156" r="5" fill="#F05021"/>
+  <text x="42" y="160" font-family="Arial, sans-serif" font-size="10.5" fill="#BFC3BA">Shopee</text>
+
+  <!-- Magalu -->
+  <rect x="10" y="182" width="144" height="32" rx="7" fill="#3F3244" stroke="#60495A" stroke-width="0.8"/>
+  <circle cx="28" cy="198" r="5" fill="#0064CC"/>
+  <text x="42" y="202" font-family="Arial, sans-serif" font-size="10.5" fill="#BFC3BA">Magalu</text>
+
+  <!-- ── Linhas convergindo para o ConcliX ── -->
+  <line x1="154" y1="72"  x2="190" y2="108" stroke="#60495A" stroke-width="1" stroke-dasharray="4,3" opacity="0.5"/>
+  <line x1="154" y1="114" x2="190" y2="124" stroke="#60495A" stroke-width="1" stroke-dasharray="4,3" opacity="0.5"/>
+  <line x1="154" y1="156" x2="190" y2="140" stroke="#60495A" stroke-width="1" stroke-dasharray="4,3" opacity="0.5"/>
+  <line x1="154" y1="198" x2="190" y2="156" stroke="#60495A" stroke-width="1" stroke-dasharray="4,3" opacity="0.5"/>
+
+  <!-- ── CENTRO: ConcliX Hub ── -->
+  <rect x="190" y="55" width="146" height="160" rx="14" fill="#3A2845"/>
+  <rect x="190" y="55" width="146" height="160" rx="14" fill="none" stroke="#7A5C72" stroke-width="1.5"/>
+
+  <!-- Escudo -->
+  <path d="M263,80 L278,87 L278,103 Q278,117 263,124 Q248,117 248,103 L248,87 Z"
+        fill="rgba(122,92,114,0.3)" stroke="#7A5C72" stroke-width="1.5" stroke-linejoin="round"/>
+  <text x="263" y="111" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#BFC3BA">✓</text>
+
+  <!-- Logo -->
+  <text x="263" y="152" text-anchor="middle" font-family="Georgia, serif" font-size="18" font-weight="bold" fill="#BFC3BA">Concli<tspan fill="#7A5C72">X</tspan></text>
+  <text x="263" y="170" text-anchor="middle" font-family="Arial, sans-serif" font-size="8.5" fill="rgba(191,195,186,0.4)">Conciliação Automática</text>
+
+  <rect x="210" y="182" width="106" height="18" rx="9" fill="rgba(96,73,90,0.3)" stroke="#60495A" stroke-width="0.75"/>
+  <text x="263" y="195" text-anchor="middle" font-family="Arial, sans-serif" font-size="7.5" fill="rgba(191,195,186,0.6)">Auditoria em tempo real</text>
+
+  <!-- ── Seta ConcliX → Lojista ── -->
+  <line x1="336" y1="135" x2="370" y2="135" stroke="#7A5C72" stroke-width="2"/>
+  <polygon points="368,130 376,135 368,140" fill="#7A5C72"/>
+
+  <!-- ── COLUNA DIREITA: Lojista ── -->
+  <text x="446" y="48" text-anchor="middle" font-family="Arial, sans-serif"
+        font-size="7" letter-spacing="1.5" fill="rgba(191,195,186,0.28)">VOCÊ RECEBE</text>
+
+  <rect x="376" y="55" width="140" height="160" rx="14" fill="#1A2C1E"/>
+  <rect x="376" y="55" width="140" height="160" rx="14" fill="none" stroke="#3A7D4F" stroke-width="1.5"/>
+
+  <circle cx="446" cy="106" r="22" fill="rgba(58,125,79,0.15)" stroke="#3A7D4F" stroke-width="1.5"/>
+  <text x="446" y="113" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#4CAF74">✓</text>
+
+  <text x="446" y="147" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#4CAF74">R$ 1.500,00</text>
+  <text x="446" y="165" text-anchor="middle" font-family="Arial, sans-serif" font-size="8.5" fill="rgba(191,195,186,0.4)">valor correto recebido</text>
+
+  <rect x="396" y="178" width="100" height="18" rx="9" fill="rgba(58,125,79,0.2)" stroke="#3A7D4F" stroke-width="0.75"/>
+  <text x="446" y="191" text-anchor="middle" font-family="Arial, sans-serif" font-size="7.5" fill="#4CAF74">Sem divergências</text>
+
+  <!-- ── Rodapé ── -->
+  <line x1="30" y1="262" x2="496" y2="262" stroke="rgba(96,73,90,0.18)" stroke-width="1"/>
+  <text x="263" y="282" text-anchor="middle" font-family="Arial, sans-serif"
+        font-size="9" fill="rgba(191,195,186,0.28)" font-style="italic">
+    Cada repasse, auditado e conciliado automaticamente.
+  </text>
+</svg>
