@@ -32,8 +32,14 @@
 
   <!-- preconnect avisa o navegador para abrir a conexão com
        o servidor do Google Fonts antecipadamente, reduzindo
-       o tempo de carregamento das fontes.                   -->
+       o tempo de carregamento das fontes.
+       São necessários DOIS preconnects:
+       - fonts.googleapis.com → envia a requisição CSS da fonte
+       - fonts.gstatic.com   → onde os arquivos .woff2 estão
+       O segundo precisa de crossorigin pois é uma origem diferente
+       (o navegador pré-abre em modo anônimo para evitar erros). -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <!-- Carrega as fontes Space Grotesk (títulos) e Inter (texto).
        wght@600;700 = pesos 600 e 700 da Space Grotesk.
@@ -217,14 +223,12 @@
   <div class="container">
 
     <!-- <blockquote> é o elemento semântico correto para
-         citações de outras pessoas ou fontes externas.
-         <footer> dentro do blockquote indica a autoria
-         (quem disse a frase) — uso semântico correto do
-         elemento <footer>, que não se limita ao rodapé
-         da página.                                       -->
+         citações e frases de destaque da marca.
+         O texto aqui é a frase oficial do ConcliX —
+         sem aspas visuais e sem atribuição de autoria,
+         pois é voz da empresa e não de um cliente.     -->
     <blockquote>
-      "O ConcliX veio para apoiar nosso crescimento com uma solução sob medida, garantindo <strong>transparência</strong>, <strong>controle</strong> e <strong>acompanhamento preciso</strong> nas vendas dos marketplaces."
-      <footer><strong>Carlos Mendes</strong> — Gestor Financeiro, E-commerce Store</footer>
+      Transparência, controle e precisão em cada repasse. Do marketplace direto para o seu caixa, <strong>sem surpresas.</strong>
     </blockquote>
 
   </div>
@@ -251,23 +255,25 @@
       <a href="#contato" class="botao botao-primario">Agendar demonstração</a>
     </div>
 
-    <!-- Grade de 3 cartões: layout CSS Grid (grade-3).
-         O cartão do meio recebe "cartao-escuro" para
-         criar contraste visual e destacar o benefício
-         central (Repasse Certo).                        -->
+    <!-- Grade de 3 cartões: layout CSS Grid (grade-3). -->
     <div class="grade-3">
+      <!-- alt="" (vazio) nos ícones é intencional:
+           significa "imagem decorativa — ignore".
+           Leitores de tela pulam imagens com alt vazio,
+           evitando leitura redundante (o <h3> já descreve
+           o propósito do ícone visualmente ao lado).    -->
       <div class="cartao">
-        <div class="icone">⚡</div>
+        <div class="icone"><img src="midias/icone-raio.svg" alt="" width="24" height="24"></div>
         <h3>Esforço Zero</h3>
         <p>Controle financeiro automático 24h. Sem planilhas, sem trabalho manual.</p>
       </div>
-      <div class="cartao cartao-escuro">
-        <div class="icone">✓</div>
+      <div class="cartao">
+        <div class="icone"><img src="midias/icone-check.svg" alt="" width="24" height="24"></div>
         <h3>Repasse Certo</h3>
         <p>Pare de perder dinheiro. Garantimos que você receba exatamente o que é seu.</p>
       </div>
       <div class="cartao">
-        <div class="icone">📊</div>
+        <div class="icone"><img src="midias/icone-grafico-barras.svg" alt="" width="24" height="24"></div>
         <h3>Visão 360°</h3>
         <p>Relatórios de todos os canais em um lugar. Decisões baseadas em dados reais.</p>
       </div>
@@ -298,17 +304,14 @@
          "mais" = variante de borda tracejada para o "+ outros". -->
     <div class="logos">
       <span>Mercado Livre</span><span>Amazon</span><span>Shopee</span><span>Magalu</span>
-      <span>Americanas</span><span>Casas Bahia</span><span>Shoptime</span><span>Netshoes</span>
-      <span>Zattini</span><span>Ponto</span><span>Extra</span><span>Leroy Merlin</span>
-      <span>Carrefour</span><span>Centauro</span><span>Madeira Madeira</span>
-      <span class="mais">+ outros</span>
+      <span>Casas Bahia</span><span>Madeira Madeira</span>
     </div>
 
     <p class="rotulo-grupo">ERPs</p>
 
-    <!-- "realce" destaca o Bling ERP como integração principal -->
+    <!-- "realce" destaca o Bling como integração principal -->
     <div class="logos">
-      <span class="realce">Bling ERP</span><span>Tiny</span><span>Omie</span><span>TOTVS</span><span>Linx</span>
+      <span class="realce">Bling</span><span>TOTVS</span>
     </div>
 
   </div>
@@ -333,22 +336,29 @@
         <h2>Ações estratégicas e relatórios para uma <strong>visão 360°</strong></h2>
       </div>
 
-      <!-- grade-2: dois cartões de relatório por linha -->
+      <!-- grade-2: CSS Grid de 2 colunas para os itens
+           de relatório — 3 linhas × 2 colunas = 6 itens. -->
       <div class="grade-2">
+        <!-- cartao-relatorio: pílula escura com borda sutil.
+             O "•" é um caractere de marcador (bullet point)
+             inserido direto no texto — aqui não usamos <ul>/<li>
+             pois o layout é em grade, não lista vertical.  -->
         <div class="cartao-relatorio">• Resumo mensal de resultados</div>
         <div class="cartao-relatorio">• Resumo financeiro por canal</div>
         <div class="cartao-relatorio">• Despesas por canal de venda</div>
-        <div class="cartao-relatorio">• Análise de campanhas e promoções</div>
         <div class="cartao-relatorio">• Bloqueios, estornos e devoluções</div>
         <div class="cartao-relatorio">• Categorização de despesas gerais</div>
-        <div class="cartao-relatorio">• Transferências, saldos e distribuição</div>
         <div class="cartao-relatorio">• Lançamentos para apoio na DRE</div>
       </div>
     </div>
 
-    <!-- Coluna direita: espaço reservado para screenshot real.
-         O CSS aplica borda tracejada e altura mínima de 360px. -->
-    <div class="reservado">[ Screenshot dos relatórios ]</div>
+    <!-- style inline aqui (e nas outras imagens SVG da página)
+         porque o border-radius foi aplicado como ajuste pontual
+         quando a imagem substituiu um placeholder — mais rápido
+         do que criar uma classe CSS só para isso.
+         alt com descrição real (não vazio) porque esta imagem
+         carrega conteúdo informativo, não é decorativa.    -->
+    <img src="midias/conclix_dashboard_screenshot.svg" alt="Dashboard de relatórios ConcliX" style="border-radius:16px; width:100%;">
 
   </div>
 </section>
@@ -367,35 +377,27 @@
       <a href="#contato" class="botao botao-primario">Agendar uma demonstração</a>
     </div>
 
-    <!-- grade-beneficios: CSS Grid de 2 colunas.
-         O último benefício recebe a classe "completo"
-         que aplica grid-column: 1 / -1 no CSS, fazendo-o
-         ocupar toda a largura (as 2 colunas).           -->
+    <!-- grade-beneficios: CSS Grid de 2 colunas × 2 linhas.
+         Os 4 cards preenchem a grade simetricamente.    -->
     <div class="grade-beneficios">
 
       <!-- Cada benefício: ícone (<span>) + conteúdo (<div>).
            O CSS usa display flex para alinhá-los lado a lado. -->
       <div class="beneficio">
-        <span class="icone">⏱</span>
+        <span class="icone"><img src="midias/icone-relogio.svg" alt="" width="24" height="24"></span>
         <div><h3>Economia de tempo e mão de obra</h3><p>Elimine horas gastas em planilhas. Sua equipe foca no que importa.</p></div>
       </div>
       <div class="beneficio">
-        <span class="icone">📈</span>
+        <span class="icone"><img src="midias/icone-grafico.svg" alt="" width="24" height="24"></span>
         <div><h3>Mais estimativa financeira</h3><p>Saiba com precisão quanto vai receber de cada marketplace.</p></div>
       </div>
       <div class="beneficio">
-        <span class="icone">🛡</span>
+        <span class="icone"><img src="midias/icone-escudo.svg" alt="" width="24" height="24"></span>
         <div><h3>Controle total dos recebimentos</h3><p>Visibilidade de cada repasse, taxa e desconto das plataformas.</p></div>
       </div>
       <div class="beneficio">
-        <span class="icone">💡</span>
+        <span class="icone"><img src="midias/icone-lampada.svg" alt="" width="24" height="24"></span>
         <div><h3>Redução de erros e custos</h3><p>Identifique divergências antes que virem prejuízos. Recupere o que é seu.</p></div>
-      </div>
-
-      <!-- "completo" = ocupa as 2 colunas via grid-column: 1/-1 -->
-      <div class="beneficio completo">
-        <span class="icone">👥</span>
-        <div><h3>Apoio técnico especializado</h3><p>Time com domínio em conciliação financeira para e-commerce ao seu lado.</p></div>
       </div>
 
     </div>
@@ -411,9 +413,7 @@
 <section class="publico" id="para-quem">
   <div class="container grade-publico">
 
-    <!-- "reservado escuro" = variante com fundo escuro
-         (usa a cor --primaria com transparência).       -->
-    <div class="reservado escuro">[ Imagem da equipe / produto ]</div>
+    <img src="midias/fluxo-marketplace.svg" alt="Fluxo de conciliação: Marketplace → ConcliX → Lojista" style="border-radius:16px; width:100%;">
 
     <!-- Coluna de texto -->
     <div class="texto-publico">
@@ -455,9 +455,7 @@
 <section class="metodo" id="como-funciona">
   <div class="container grade-metodo">
 
-    <!-- Imagem reservada (lado esquerdo em desktop,
-         move para cima em mobile via order: -1 no CSS) -->
-    <div class="reservado">[ Foto da equipe / produto em uso ]</div>
+    <img src="midias/alerta-divergencia.svg" alt="Close na notificação de divergência ConcliX" style="border-radius:16px; width:100%;">
 
     <!-- Coluna dos passos -->
     <div>
@@ -481,7 +479,7 @@
         </li>
         <li>
           <span>02</span>
-          <div><h3>Conciliação financeira automática</h3><p>Cada repasse é cruzado com sua regra de negócio via Bling ERP.</p></div>
+          <div><h3>Conciliação financeira automática</h3><p>Cada repasse é cruzado com sua regra de negócio via ERP.</p></div>
         </li>
         <li>
           <span>03</span>
@@ -502,65 +500,6 @@
 </section>
 
 
-<!-- ════════════════════════════════════════════════════════
-     SEÇÃO DEPOIMENTOS
-════════════════════════════════════════════════════════ -->
-<section class="depoimentos" id="clientes">
-  <div class="container">
-
-    <div class="cabecalho-secao">
-      <span class="etiqueta clara">Clientes que confiam no ConcliX</span>
-      <h2>Esforço zero e assertividade comprovados por <strong>sellers de alto volume</strong></h2>
-    </div>
-
-    <!-- Logos dos clientes em linha flex centralizada.
-         TODO: substituir os textos por imagens SVG/PNG reais. -->
-    <div class="logos-clientes">
-      <span>Cliente 1</span><span>Cliente 2</span><span>Cliente 3</span>
-      <span>Cliente 4</span><span>Cliente 5</span><span>Cliente 6</span>
-    </div>
-
-    <!-- grade-2 = 2 cartões de depoimento lado a lado -->
-    <div class="grade-2">
-
-      <!-- <blockquote> = citação de uma pessoa real.
-           <footer> DENTRO do blockquote = atribuição da fala
-           (quem disse). Este <footer> é diferente do <footer>
-           principal da página — não recebe os estilos escuros
-           pois o CSS usa .cartao-depoimento footer (escopo
-           específico) e .rodape-site (para o rodapé da página). -->
-      <blockquote class="cartao-depoimento">
-        <p>"Graças aos relatórios do ConcliX, tivemos uma base <strong>assertiva</strong> de onde investir mais e onde estávamos errando."</p>
-        <footer>
-          <!-- Avatar com a inicial do nome (gerado via CSS/texto) -->
-          <div class="avatar">A</div>
-          <div>
-            <strong>Ana Paula Rodrigues</strong>
-            <span>Proprietária, Loja Online</span>
-          </div>
-        </footer>
-      </blockquote>
-
-      <blockquote class="cartao-depoimento">
-        <p>"O principal benefício é não se debruçar horas em um relatório. <strong>Nada melhor do que automatizar.</strong>"</p>
-        <footer>
-          <div class="avatar">R</div>
-          <div>
-            <strong>Ricardo Santos</strong>
-            <span>Analista Financeiro, E-commerce</span>
-          </div>
-        </footer>
-      </blockquote>
-
-    </div>
-
-    <!-- CTA centralizado abaixo dos depoimentos -->
-    <div class="cta-centro">
-      <a href="#contato" class="botao botao-primario">Agendar demonstração</a>
-    </div>
-
-  </div>
-</section>
 
 
 <!-- ════════════════════════════════════════════════════════
@@ -588,12 +527,12 @@
            <p> = resposta (fica oculto até clicar).     -->
       <details><summary>O que é o ConcliX?</summary><p>Sistema especializado em conciliação de repasses. Monitora continuamente, cruza com as regras do seu ERP e alerta quando há divergências.</p></details>
       <details><summary>Para quem é indicado?</summary><p>Sellers que precisam de controle financeiro preciso sem dedicar horas à conferência manual. Ideal para volumes médio e alto.</p></details>
-      <details><summary>Quais marketplaces são integrados?</summary><p>Mercado Livre, Amazon, Shopee, Magalu, Americanas, Casas Bahia, Ponto, Extra, Shoptime, Netshoes, Zattini, Leroy Merlin, Carrefour, Centauro, Madeira Madeira e outros.</p></details>
+      <details><summary>Quais marketplaces são integrados?</summary><p>Mercado Livre, Amazon, Shopee, Magalu, Casas Bahia e Madeira Madeira.</p></details>
       <details><summary>Quais são os principais benefícios?</summary><p>Auditoria 24/7, identificação de taxas indevidas, relatórios por canal, alertas em tempo real e economia de horas de trabalho manual.</p></details>
       <details><summary>O que acontece se um repasse estiver errado?</summary><p>Você recebe um alerta com os dados para contestar junto ao marketplace e recuperar o valor devido.</p></details>
       <details><summary>Consigo acompanhar as análises?</summary><p>Sim. Acesso completo à plataforma com dashboards em tempo real e relatórios periódicos por canal.</p></details>
       <details><summary>Preciso de configuração ou treinamento?</summary><p>Não. Nossa equipe cuida de toda a configuração inicial sem necessidade de conhecimento técnico.</p></details>
-      <details><summary>Integra com ERPs?</summary><p>Sim. Bling ERP, Tiny, Omie, TOTVS, Linx e outros. A integração com Bling é nativa.</p></details>
+      <details><summary>Integra com ERPs?</summary><p>Sim. Bling (integração nativa) e TOTVS.</p></details>
       <details><summary>Substitui um contador?</summary><p>Não. Complementa o trabalho contábil com dados precisos e relatórios estruturados.</p></details>
       <details><summary>Quanto custa?</summary><p>Os valores variam conforme volume e complexidade. Entre em contato para uma proposta personalizada.</p></details>
 
@@ -705,8 +644,7 @@
         <textarea name="desafio" rows="4" placeholder="Descreva sua principal dificuldade com conciliação..." required></textarea>
       </div>
 
-      <!-- Texto de aviso legal abaixo dos campos           -->
-      <p class="privacidade">Ao enviar, você concorda com nossa <a href="#">Política de Privacidade</a>.</p>
+
 
       <!-- type="submit" dispara o evento "submit" do formulário,
            capturado pelo JavaScript para mostrar o feedback. -->
@@ -736,8 +674,10 @@
       <!-- Links de contato direto: WhatsApp e e-mail.
            wa.me é o link universal do WhatsApp.
            mailto: abre o cliente de e-mail do usuário.   -->
-      <a href="https://wa.me/5500000000000" class="link-contato">💬 (44) 3033-0000</a>
-      <a href="mailto:comercial@conclix.com.br" class="link-contato">✉ comercial@conclix.com.br</a>
+      <a href="https://wa.me/5544998860226" class="link-contato">💬 (44) 99886-0226</a>
+      <a href="https://wa.me/5544999048703" class="link-contato">💬 (44) 99904-8703</a>
+      <a href="mailto:fg0139784@gmail.com" class="link-contato">✉ fg0139784@gmail.com</a>
+      <a href="mailto:nhdds699@gmail.com" class="link-contato">✉ nhdds699@gmail.com</a>
     </div>
 
     <!-- Coluna direita: <nav> semântico com 3 grupos de links.
@@ -775,6 +715,9 @@
            — assim o copyright nunca fica desatualizado.   -->
       <span id="ano"></span> ConcliX. Todos os direitos reservados.
     </p>
+    <!-- botao-fantasma = visual transparente (sem preenchimento).
+         botao-pequeno = padding reduzido para encaixar na barra
+         inferior sem dominar o espaço do copyright.       -->
     <a href="#contato" class="botao botao-fantasma botao-pequeno">Experimente agora</a>
   </div>
 
