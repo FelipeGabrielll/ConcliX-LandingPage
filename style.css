@@ -68,7 +68,7 @@
 html { scroll-behavior: smooth; }
 
 /* -webkit-font-smoothing: antialiased melhora a renderização
-   das fontes em telas de alta resolução (macOS/iOS).          */
+   das fontes em telas de alta resolução (macOS/Safari).       */
 body { font-family: 'Inter', sans-serif; color: var(--texto-b); background: var(--branco); line-height: 1.65; -webkit-font-smoothing: antialiased; }
 
 /* Aplica a fonte de títulos (Space Grotesk) em todos os
@@ -181,7 +181,7 @@ section { padding-block: 5rem; }
 .cta-centro { text-align: center; }
 
 /* flex-wrap: wrap permite que os botões quebrem para a próxima
-   linha em telas pequenas (sem overflow horizontal).          */
+   linha caso o espaço disponível seja insuficiente.           */
 .grupo-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
 
 
@@ -216,20 +216,17 @@ header.rolado { box-shadow: var(--sombra); border-bottom: 1px solid rgba(191,195
 
 /* flex: 1 faz o nav crescer e ocupar todo o espaço disponível
    entre o logo e os botões do lado direito.                   */
-nav#menuNav { flex: 1; }
+nav { flex: 1; }
 
 /* position: relative nos links reserva espaço para que um
    pseudo-elemento ::after possa ser posicionado em relação
    a eles (ex: sublinhado animado no hover via position: absolute).
    Mesmo sem o ::after ativo agora, é boa prática manter.      */
-nav#menuNav a { font-size: .875rem; font-weight: 500; color: rgba(191,195,186,.75); margin-right: 2rem; position: relative; transition: color var(--transicao); }
-nav#menuNav a:hover { color: var(--clara); }
+nav a { font-size: .875rem; font-weight: 500; color: rgba(191,195,186,.75); margin-right: 2rem; position: relative; transition: color var(--transicao); }
+nav a:hover { color: var(--clara); }
 
 /* margin-left: auto empurra este grupo para a direita          */
 .fim-nav { display: flex; align-items: center; gap: 1rem; margin-left: auto; }
-
-/* Botão hambúrguer não utilizado em desktop                   */
-.hamburguer { display: none; }
 
 
 /* ═══════════════════════════════════════════════════
@@ -302,11 +299,11 @@ nav#menuNav a:hover { color: var(--clara); }
 
 
 /* ═══════════════════════════════════════════════════
-   SEÇÃO PROVA SOCIAL (depoimento em destaque)
+   SEÇÃO PROVA SOCIAL (frase de destaque da marca)
 ═══════════════════════════════════════════════════ */
 
 /* padding-block: 3rem é um ritmo menor que as outras seções
-   pois esta é apenas uma faixa de depoimento de destaque.     */
+   pois esta é apenas uma faixa com a frase da marca.          */
 .prova-social { background: var(--secundaria); padding-block: 3rem; }
 .prova-social blockquote { max-width: 780px; margin: 0 auto; text-align: center; font-size: 1.125rem; font-style: italic; color: rgba(191,195,186,.88); line-height: 1.75; }
 
@@ -384,7 +381,7 @@ nav#menuNav a:hover { color: var(--clara); }
 .relatorios h2 { color: var(--branco); }
 .relatorios .etiqueta { background: rgba(191,195,186,.1); color: var(--clara); }
 
-/* Grade de 2 colunas: lista de relatórios + imagem reservada   */
+/* Grade de 2 colunas: lista de relatórios + SVG do dashboard   */
 .grade-relatorios { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
 
 /* Grade de 2 colunas: usada nos itens de relatório             */
@@ -427,7 +424,7 @@ nav#menuNav a:hover { color: var(--clara); }
 ═══════════════════════════════════════════════════ */
 .publico { background: var(--primaria); }
 
-/* Grade de 2 colunas: imagem reservada + texto                 */
+/* Grade de 2 colunas: ilustração fluxo-marketplace.svg + texto */
 .grade-publico { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
 .texto-publico .etiqueta { background: rgba(191,195,186,.1); color: var(--clara); }
 .texto-publico h2 { font-size: var(--fs-h2); color: var(--branco); margin-bottom: 1.25rem; }
@@ -459,7 +456,7 @@ nav#menuNav a:hover { color: var(--clara); }
 .metodo h2 { color: var(--branco); }
 .metodo .etiqueta { background: rgba(191,195,186,.1); color: var(--clara); }
 
-/* Grade de 2 colunas: imagem reservada + lista de passos       */
+/* Grade de 2 colunas: ilustração alerta-divergencia.svg + passos */
 .grade-metodo { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
 
 /* Lista de passos com linha vertical conectora                 */
