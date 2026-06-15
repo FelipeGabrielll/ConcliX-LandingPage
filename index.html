@@ -17,9 +17,9 @@
        incluindo ã, ç, é, ê — essencial para texto em português -->
   <meta charset="UTF-8">
 
-  <!-- viewport controla como a página escala em dispositivos
-       móveis. width=device-width usa a largura real da tela.
-       initial-scale=1.0 impede zoom automático indesejado.  -->
+  <!-- viewport define a escala inicial do conteúdo na janela
+       do navegador. initial-scale=1.0 impede zoom automático
+       indesejado ao abrir a página.                         -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Título exibido na aba do navegador e nos resultados
@@ -83,18 +83,17 @@
     <a href="#" class="logo">Concli<span>X</span></a>
 
     <!-- <nav> é semântico: marca esta área como navegação
-         principal. id="menuNav" é usado pelo JS para
-         abrir/fechar o menu em mobile.
-         Os href="#ancora" rolam até a seção correspondente
-         via scroll-behavior: smooth definido no CSS.      -->
-    <nav id="menuNav">
+         principal. Os href="#ancora" rolam suavemente até
+         a seção correspondente via scroll-behavior: smooth
+         definido no CSS.                                  -->
+    <nav>
       <a href="#conciliacao">Conciliação</a>
       <a href="#integracoes">Integrações</a>
       <a href="#como-funciona">Como funciona</a>
       <a href="#faq">FAQ</a>
     </nav>
 
-    <!-- Grupo direito do cabeçalho: botão CTA + hambúrguer -->
+    <!-- Grupo direito do cabeçalho: botão CTA -->
     <div class="fim-nav">
 
       <!-- CTA (Call to Action) principal do cabeçalho.
@@ -102,13 +101,6 @@
            outra parte da página (href="#contato").        -->
       <a href="#contato" class="botao botao-primario">Agendar demo</a>
 
-      <!-- Botão hambúrguer: visível apenas em mobile (CSS).
-           id="botaoMenu" = gancho do JavaScript.
-           Os três <span> vazios são as "barras" do ícone —
-           estilizados e animados puramente em CSS.        -->
-      <button id="botaoMenu" class="hamburguer">
-        <span></span><span></span><span></span>
-      </button>
     </div>
 
   </div>
@@ -300,8 +292,7 @@
 
     <!-- Lista de chips/pílulas com os nomes dos marketplaces.
          Usamos <span> dentro de <div class="logos"> pois são
-         apenas itens visuais sem link ou ação associada.
-         "mais" = variante de borda tracejada para o "+ outros". -->
+         apenas itens visuais sem link ou ação associada.     -->
     <div class="logos">
       <span>Mercado Livre</span><span>Amazon</span><span>Shopee</span><span>Magalu</span>
       <span>Casas Bahia</span><span>Madeira Madeira</span>
@@ -604,7 +595,7 @@
         </div>
         <div class="campo">
           <label>Telefone *</label>
-          <!-- type="tel" abre teclado numérico em mobile    -->
+          <!-- type="tel" indica campo de telefone ao navegador -->
           <input type="tel" name="telefone" placeholder="(00) 00000-0000" required>
         </div>
       </div>
@@ -658,9 +649,9 @@
 <!-- ════════════════════════════════════════════════════════
      RODAPÉ DO SITE
      <footer> é semântico — marca o rodapé da página.
-     class="rodape-site" é necessário para o CSS não confundir
-     com os <footer> semânticos dentro dos <blockquote>
-     de depoimentos (que têm seletor específico).
+     class="rodape-site" permite ao CSS diferenciar este
+     rodapé de outros elementos <footer> que possam existir
+     dentro de seções (ex: dentro de <blockquote>).
 ════════════════════════════════════════════════════════ -->
 <footer class="rodape-site">
 
