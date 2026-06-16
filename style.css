@@ -1,111 +1,55 @@
-/* ═══════════════════════════════════════════════════════════════
-   ConcliX — Folha de Estilos Principal
-   Organização: Variáveis → Reset → Layout → Componentes → Seções
-═══════════════════════════════════════════════════════════════ */
-
-
-/* ── VARIÁVEIS GLOBAIS (CSS Custom Properties) ─────────────────
-   :root representa o elemento raiz do documento (<html>).
-   Definir variáveis aqui as torna acessíveis em qualquer lugar
-   do CSS via var(--nome-da-variavel).
-   Vantagem: alterar UMA linha muda toda a aparência do site.
-─────────────────────────────────────────────────────────────── */
 :root {
-  /* Paleta de cores da marca ConcliX */
-  --primaria:    #2F2235;   /* roxo escuro — fundo principal, cabeçalho, hero  */
-  --secundaria:  #3F3244;   /* roxo médio  — fundos alternativos, formulário   */
-  --realce:      #60495A;   /* roxo claro  — botões, ícones, destaque          */
-  --realce-h:    #7A5C72;   /* roxo hover  — estado :hover dos botões          */
-  --clara:       #BFC3BA;   /* bege/cinza  — textos e bordas em fundo escuro   */
-  --branco:      #FFFFFF;   /* branco puro — fundo de seções claras e cartões  */
+  --primaria:    #2F2235;
+  --secundaria:  #3F3244;
+  --realce:      #60495A;
+  --realce-h:    #7A5C72;
+  --clara:       #BFC3BA;
+  --branco:      #FFFFFF;
 
-  /* Cores de texto (usadas em seções brancas) */
-  --texto-d:     #1A1020;   /* texto muito escuro — títulos h1/h2/h3           */
-  --texto-b:     #3D3643;   /* texto base — parágrafos em fundo claro          */
-  --texto-m:     #6B6270;   /* texto médio/suave — subtítulos, legendas        */
+  --texto-d:     #1A1020;
+  --texto-b:     #3D3643;
+  --texto-m:     #6B6270;
 
-  /* Cores de status do painel de auditorias */
-  --sucesso:     #3A7D4F;   /* verde escuro — borda esquerda de linha OK       */
-  --erro:        #B44B4B;   /* vermelho     — borda esquerda de linha ALERTA   */
-  --sucesso-b:   #4CAF74;   /* verde claro  — texto do badge de sucesso        */
-  --erro-b:      #E06060;   /* vermelho claro — texto do badge de erro         */
+  --sucesso:     #3A7D4F;
+  --erro:        #B44B4B;
+  --sucesso-b:   #4CAF74;
+  --erro-b:      #E06060;
 
-  /* Tipografia fluida com clamp()
-     clamp(min, preferido, max): o valor cresce com a tela,
-     mas nunca sai dos limites mínimo e máximo definidos.     */
-  --fs-destaque: clamp(2.25rem, 5vw, 3.75rem); /* tamanho do h1 do hero      */
-  --fs-h2:       clamp(1.75rem, 3vw, 2.25rem); /* tamanho dos h2 de seção    */
+  --fs-destaque: clamp(2.25rem, 5vw, 3.75rem);
+  --fs-h2:       clamp(1.75rem, 3vw, 2.25rem);
 
-  /* Medidas de layout */
-  --altura-cab:  68px;      /* altura fixa do cabeçalho (usado em calc())     */
-  --largura-max: 1140px;    /* largura máxima do container de conteúdo        */
-  --espacamento: 1.5rem;    /* padding lateral padrão (24px)                  */
-  --raio:        8px;       /* border-radius padrão para cantos arredondados  */
+  --altura-cab:  68px;
+  --largura-max: 1140px;
+  --espacamento: 1.5rem;
+  --raio:        8px;
 
-  /* Animações */
-  --transicao:   150ms ease; /* duração e curva padrão de todas as transições */
+  --transicao:   150ms ease;
 
-  /* Sombras */
-  --sombra:      0 4px 16px rgba(0,0,0,.15);  /* sombra sutil — cards, botões */
-  --sombra-g:    0 8px 32px rgba(0,0,0,.18);  /* sombra maior — hover de card  */
+  --sombra:      0 4px 16px rgba(0,0,0,.15);
+  --sombra-g:    0 8px 32px rgba(0,0,0,.18);
 }
 
 
-/* ── RESET BÁSICO ───────────────────────────────────────────────
-   Navegadores aplicam estilos padrão diferentes.
-   Este reset padroniza o comportamento entre todos eles.
-─────────────────────────────────────────────────────────────── */
-
-/* box-sizing: border-box faz com que padding e border sejam
-   incluídos na largura/altura declarada — evita surpresas de
-   elementos "vazando" para fora do container.
-   * seleciona todos os elementos; ::before e ::after são
-   pseudo-elementos gerados pelo CSS (ex: o ✓ da lista).      */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* scroll-behavior: smooth faz a página rolar suavemente ao
-   clicar nos links de âncora (ex: href="#contato")            */
 html { scroll-behavior: smooth; }
 
-/* -webkit-font-smoothing: antialiased melhora a renderização
-   das fontes em telas de alta resolução (macOS/Safari).       */
 body { font-family: 'Inter', sans-serif; color: var(--texto-b); background: var(--branco); line-height: 1.65; -webkit-font-smoothing: antialiased; }
 
-/* Aplica a fonte de títulos (Space Grotesk) em todos os
-   headings de uma vez; line-height menor pois títulos grandes
-   ficam estranhos com espaçamento de parágrafo (1.65).        */
 h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; line-height: 1.15; color: var(--texto-d); }
 
-/* Remove sublinhado e herda a cor do elemento pai nos links    */
 a { color: inherit; text-decoration: none; }
 
-/* Remove os marcadores (bolinhas/números) de listas            */
 ul, ol { list-style: none; }
 
-/* display: block em imagens remove o espaço em branco gerado
-   pelo comportamento inline padrão; max-width: 100% impede
-   que a imagem ultrapasse o container.                        */
 img, svg { display: block; max-width: 100%; }
 
 
-/* ── LAYOUT GLOBAL ─────────────────────────────────────────────
-   .container centra e limita o conteúdo horizontalmente.
-   padding-inline aplica padding apenas nos lados esquerdo e
-   direito (propriedade lógica, equivale a padding-left +
-   padding-right, mas respeita idiomas RTL).                   */
 .container { max-width: var(--largura-max); margin: 0 auto; padding-inline: var(--espacamento); }
 
-/* padding-block aplica padding no topo e na base da seção
-   (equivale a padding-top + padding-bottom).                  */
 section { padding-block: 5rem; }
 
 
-/* ── ETIQUETA DE SEÇÃO ─────────────────────────────────────────
-   Pequeno label em maiúsculas acima dos títulos h2.
-   display: inline-block permite definir padding num elemento
-   que originalmente seria inline (como <span>).
-   border-radius: 100px cria o formato de pílula (valor grande
-   garante cantos totalmente arredondados independente da altura). */
 .etiqueta {
   display: inline-block;
   font-size: .75rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
@@ -113,30 +57,16 @@ section { padding-block: 5rem; }
   padding: .25rem .75rem; border-radius: 100px; margin-bottom: 1rem;
 }
 
-/* Variante clara: usada em seções com fundo branco.
-   O seletor .etiqueta.clara exige que o elemento tenha
-   AMBAS as classes: class="etiqueta clara"                    */
 .etiqueta.clara { background: rgba(47,34,53,.1); color: var(--primaria); }
 
 
-/* ── CABEÇALHO DE SEÇÃO ────────────────────────────────────────
-   Bloco centralizado com etiqueta + título + subtítulo + botão.
-   display: flex com flex-direction: column empilha os filhos
-   verticalmente; align-items: center centraliza horizontalmente. */
 .cabecalho-secao { text-align: center; max-width: 640px; margin: 0 auto 3rem; display: flex; flex-direction: column; align-items: center; }
 .cabecalho-secao h2 { font-size: var(--fs-h2); margin-bottom: 1rem; }
 .cabecalho-secao p { font-size: 1.125rem; color: var(--texto-m); margin-bottom: 1.5rem; }
 
-/* Variante alinhada à esquerda — usada nas seções de grid
-   (relatórios, como funciona) onde o texto fica numa coluna.  */
 .cabecalho-secao.esquerda { text-align: left; align-items: flex-start; max-width: none; margin: 0 0 2rem; }
 
 
-/* ── BOTÕES ─────────────────────────────────────────────────────
-   display: inline-flex permite centralizar o ícone e o texto
-   lado a lado usando flexbox, sem ocupar 100% da largura.
-   border: 2px solid transparent reserva espaço para a borda
-   do estado hover sem que o layout "pule" ao aparecer.        */
 .botao {
   display: inline-flex; align-items: center; gap: .5rem;
   padding: .75rem 1.5rem; border-radius: var(--raio); border: 2px solid transparent;
@@ -144,27 +74,16 @@ section { padding-block: 5rem; }
   cursor: pointer; transition: background var(--transicao), transform var(--transicao), box-shadow var(--transicao);
 }
 
-/* Botão primário: fundo colorido sólido                        */
 .botao-primario { background: var(--realce); color: var(--branco); border-color: var(--realce); }
-
-/* :hover ativa quando o cursor passa por cima.
-   translateY(-1px) sobe 1px — efeito de "levantar" o botão.  */
 .botao-primario:hover { background: var(--realce-h); border-color: var(--realce-h); transform: translateY(-1px); box-shadow: var(--sombra); }
 
-/* Botão fantasma: fundo transparente, apenas contorno         */
 .botao-fantasma { background: transparent; color: var(--clara); border-color: rgba(191,195,186,.4); }
 .botao-fantasma:hover { background: rgba(191,195,186,.08); border-color: var(--clara); }
 
-/* Modificadores de tamanho (sobrescrevem o padding do .botao)  */
 .botao-grande { padding: 1rem 2rem; font-size: 1rem; }
 .botao-pequeno { padding: .5rem 1rem; font-size: .75rem; }
 
 
-/* ── RESERVADO ─────────────────────────────────────────────────
-   ⚠ SEM USO NO HTML ATUAL: todos os <div class="reservado">
-   foram substituídos por imagens SVG reais (midias/*.svg).
-   Mantido aqui como referência do padrão de placeholder.
-   border: 2px dashed cria a borda pontilhada/tracejada.       */
 .reservado {
   width: 100%; min-height: 360px; border-radius: 16px;
   border: 2px dashed rgba(191,195,186,.25); background: rgba(255,255,255,.04);
@@ -172,112 +91,63 @@ section { padding-block: 5rem; }
   color: rgba(191,195,186,.45); font-size: .875rem; text-align: center;
 }
 
-/* ⚠ SEM USO — variante escura do placeholder, também substituída */
 .reservado.escuro { background: rgba(47,34,53,.35); border-color: rgba(96,73,90,.25); }
 
 
-/* ── CLASSES AUXILIARES ─────────────────────────────────────────
-   Pequenos helpers reutilizáveis em várias seções.             */
 .cta-centro { text-align: center; }
 
-/* flex-wrap: wrap permite que os botões quebrem para a próxima
-   linha caso o espaço disponível seja insuficiente.           */
 .grupo-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
 
 
-/* ═══════════════════════════════════════════════════
-   CABEÇALHO DO SITE
-═══════════════════════════════════════════════════ */
-
-/* position: fixed mantém o cabeçalho visível durante a rolagem.
-   inset: 0 0 auto é atalho para top:0, right:0, bottom:auto,
-   left:0 — ocupa toda a largura no topo da viewport.
-   z-index: 100 garante que fique acima de todos os outros
-   elementos (quanto maior o número, mais "acima" na pilha).   */
 header {
   position: fixed; inset: 0 0 auto;
   height: var(--altura-cab); background: var(--primaria); z-index: 100;
   transition: box-shadow var(--transicao);
 }
 
-/* Classe adicionada pelo JavaScript quando o usuário rola >20px.
-   A sombra indica visualmente que o cabeçalho está flutuando.  */
 header.rolado { box-shadow: var(--sombra); border-bottom: 1px solid rgba(191,195,186,.12); }
 
-/* Container interno do cabeçalho: usa flex para alinhar
-   logo + nav + botões em linha horizontal.                    */
 .container-nav { height: 100%; display: flex; align-items: center; gap: 2rem; }
 
-/* Logo em texto com fonte de display (Space Grotesk)          */
 .logo { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 700; letter-spacing: -.02em; color: var(--clara); }
 
-/* O <span> dentro do logo recebe cor de destaque (o "X")      */
 .logo span { color: var(--realce-h); }
 
-/* Controla o tamanho do SVG quando a logo é uma imagem.
-   display: block remove a lacuna de linha-base do <img>.      */
 .logo img { height: 1.75rem; width: auto; display: block; }
 
-/* flex: 1 faz o nav crescer e ocupar todo o espaço disponível
-   entre o logo e os botões do lado direito.                   */
 nav { flex: 1; }
 
-/* position: relative nos links reserva espaço para que um
-   pseudo-elemento ::after possa ser posicionado em relação
-   a eles (ex: sublinhado animado no hover via position: absolute).
-   Mesmo sem o ::after ativo agora, é boa prática manter.      */
 nav a { font-size: .875rem; font-weight: 500; color: rgba(191,195,186,.75); margin-right: 2rem; position: relative; transition: color var(--transicao); }
 nav a:hover { color: var(--clara); }
 
-/* margin-left: auto empurra este grupo para a direita          */
 .fim-nav { display: flex; align-items: center; gap: 1rem; margin-left: auto; }
 
 
-/* ═══════════════════════════════════════════════════
-   SEÇÃO DESTAQUE (hero)
-═══════════════════════════════════════════════════ */
-
-/* padding-top usa calc() para somar a altura do cabeçalho fixo
-   (68px) com o espaçamento da seção (5rem = 80px), evitando
-   que o conteúdo fique escondido atrás do cabeçalho.         */
 .destaque { background: var(--primaria); padding-top: calc(var(--altura-cab) + 5rem); padding-bottom: 5rem; }
 
-/* Grid de 2 colunas iguais: texto à esquerda, painel à direita */
 .grade-destaque { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
 
-/* Coluna de texto: flex para empilhar e alinhar à esquerda     */
 .texto-destaque { display: flex; flex-direction: column; align-items: flex-start; }
 .texto-destaque .etiqueta { background: rgba(191,195,186,.1); color: var(--clara); }
 
-/* font-size usa a variável de tipografia fluida (clamp)        */
 .texto-destaque h1 { font-size: var(--fs-destaque); font-weight: 700; color: var(--branco); margin-bottom: 1.5rem; letter-spacing: -.02em; }
 
-/* <em> dentro do h1 recebe cor de realce sem ficar em itálico  */
 .texto-destaque h1 em { color: var(--realce-h); font-style: normal; }
 .texto-destaque p { font-size: 1.125rem; color: rgba(191,195,186,.85); margin-bottom: 2rem; }
 
 
-/* ── Painel Demo (simulação de dashboard) ── */
-
-/* overflow: hidden garante que o conteúdo interno respeite
-   o border-radius do container pai.                           */
 .painel-demo { background: #1A1020; border-radius: 16px; border: 1px solid rgba(96,73,90,.35); overflow: hidden; box-shadow: var(--sombra-g); }
 
-/* Barra de título do painel (imita macOS com os 3 pontos)      */
 .barra-painel { display: flex; align-items: center; gap: .75rem; padding: .75rem 1.25rem; background: rgba(47,34,53,.8); border-bottom: 1px solid rgba(96,73,90,.2); font-family: monospace; font-size: .7rem; color: rgba(191,195,186,.45); }
 
-/* Cada ponto colorido (vermelho, amarelo, verde) é um <span>   */
 .ponto { width: 10px; height: 10px; border-radius: 50%; }
 
-/* border-radius: 50% em elemento quadrado = círculo perfeito   */
-.ponto.r { background: var(--erro); }    /* vermelho — fechar  */
-.ponto.y { background: #C8A127; }        /* amarelo  — minimizar */
-.ponto.g { background: var(--sucesso); } /* verde    — maximizar */
+.ponto.r { background: var(--erro); }
+.ponto.y { background: #C8A127; }
+.ponto.g { background: var(--sucesso); }
 
-/* Grade dos 3 KPIs (Key Performance Indicators) lado a lado    */
 .grade-indicadores { display: grid; grid-template-columns: repeat(3,1fr); gap: .75rem; padding: 1.25rem; }
 
-/* Cada indicador é um card com fonte monospace (estilo terminal) */
 .indicador { background: rgba(63,50,68,.5); border: 1px solid rgba(96,73,90,.3); border-radius: var(--raio); padding: 1rem; display: flex; flex-direction: column; gap: .25rem; }
 .indicador small { font-family: monospace; font-size: .62rem; text-transform: uppercase; letter-spacing: .08em; color: rgba(191,195,186,.45); }
 .indicador b { font-family: 'Space Grotesk', sans-serif; font-size: 1.125rem; color: var(--clara); }
@@ -285,64 +155,35 @@ nav a:hover { color: var(--clara); }
 .indicador em.sucesso { color: var(--sucesso-b); }
 .indicador em.erro    { color: var(--erro-b); }
 
-/* Log de auditorias em tempo real (lista de linhas)            */
 .registro { display: flex; flex-direction: column; gap: .5rem; padding: 0 1.25rem 1.25rem; }
 
-/* Cada linha do log tem fonte monospace e borda colorida
-   à esquerda para indicar status (verde = OK, vermelho = alerta).
-   border-left: 3px solid transparent reserva o espaço da borda
-   sem exibir cor, para não causar deslocamento visual.        */
 .registro p { display: flex; align-items: center; gap: .75rem; font-family: monospace; font-size: .72rem; color: rgba(191,195,186,.7); padding: .5rem .75rem; border-radius: 4px; background: rgba(47,34,53,.5); border-left: 3px solid transparent; }
 .registro p.sucesso { border-left-color: var(--sucesso); }
 .registro p.erro    { border-left-color: var(--erro); }
 
-/* Badge colorido dentro de cada linha (ex: "✓ OK", "⚠ ALERTA") */
 .registro p b { font-size: .62rem; padding: 2px 6px; border-radius: 4px; white-space: nowrap; flex-shrink: 0; }
 .registro p.sucesso b { background: rgba(58,125,79,.18); color: var(--sucesso-b); }
 .registro p.erro    b { background: rgba(180,75,75,.18); color: var(--erro-b); }
 
 
-/* ═══════════════════════════════════════════════════
-   SEÇÃO PROVA SOCIAL (frase de destaque da marca)
-═══════════════════════════════════════════════════ */
-
-/* padding-block: 3rem é um ritmo menor que as outras seções
-   pois esta é apenas uma faixa com a frase da marca.          */
 .prova-social { background: var(--secundaria); padding-block: 3rem; }
 .prova-social blockquote { max-width: 780px; margin: 0 auto; text-align: center; font-size: 1.125rem; font-style: italic; color: rgba(191,195,186,.88); line-height: 1.75; }
 
-/* ⚠ SEM USO — a atribuição de autoria foi removida do blockquote;
-   a frase agora é voz da marca, não de um cliente específico.
-   <footer> dentro de <blockquote> indicaria "quem disse a frase" —
-   uso semântico correto do <footer>, não limitado ao rodapé da página. */
 .prova-social blockquote footer { display: block; font-style: normal; margin-top: 1.25rem; font-size: .875rem; color: rgba(191,195,186,.55); }
 .prova-social blockquote footer strong { display: block; font-size: 1rem; color: var(--clara); margin-bottom: .25rem; }
 
 
-/* ═══════════════════════════════════════════════════
-   SEÇÃO PROPOSTA DE VALOR (3 cartões)
-═══════════════════════════════════════════════════ */
 .proposta-valor { background: var(--branco); }
 
-/* O padrão do CSS define h2/h3 com --texto-d globalmente, mas
-   seções escuras (como .relatorios) sobrescrevem para --branco.
-   Declarar explicitamente aqui garante que a cor escura se
-   mantém, independente da ordem das regras na folha de estilos. */
 .proposta-valor h2, .proposta-valor h3 { color: var(--texto-d); }
 .proposta-valor .cabecalho-secao p { color: var(--texto-b); }
 
-/* repeat(3, 1fr) cria 3 colunas de tamanho igual (1 fração cada) */
 .grade-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-top: 2.5rem; }
 
-/* Cartão base: flex column para empilhar ícone → título → texto */
 .cartao { background: var(--branco); border: 1px solid rgba(47,34,53,.12); border-radius: 16px; padding: 2rem; display: flex; flex-direction: column; gap: 1rem; transition: transform var(--transicao), box-shadow var(--transicao); }
 
-/* Hover levanta o cartão 3px e adiciona sombra maior            */
 .cartao:hover { transform: translateY(-3px); box-shadow: var(--sombra-g); }
 
-/* ⚠ SEM USO NO HTML ATUAL: a classe .cartao-escuro foi removida
-   do card "Repasse Certo" para que os 3 cards fiquem idênticos.
-   Variante escura: cartão com fundo roxo sobre seção branca.   */
 .cartao-escuro { background: var(--primaria); border-color: var(--secundaria); }
 .cartao-escuro h3 { color: var(--branco); }
 .cartao-escuro p  { color: rgba(191,195,186,.8); }
@@ -351,303 +192,179 @@ nav a:hover { color: var(--clara); }
 .cartao h3 { font-size: 1.25rem; }
 .cartao p  { font-size: 1rem; color: var(--texto-b); }
 
-/* Quadrado com ícone centralizado usando flex                   */
 .icone { width: 48px; height: 48px; border-radius: var(--raio); background: rgba(96,73,90,.1); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; }
 
 
-/* ═══════════════════════════════════════════════════
-   SEÇÃO INTEGRAÇÕES
-═══════════════════════════════════════════════════ */
 .integracoes { background: var(--primaria); }
 .integracoes h2 { color: var(--branco); }
 .integracoes .etiqueta { background: rgba(191,195,186,.1); color: var(--clara); }
 
-/* Rótulo de grupo (ex: "MARKETPLACES", "ERPS") — letra pequena
-   em maiúsculas com espaçamento largo entre letras.           */
 .rotulo-grupo { font-size: .75rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: rgba(191,195,186,.45); margin-bottom: 1rem; }
 
-/* Contêiner de chips/pílulas dos logos                         */
 .logos { display: flex; flex-wrap: wrap; gap: .75rem; margin-bottom: 2.5rem; }
 .logos span { background: rgba(63,50,68,.6); border: 1px solid rgba(96,73,90,.3); border-radius: var(--raio); padding: .6rem 1.25rem; font-size: .875rem; color: rgba(191,195,186,.75); transition: background var(--transicao), color var(--transicao); }
 .logos span:hover { background: rgba(96,73,90,.4); color: var(--clara); }
 
-/* Chip em destaque: Bling ERP (integração principal)           */
 .logos .realce { background: rgba(96,73,90,.4); border-color: var(--realce-h); color: var(--clara); font-weight: 600; }
 
-/* ⚠ SEM USO — o chip "+ outros" foi removido da lista de marketplaces */
 .logos .mais { border-style: dashed; color: rgba(191,195,186,.35); font-style: italic; }
 
 
-/* ═══════════════════════════════════════════════════
-   SEÇÃO RELATÓRIOS
-═══════════════════════════════════════════════════ */
 .relatorios { background: var(--secundaria); }
 .relatorios h2 { color: var(--branco); }
 .relatorios .etiqueta { background: rgba(191,195,186,.1); color: var(--clara); }
 
-/* Grade de 2 colunas: lista de relatórios + SVG do dashboard   */
 .grade-relatorios { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
 
-/* Grade de 2 colunas: usada nos itens de relatório             */
 .grade-2 { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
 
-/* Cada item da lista de relatórios                             */
 .cartao-relatorio { padding: 1rem; background: rgba(47,34,53,.5); border: 1px solid rgba(96,73,90,.22); border-radius: var(--raio); font-size: .875rem; color: rgba(191,195,186,.85); transition: background var(--transicao); }
 .cartao-relatorio:hover { background: rgba(96,73,90,.25); }
 
 
-/* ═══════════════════════════════════════════════════
-   SEÇÃO BENEFÍCIOS
-═══════════════════════════════════════════════════ */
 .beneficios { background: var(--branco); }
 .beneficios h2 { color: var(--texto-d); }
 .beneficios .cabecalho-secao p { color: var(--texto-b); }
 
-/* repeat(2, 1fr) = 2 colunas iguais para os benefícios        */
 .grade-beneficios { display: grid; grid-template-columns: repeat(2,1fr); gap: 1.25rem; margin-top: 2.5rem; }
 
-/* Cada benefício: ícone à esquerda, título+texto à direita     */
 .beneficio { display: flex; gap: 1.25rem; padding: 1.5rem; background: var(--branco); border: 1px solid rgba(47,34,53,.12); border-radius: 16px; transition: transform var(--transicao), box-shadow var(--transicao); }
 .beneficio:hover { transform: translateY(-2px); box-shadow: var(--sombra); }
 
-/* ⚠ SEM USO — o 5° card de benefício foi removido; os 4 restantes
-   preenchem o grid 2×2 simetricamente e não precisam desta classe.
-   grid-column: 1 / -1 faz um item ocupar todas as colunas da linha
-   (da coluna 1 até a última, -1 é atalho para "última coluna").  */
 .beneficio.completo { grid-column: 1 / -1; }
 
-/* flex-shrink: 0 impede que o ícone encolha quando o texto
-   ao lado for muito longo.                                     */
 .beneficio .icone { flex-shrink: 0; width: 44px; height: 44px; border-radius: var(--raio); background: rgba(96,73,90,.1); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; }
 .beneficio h3 { font-size: 1rem; font-weight: 700; color: var(--texto-d); margin-bottom: .5rem; }
 .beneficio p  { font-size: .875rem; color: var(--texto-b); }
 
 
-/* ═══════════════════════════════════════════════════
-   SEÇÃO PÚBLICO-ALVO
-═══════════════════════════════════════════════════ */
 .publico { background: var(--primaria); }
 
-/* Grade de 2 colunas: ilustração fluxo-marketplace.svg + texto */
 .grade-publico { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
 .texto-publico .etiqueta { background: rgba(191,195,186,.1); color: var(--clara); }
 .texto-publico h2 { font-size: var(--fs-h2); color: var(--branco); margin-bottom: 1.25rem; }
 
-/* Seletor ">" seleciona apenas filhos DIRETOS de .texto-publico.
-   Sem ">" pegaria todos os <p> dentro, incluindo os de outras
-   classes aninhadas — aqui só queremos os parágrafos diretos. */
 .texto-publico > p { font-size: 1.125rem; color: rgba(191,195,186,.7); margin-bottom: 1.25rem; }
 
-/* Lista de desafios com separadores horizontais               */
 .lista-verificacao { margin-bottom: 1.5rem; }
 .lista-verificacao li { padding: 1rem 0; font-size: 1rem; color: rgba(191,195,186,.85); border-bottom: 1px solid rgba(96,73,90,.18); }
 
-/* ::before insere o ✓ como conteúdo gerado pelo CSS —
-   sem precisar escrever o símbolo em cada <li> do HTML.       */
 .lista-verificacao li::before { content: "✓ "; color: var(--sucesso); font-weight: 700; }
 
-/* Seletor específico: <strong> filho direto de <p> filho direto
-   de .texto-publico — afeta apenas o texto de conclusão
-   "Nós somos a solução certa para você!", sem interferir nos
-   <strong> dentro do <h2> ou de outros parágrafos.            */
 .texto-publico > p > strong { font-size: 1.125rem; color: var(--clara); display: block; margin-bottom: 1.5rem; }
 
 
-/* ═══════════════════════════════════════════════════
-   SEÇÃO COMO FUNCIONA (passos numerados)
-═══════════════════════════════════════════════════ */
 .metodo { background: var(--secundaria); }
 .metodo h2 { color: var(--branco); }
 .metodo .etiqueta { background: rgba(191,195,186,.1); color: var(--clara); }
 
-/* Grade de 2 colunas: ilustração alerta-divergencia.svg + passos */
 .grade-metodo { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
 
-/* Lista de passos com linha vertical conectora                 */
 .passos { margin-top: 2rem; display: flex; flex-direction: column; gap: 0; position: relative; }
 
-/* ::before cria a linha vertical que liga todos os círculos.
-   position: absolute posiciona em relação ao .passos (que tem
-   position: relative). left: 19px alinha com o centro dos
-   círculos numerados (40px de largura / 2 = 20px, menos 1px). */
 .passos::before { content: ''; position: absolute; left: 19px; top: 40px; width: 2px; height: calc(100% - 60px); background: rgba(96,73,90,.35); }
 
 .passos li { display: flex; gap: 1.25rem; padding-bottom: 1.5rem; position: relative; }
 
-/* Remove o espaço abaixo do último passo — sem isso, a linha
-   vertical do ::before ficaria visivelmente longa demais.      */
 .passos li:last-child { padding-bottom: 0; }
 
-/* Círculo numerado (01, 02, 03...).
-   z-index: 1 garante que o círculo fique acima da linha
-   vertical criada pelo ::before do .passos pai.               */
 .passos li > span { flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: var(--realce); color: var(--branco); font-family: 'Space Grotesk', sans-serif; font-size: .875rem; font-weight: 700; display: flex; align-items: center; justify-content: center; position: relative; z-index: 1; }
 .passos li h3 { font-size: 1rem; font-weight: 700; color: var(--branco); margin-bottom: .5rem; padding-top: 8px; }
 .passos li p  { font-size: .875rem; color: rgba(191,195,186,.65); }
 
 
-/* ═══════════════════════════════════════════════════
-   SEÇÃO DEPOIMENTOS
-   ⚠ SEM USO — a seção <section class="depoimentos"> foi removida
-   do HTML (ainda não temos clientes para exibir). Todo este bloco
-   de CSS ficou órfão. Mantido como referência do design de cartões
-   de depoimento para uso futuro.
-═══════════════════════════════════════════════════ */
 .depoimentos { background: var(--branco); }
 .depoimentos h2 { color: var(--texto-d); }
 
-/* Logos dos clientes em linha centralizada                     */
 .logos-clientes { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-bottom: 3rem; }
 .logos-clientes span { background: rgba(191,195,186,.18); border: 1px solid rgba(47,34,53,.12); border-radius: var(--raio); padding: 1rem 2rem; font-size: .875rem; color: var(--texto-m); min-width: 120px; text-align: center; }
 
-/* Cartão de depoimento (<blockquote>)                          */
 .cartao-depoimento { background: var(--branco); border: 1px solid rgba(47,34,53,.12); border-radius: 16px; padding: 2rem; }
 .cartao-depoimento p { font-size: 1.125rem; color: var(--texto-b); font-style: italic; line-height: 1.75; margin-bottom: 1.5rem; }
 
-/* <footer> do cartão contém avatar + nome + cargo.
-   Seletor específico .cartao-depoimento footer evita conflito
-   com o rodapé principal da página (<footer class="rodape-site">). */
 .cartao-depoimento footer { display: flex; align-items: center; gap: 1rem; font-style: normal; }
 .cartao-depoimento footer strong { display: block; font-size: 1rem; color: var(--texto-d); }
 .cartao-depoimento footer span   { font-size: .875rem; color: var(--texto-m); }
 
-/* Avatar circular com inicial do nome da pessoa               */
 .avatar { width: 42px; height: 42px; border-radius: 50%; background: var(--realce); color: var(--branco); font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.125rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 
 
-/* ═══════════════════════════════════════════════════
-   SEÇÃO FAQ (acordeão nativo HTML)
-═══════════════════════════════════════════════════ */
 .faq { background: var(--primaria); }
 .faq h2 { color: var(--branco); }
 .faq .etiqueta { background: rgba(191,195,186,.1); color: var(--clara); }
 .lista-faq { max-width: 780px; margin: 0 auto; display: flex; flex-direction: column; gap: .5rem; }
 
-/* <details> é um elemento HTML nativo de acordeão.
-   Nenhum JavaScript é necessário — o navegador controla
-   a abertura e fechamento automaticamente.                    */
 details { background: rgba(63,50,68,.5); border: 1px solid rgba(96,73,90,.28); border-radius: var(--raio); overflow: hidden; }
 
-/* <summary> é o título clicável do <details>.
-   list-style: none remove o triângulo padrão do navegador.   */
 details summary { padding: 1.25rem 1.5rem; font-family: 'Space Grotesk', sans-serif; font-size: 1rem; font-weight: 600; color: var(--clara); cursor: pointer; display: flex; justify-content: space-between; align-items: center; list-style: none; }
 
-/* Remove o marcador padrão em Safari/Chrome                   */
 details summary::-webkit-details-marker { display: none; }
 
-/* ::after insere o "+" no lado direito do summary.
-   A transição faz girar para "×" quando aberto.              */
 details summary::after { content: '+'; font-size: 1.5rem; font-weight: 300; color: var(--realce-h); margin-left: 1rem; transition: transform var(--transicao); }
 
-/* details[open] é um seletor de atributo: seleciona o
-   <details> quando ele está com o atributo "open" presente
-   (o navegador adiciona "open" automaticamente ao abrir).    */
 details[open] summary { color: var(--branco); border-bottom: 1px solid rgba(96,73,90,.28); }
 
-/* Gira o "+" 45° para virar um "×" quando aberto             */
 details[open] summary::after { transform: rotate(45deg); }
 
-/* Parágrafo de resposta (filho direto de <details>)           */
 details > p { padding: 1.25rem 1.5rem; font-size: 1rem; color: rgba(191,195,186,.78); line-height: 1.7; }
 
 
-/* ═══════════════════════════════════════════════════
-   SEÇÃO CHAMADA FINAL (CTA)
-═══════════════════════════════════════════════════ */
 .chamada-final { background: var(--realce); padding-block: 5rem; }
 
-/* max-width centralizado para não esticar o texto demais      */
 .chamada-final .cta-centro { max-width: 700px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
 .chamada-final .etiqueta { background: rgba(255,255,255,.15); color: rgba(255,255,255,.9); }
 .chamada-final h2 { font-size: var(--fs-h2); color: var(--branco); margin-bottom: 1.25rem; text-align: center; }
 .chamada-final p  { font-size: 1.125rem; color: rgba(255,255,255,.82); margin-bottom: 2rem; text-align: center; }
 
-/* Botão desta seção inverte as cores: fundo primário escuro
-   em vez do fundo de realce padrão, para contrastar com o
-   fundo roxo claro da seção.                                  */
 .chamada-final .botao-primario       { background: var(--primaria); border-color: var(--primaria); }
 .chamada-final .botao-primario:hover { background: var(--secundaria); border-color: var(--secundaria); }
 
 
-/* ═══════════════════════════════════════════════════
-   SEÇÃO FORMULÁRIO DE CONTATO
-═══════════════════════════════════════════════════ */
 .contato { background: var(--secundaria); }
 .contato h2 { color: var(--branco); }
 .contato .cabecalho-secao p { color: rgba(191,195,186,.65); }
 .contato .etiqueta { background: rgba(191,195,186,.1); color: var(--clara); }
 
-/* O <form> em si tem layout de coluna para empilhar os campos  */
 form { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.25rem; }
 
-/* align-self: center centraliza o botão no eixo transversal do
-   flex-column, sem afetar os outros campos (que continuam 100%) */
 form [type="submit"] { align-self: center; }
 
-/* Linha com 2 campos lado a lado (nome + email, empresa + tel)  */
 .linha-formulario { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
 
-/* Cada campo: label + input em coluna                          */
 .campo { display: flex; flex-direction: column; gap: .5rem; }
 .campo label { font-size: .875rem; font-weight: 600; color: rgba(191,195,186,.8); }
 
-/* -webkit-appearance: none remove o estilo nativo do sistema
-   operacional em <select> e <input type="date">, permitindo
-   estilização personalizada.                                   */
 .campo input, .campo select, .campo textarea { padding: .75rem 1rem; border-radius: var(--raio); border: 1px solid rgba(96,73,90,.4); background: rgba(47,34,53,.6); color: var(--clara); font-size: 1rem; outline: none; transition: border-color var(--transicao); -webkit-appearance: none; appearance: none; }
 .campo input::placeholder, .campo textarea::placeholder { color: rgba(191,195,186,.3); }
 
-/* :focus ativa quando o usuário clica no campo.
-   box-shadow com 0 blur cria um "anel" de foco visível
-   (boa prática de acessibilidade).                            */
 .campo input:focus, .campo select:focus, .campo textarea:focus { border-color: var(--realce-h); box-shadow: 0 0 0 3px rgba(96,73,90,.15); }
 
-/* Opções do <select> herdam o fundo escuro da página           */
 .campo select option { background: var(--primaria); }
 
-/* resize: vertical permite que o usuário redimensione apenas
-   verticalmente (sem estragar o layout horizontal).           */
 .campo textarea { resize: vertical; min-height: 120px; }
 
-/* ⚠ SEM USO — o parágrafo <p class="privacidade"> foi removido
-   do formulário de contato. Mantido caso seja reintroduzido.   */
 .privacidade   { font-size: .75rem; color: rgba(191,195,186,.45); }
 .privacidade a { color: var(--realce-h); text-decoration: underline; }
 
 
-/* ═══════════════════════════════════════════════════
-   RODAPÉ DO SITE
-═══════════════════════════════════════════════════ */
-
-/* padding-block: 4rem 2rem = topo 4rem, base 2rem (assimetria
-   intencional — mais espaço no topo, menos na base).          */
 .rodape-site { background: var(--primaria); padding-block: 4rem 2rem; border-top: 1px solid rgba(96,73,90,.2); }
 
-/* Grade de 2 colunas: coluna estreita (logo+contato) e
-   coluna larga (links de navegação) — proporção 1:2.          */
 .grade-rodape { display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(96,73,90,.18); margin-bottom: 2rem; }
 
-/* Parágrafo de descrição na coluna do logo                    */
 .grade-rodape > div > p { font-size: .875rem; color: rgba(191,195,186,.58); max-width: 280px; margin: 1rem 0 1.5rem; line-height: 1.7; }
 
-/* Links de telefone e e-mail no rodapé                        */
 .link-contato       { display: block; font-size: .875rem; color: rgba(191,195,186,.55); margin-bottom: .75rem; transition: color var(--transicao); }
 .link-contato:hover { color: var(--clara); }
 
-/* Grade de 3 colunas para os grupos de links (Produto/Empresa/Contato) */
 .links-rodape { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; }
 .links-rodape h4 { font-size: .75rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: rgba(191,195,186,.45); margin-bottom: 1rem; }
 .links-rodape a       { display: block; font-size: .875rem; color: rgba(191,195,186,.58); margin-bottom: .75rem; transition: color var(--transicao); }
 .links-rodape a:hover { color: var(--clara); }
 
-/* Barra inferior do rodapé: copyright à esquerda, botão à direita */
 .rodape-inferior   { display: flex; justify-content: space-between; align-items: center; }
 .rodape-inferior p { font-size: .75rem; color: rgba(191,195,186,.38); }
 
 
-/* ACESSIBILIDADE — respeita a preferência do sistema operacional
-   por menos movimento.
-   !important garante que sobrescreve qualquer transição inline. */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; }
 }
