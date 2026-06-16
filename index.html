@@ -1,178 +1,57 @@
 <!DOCTYPE html>
-<!-- DOCTYPE informa ao navegador que este é um documento HTML5.
-     Sem ele, navegadores entram em "modo quirks" e interpretam
-     o CSS de forma inconsistente entre si.                    -->
-
-<!-- lang="pt-BR" declara o idioma da página.
-     Leitores de tela usam isso para pronunciar corretamente.
-     Motores de busca usam para indexar no país certo.        -->
 <html lang="pt-BR">
 
 <head>
-  <!-- ── CONFIGURAÇÕES DO DOCUMENTO ───────────────────────────
-       O <head> não exibe nada na tela — contém metadados,
-       configurações e carregamento de recursos externos.     -->
-
-  <!-- charset UTF-8 suporta todos os caracteres latinos,
-       incluindo ã, ç, é, ê — essencial para texto em português -->
   <meta charset="UTF-8">
-
-  <!-- viewport define a escala inicial do conteúdo na janela
-       do navegador. initial-scale=1.0 impede zoom automático
-       indesejado ao abrir a página.                         -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- Título exibido na aba do navegador e nos resultados
-       de busca do Google. Deve ser único e descritivo.      -->
   <title>ConcliX — Conciliação Inteligente de Marketplaces</title>
-
-  <!-- Meta description: aparece no Google abaixo do título.
-       Não afeta o ranking, mas influencia o clique do usuário. -->
   <meta name="description" content="ConcliX — Sistema conciliador de marketplaces. Audite e valide repasses financeiros automaticamente.">
-
-  <!-- Ícone exibido na aba do navegador, favoritos e atalhos  -->
   <link rel="icon" type="image/png" href="midias/favicon.png">
-
-  <!-- preconnect avisa o navegador para abrir a conexão com
-       o servidor do Google Fonts antecipadamente, reduzindo
-       o tempo de carregamento das fontes.
-       São necessários DOIS preconnects:
-       - fonts.googleapis.com → envia a requisição CSS da fonte
-       - fonts.gstatic.com   → onde os arquivos .woff2 estão
-       O segundo precisa de crossorigin pois é uma origem diferente
-       (o navegador pré-abre em modo anônimo para evitar erros). -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <!-- Carrega as fontes Space Grotesk (títulos) e Inter (texto).
-       wght@600;700 = pesos 600 e 700 da Space Grotesk.
-       wght@400;500 = pesos 400 e 500 da Inter.
-       display=swap: exibe fonte do sistema enquanto carrega,
-       trocando depois — evita texto invisível na tela.      -->
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
-
-  <!-- Vincula a folha de estilos CSS ao HTML.
-       rel="stylesheet" define o tipo de relação.
-       O navegador baixa e processa o CSS antes de renderizar
-       a página, evitando "flash" de conteúdo sem estilo.   -->
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-<!-- O <body> contém todo o conteúdo visível da página.
-     A ordem dos elementos aqui define a ordem visual e
-     também a ordem de leitura para leitores de tela.       -->
 
-
-<!-- ════════════════════════════════════════════════════════
-     CABEÇALHO DO SITE
-     <header> é um elemento semântico — informa ao navegador
-     e aos robôs de busca que este bloco é o cabeçalho.
-     id="cabecalho" é o gancho usado pelo JavaScript para
-     adicionar a classe "rolado" ao rolar a página.
-════════════════════════════════════════════════════════ -->
 <header id="cabecalho">
-
-  <!-- Duas classes no mesmo elemento:
-       "container" limita a largura máxima e centraliza.
-       "container-nav" adiciona display flex para alinhar
-       logo + menu + botão em linha horizontal.            -->
   <div class="container container-nav">
-
-    <!-- href="#" rola suavemente até o topo da página.
-         alt="ConcliX" descreve a imagem para leitores de tela
-         (substitui o texto que a logo representa).           -->
     <a href="#" class="logo">
       <img src="midias/LogoEscrita.svg" alt="ConcliX">
     </a>
-
-    <!-- <nav> é semântico: marca esta área como navegação
-         principal. Os href="#ancora" rolam suavemente até
-         a seção correspondente via scroll-behavior: smooth
-         definido no CSS.                                  -->
     <nav>
       <a href="#conciliacao">Conciliação</a>
       <a href="#integracoes">Integrações</a>
       <a href="#como-funciona">Como funciona</a>
       <a href="#faq">FAQ</a>
     </nav>
-
-    <!-- Grupo direito do cabeçalho: botão CTA -->
     <div class="fim-nav">
-
-      <!-- CTA (Call to Action) principal do cabeçalho.
-           Usamos <a> e não <button> porque navega para
-           outra parte da página (href="#contato").        -->
       <a href="#contato" class="botao botao-primario">Agendar demo</a>
-
     </div>
-
   </div>
 </header>
 
 
-<!-- ════════════════════════════════════════════════════════
-     SEÇÃO DESTAQUE (hero)
-     Primeira seção visível — o impacto inicial do site.
-     <section> é semântico e agrupa conteúdo relacionado.
-     Não tem id pois nenhum link de âncora aponta para ela
-     (o usuário já está no topo ao carregar a página).
-════════════════════════════════════════════════════════ -->
 <section class="destaque">
-
-  <!-- "container grade-destaque" aplica duas classes:
-       container = limita largura e centraliza.
-       grade-destaque = CSS Grid de 2 colunas (texto | painel). -->
   <div class="container grade-destaque">
-
-    <!-- Coluna esquerda: texto principal -->
     <div class="texto-destaque">
-
-      <!-- Etiqueta (eyebrow): pequeno label acima do h1.
-           Usamos <span> pois é inline e não carrega
-           significado semântico especial.                -->
       <span class="etiqueta">Serviço financeiro para marketplaces</span>
-
-      <!-- h1: deve existir apenas UM por página.
-           É o título principal para SEO e acessibilidade.
-           <em> (ênfase) aqui é usado visualmente para
-           colorir "esforço zero" — font-style: normal
-           no CSS cancela o itálico padrão do <em>.      -->
       <h1>Conciliação financeira de marketplaces com <em>esforço zero</em></h1>
-
-      <!-- Parágrafo de subtítulo. <strong> indica importância
-           semântica e deixa o texto em negrito.         -->
       <p>Automatize a conferência dos seus repasses e elimine inconsistências. <strong>Foque no crescimento enquanto cuidamos da sua conciliação financeira.</strong></p>
-
-      <!-- Grupo de botões lado a lado (flex no CSS).
-           Dois CTAs: primário (conversão) e secundário
-           (para quem ainda quer conhecer mais).         -->
       <div class="grupo-cta">
         <a href="#contato" class="botao botao-primario">Agendar demonstração</a>
         <a href="#como-funciona" class="botao botao-fantasma">Saiba mais</a>
       </div>
-
     </div>
 
-    <!-- Coluna direita: painel demo simulado em HTML/CSS puro.
-         Representa o painel real do produto ConcliX.
-         TODO: substituir por screenshot real quando disponível. -->
     <div class="painel-demo">
-
-      <!-- Barra de título estilo macOS com os 3 pontos coloridos -->
       <div class="barra-painel">
-        <!-- Cada ponto é um <span> vazio estilizado em CSS.
-             Classes r/y/g definem a cor (vermelho/amarelo/verde) -->
         <span class="ponto r"></span>
         <span class="ponto y"></span>
         <span class="ponto g"></span>
         ConcliX — Painel de Auditorias
       </div>
-
-      <!-- Grade de 3 KPIs (Indicadores-chave de desempenho).
-           <small> = texto de tamanho reduzido (legenda).
-           <b> = texto em negrito (sem peso semântico).
-           <em class="sucesso/erro"> = variação colorida      -->
       <div class="grade-indicadores">
         <div class="indicador">
           <small>Repasses auditados</small>
@@ -186,78 +65,39 @@
         </div>
         <div class="indicador">
           <small>Tempo de alerta</small>
-          <!-- &lt; é a entidade HTML para o caractere "<".
-               Usar < direto quebraria o HTML pois o navegador
-               interpretaria como abertura de uma tag.        -->
           <b>&lt; 2 min</b>
           <em class="sucesso">▲ automático</em>
         </div>
       </div>
-
-      <!-- Log de auditorias: lista de linhas com status.
-           Cada <p> recebe classe "sucesso" ou "erro" para
-           colorir a borda esquerda via CSS.               -->
       <div class="registro">
         <p class="sucesso"><b>✓ OK</b> Mercado Livre — #MLA2847 — R$ 312,00</p>
         <p class="erro"><b>⚠ ALERTA</b> Shopee — #SPE9134 — divergência R$ 24,80</p>
         <p class="sucesso"><b>✓ OK</b> Amazon — #AMZ5512 — R$ 189,90</p>
         <p class="sucesso"><b>✓ OK</b> Magalu — #MGR0074 — R$ 97,50</p>
       </div>
-
     </div>
   </div>
 </section>
 
 
-<!-- ════════════════════════════════════════════════════════
-     SEÇÃO PROVA SOCIAL
-     Faixa estreita com um depoimento de destaque logo
-     abaixo do hero — estratégia de conversão: apresentar
-     evidência social imediatamente após a proposta.
-════════════════════════════════════════════════════════ -->
 <section class="prova-social">
   <div class="container">
-
-    <!-- <blockquote> é o elemento semântico correto para
-         citações e frases de destaque da marca.
-         O texto aqui é a frase oficial do ConcliX —
-         sem aspas visuais e sem atribuição de autoria,
-         pois é voz da empresa e não de um cliente.     -->
     <blockquote>
       Transparência, controle e precisão em cada repasse. Do marketplace direto para o seu caixa, <strong>sem surpresas.</strong>
     </blockquote>
-
   </div>
 </section>
 
 
-<!-- ════════════════════════════════════════════════════════
-     SEÇÃO PROPOSTA DE VALOR
-     id="conciliacao" é o destino do link href="#conciliacao"
-     no menu de navegação. Toda seção com âncora de menu
-     precisa de um id correspondente.
-════════════════════════════════════════════════════════ -->
 <section class="proposta-valor" id="conciliacao">
   <div class="container">
-
-    <!-- cabecalho-secao: bloco centralizado com etiqueta +
-         título + subtítulo + botão CTA.
-         "etiqueta clara" = duas classes: estilo base da
-         etiqueta + variante de cor para fundo claro.    -->
     <div class="cabecalho-secao">
       <span class="etiqueta clara">Por que o ConcliX?</span>
       <h2>Sua conciliação de marketplaces <strong>sem erros e sem esforço</strong></h2>
       <p>O ConcliX audita cada centavo liquidado pelas plataformas e dispara alertas quando o repasse não bate.</p>
       <a href="#contato" class="botao botao-primario">Agendar demonstração</a>
     </div>
-
-    <!-- Grade de 3 cartões: layout CSS Grid (grade-3). -->
     <div class="grade-3">
-      <!-- alt="" (vazio) nos ícones é intencional:
-           significa "imagem decorativa — ignore".
-           Leitores de tela pulam imagens com alt vazio,
-           evitando leitura redundante (o <h3> já descreve
-           o propósito do ícone visualmente ao lado).    -->
       <div class="cartao">
         <div class="icone"><img src="midias/icone-raio.svg" alt="" width="24" height="24"></div>
         <h3>Esforço Zero</h3>
@@ -274,70 +114,37 @@
         <p>Relatórios de todos os canais em um lugar. Decisões baseadas em dados reais.</p>
       </div>
     </div>
-
   </div>
 </section>
 
 
-<!-- ════════════════════════════════════════════════════════
-     SEÇÃO INTEGRAÇÕES
-════════════════════════════════════════════════════════ -->
 <section class="integracoes" id="integracoes">
   <div class="container">
-
     <div class="cabecalho-secao">
       <span class="etiqueta">Ecossistema Conectado</span>
       <h2>Integramos com os principais <strong>marketplaces</strong> e <strong>ERPs</strong> do país</h2>
     </div>
-
-    <!-- rotulo-grupo: pequeno rótulo de categoria acima
-         de cada grupo de logos (Marketplaces / ERPs).   -->
     <p class="rotulo-grupo">Marketplaces</p>
-
-    <!-- Lista de chips/pílulas com os nomes dos marketplaces.
-         Usamos <span> dentro de <div class="logos"> pois são
-         apenas itens visuais sem link ou ação associada.     -->
     <div class="logos">
       <span>Mercado Livre</span><span>Amazon</span><span>Shopee</span><span>Magalu</span>
       <span>Casas Bahia</span><span>Madeira Madeira</span>
     </div>
-
     <p class="rotulo-grupo">ERPs</p>
-
-    <!-- "realce" destaca o Bling como integração principal -->
     <div class="logos">
       <span class="realce">Bling</span><span>TOTVS</span>
     </div>
-
   </div>
 </section>
 
 
-<!-- ════════════════════════════════════════════════════════
-     SEÇÃO RELATÓRIOS
-     Layout de 2 colunas: lista de relatórios + imagem.
-     "container grade-relatorios" aplica o container de
-     largura máxima E o CSS Grid de 2 colunas ao mesmo div.
-════════════════════════════════════════════════════════ -->
 <section class="relatorios" id="relatorios">
   <div class="container grade-relatorios">
-
-    <!-- Coluna esquerda: cabeçalho + grade de cartões -->
     <div>
-      <!-- "cabecalho-secao esquerda" = variante alinhada à
-           esquerda (ao invés de centralizada).          -->
       <div class="cabecalho-secao esquerda">
         <span class="etiqueta">Relatórios e Insights</span>
         <h2>Ações estratégicas e relatórios para uma <strong>visão 360°</strong></h2>
       </div>
-
-      <!-- grade-2: CSS Grid de 2 colunas para os itens
-           de relatório — 3 linhas × 2 colunas = 6 itens. -->
       <div class="grade-2">
-        <!-- cartao-relatorio: pílula escura com borda sutil.
-             O "•" é um caractere de marcador (bullet point)
-             inserido direto no texto — aqui não usamos <ul>/<li>
-             pois o layout é em grade, não lista vertical.  -->
         <div class="cartao-relatorio">• Resumo mensal de resultados</div>
         <div class="cartao-relatorio">• Resumo financeiro por canal</div>
         <div class="cartao-relatorio">• Despesas por canal de venda</div>
@@ -346,38 +153,20 @@
         <div class="cartao-relatorio">• Lançamentos para apoio na DRE</div>
       </div>
     </div>
-
-    <!-- style inline aqui (e nas outras imagens SVG da página)
-         porque o border-radius foi aplicado como ajuste pontual
-         quando a imagem substituiu um placeholder — mais rápido
-         do que criar uma classe CSS só para isso.
-         alt com descrição real (não vazio) porque esta imagem
-         carrega conteúdo informativo, não é decorativa.    -->
     <img src="midias/conclix_dashboard_screenshot.svg" alt="Dashboard de relatórios ConcliX" style="border-radius:16px; width:100%;">
-
   </div>
 </section>
 
 
-<!-- ════════════════════════════════════════════════════════
-     SEÇÃO BENEFÍCIOS
-════════════════════════════════════════════════════════ -->
 <section class="beneficios" id="beneficios">
   <div class="container">
-
     <div class="cabecalho-secao">
       <span class="etiqueta clara">Vantagens para o Seller</span>
       <h2>Esforço zero na conciliação <strong>para o seller</strong></h2>
       <p>Menos riscos de erros financeiros e mais estimativa dos seus recebimentos</p>
       <a href="#contato" class="botao botao-primario">Agendar uma demonstração</a>
     </div>
-
-    <!-- grade-beneficios: CSS Grid de 2 colunas × 2 linhas.
-         Os 4 cards preenchem a grade simetricamente.    -->
     <div class="grade-beneficios">
-
-      <!-- Cada benefício: ícone (<span>) + conteúdo (<div>).
-           O CSS usa display flex para alinhá-los lado a lado. -->
       <div class="beneficio">
         <span class="icone"><img src="midias/icone-relogio.svg" alt="" width="24" height="24"></span>
         <div><h3>Economia de tempo e mão de obra</h3><p>Elimine horas gastas em planilhas. Sua equipe foca no que importa.</p></div>
@@ -394,80 +183,40 @@
         <span class="icone"><img src="midias/icone-lampada.svg" alt="" width="24" height="24"></span>
         <div><h3>Redução de erros e custos</h3><p>Identifique divergências antes que virem prejuízos. Recupere o que é seu.</p></div>
       </div>
-
     </div>
   </div>
 </section>
 
 
-<!-- ════════════════════════════════════════════════════════
-     SEÇÃO PÚBLICO-ALVO
-     "container grade-publico" aplica grid de 2 colunas
-     diretamente no container (imagem | texto).
-════════════════════════════════════════════════════════ -->
 <section class="publico" id="para-quem">
   <div class="container grade-publico">
-
     <img src="midias/fluxo-marketplace.svg" alt="Fluxo de conciliação: Marketplace → ConcliX → Lojista" style="border-radius:16px; width:100%;">
-
-    <!-- Coluna de texto -->
     <div class="texto-publico">
       <span class="etiqueta">Para quem é o ConcliX?</span>
-
-      <!-- <strong> dentro do h2 formata em negrito sem quebrar
-           a linha — funciona como destaque inline no título. -->
       <h2>Para empresas que vendem em marketplaces e precisam de <strong>segurança</strong>, <strong>automação</strong> e <strong>controle financeiro</strong></h2>
-
       <p>Se você enfrenta desafios como:</p>
-
-      <!-- <ul> = lista não ordenada (sem numeração).
-           O CSS adiciona "✓" antes de cada <li> via ::before,
-           sem precisar escrever o símbolo no HTML.      -->
       <ul class="lista-verificacao">
         <li>Dificuldade para conferir repasses dos marketplaces</li>
         <li>Erros frequentes nos pagamentos recebidos</li>
         <li>Falta de tempo para analisar relatórios financeiros</li>
         <li>Perdas financeiras por falta de conciliação detalhada</li>
       </ul>
-
-      <!-- <strong> filho direto de <p> filho direto de
-           .texto-publico — seletor CSS específico para este
-           parágrafo de conclusão. display: block no CSS
-           faz ele ocupar linha própria.                 -->
       <p><strong>Nós somos a solução certa para você!</strong></p>
-
       <a href="#contato" class="botao botao-primario">Quero conciliar com esforço zero</a>
     </div>
-
   </div>
 </section>
 
 
-<!-- ════════════════════════════════════════════════════════
-     SEÇÃO COMO FUNCIONA (5 passos)
-     "container grade-metodo" = grid 2 colunas (imagem | passos).
-════════════════════════════════════════════════════════ -->
 <section class="metodo" id="como-funciona">
   <div class="container grade-metodo">
-
     <img src="midias/alerta-divergencia.svg" alt="Close na notificação de divergência ConcliX" style="border-radius:16px; width:100%;">
-
-    <!-- Coluna dos passos -->
     <div>
       <div class="cabecalho-secao esquerda">
         <span class="etiqueta">Método Exclusivo do ConcliX</span>
         <h2>Como o <strong>ConcliX</strong> opera na prática</h2>
       </div>
-
-      <!-- <ol> = lista ORDENADA (com numeração).
-           Aqui os números são visuais (01, 02...) inseridos
-           manualmente no <span>, não os números automáticos
-           do navegador (que foram desativados no CSS via
-           list-style: none).                            -->
       <ol class="passos">
-        <!-- Cada passo: <span> com número + <div> com conteúdo.
-             O CSS cria a linha vertical conectora entre os
-             círculos usando o pseudo-elemento ::before do .passos. -->
         <li>
           <span>01</span>
           <div><h3>Importamos os dados das suas vendas</h3><p>Conexão direta com as APIs dos marketplaces. Sem uploads manuais.</p></div>
@@ -490,36 +239,17 @@
         </li>
       </ol>
     </div>
-
   </div>
 </section>
 
 
-
-
-<!-- ════════════════════════════════════════════════════════
-     SEÇÃO FAQ (Perguntas Frequentes)
-     Usa o elemento nativo <details>/<summary> do HTML5 —
-     funciona como acordeão SEM JavaScript: o navegador
-     controla abertura e fechamento automaticamente.
-     O atributo "open" é adicionado/removido pelo próprio
-     navegador ao clicar, e o CSS usa details[open] para
-     estilizar o estado aberto.
-════════════════════════════════════════════════════════ -->
 <section class="faq" id="faq">
   <div class="container">
-
     <div class="cabecalho-secao">
       <span class="etiqueta">Dúvidas Frequentes</span>
       <h2>Perguntas Frequentes (FAQ)</h2>
     </div>
-
-    <!-- lista-faq: container com gap entre os <details> -->
     <div class="lista-faq">
-
-      <!-- Cada <details> é uma pergunta+resposta.
-           <summary> = parte clicável (a pergunta).
-           <p> = resposta (fica oculto até clicar).     -->
       <details><summary>O que é o ConcliX?</summary><p>Sistema especializado em conciliação de repasses. Monitora continuamente, cruza com as regras do seu ERP e alerta quando há divergências.</p></details>
       <details><summary>Para quem é indicado?</summary><p>Sellers que precisam de controle financeiro preciso sem dedicar horas à conferência manual. Ideal para volumes médio e alto.</p></details>
       <details><summary>Quais marketplaces são integrados?</summary><p>Mercado Livre, Amazon, Shopee, Magalu, Casas Bahia e Madeira Madeira.</p></details>
@@ -530,68 +260,39 @@
       <details><summary>Integra com ERPs?</summary><p>Sim. Bling (integração nativa) e TOTVS.</p></details>
       <details><summary>Substitui um contador?</summary><p>Não. Complementa o trabalho contábil com dados precisos e relatórios estruturados.</p></details>
       <details><summary>Quanto custa?</summary><p>Os valores variam conforme volume e complexidade. Entre em contato para uma proposta personalizada.</p></details>
-
     </div>
   </div>
 </section>
 
 
-<!-- ════════════════════════════════════════════════════════
-     SEÇÃO CHAMADA FINAL (CTA de fechamento)
-     Última oportunidade de conversão antes do formulário.
-     "container cta-centro" = container centralizado +
-     centralização de texto e alinhamento flex da seção.
-════════════════════════════════════════════════════════ -->
 <section class="chamada-final">
   <div class="container cta-centro">
     <span class="etiqueta">Comece agora</span>
     <h2>Evite prejuízos e simplifique sua conciliação financeira agora mesmo!</h2>
     <p>Não perca tempo conferindo repasses manualmente. O ConcliX faz isso por você! <strong>Garanta uma gestão financeira eficiente e segura!</strong></p>
-    <!-- botao-grande aumenta o padding para CTA de alta intenção -->
     <a href="#contato" class="botao botao-primario botao-grande">Quero falar com um especialista →</a>
   </div>
 </section>
 
 
-<!-- ════════════════════════════════════════════════════════
-     SEÇÃO FORMULÁRIO DE CONTATO
-     id="contato" é o destino de todos os href="#contato"
-     da página (botões CTA do menu, hero, benefícios, etc).
-════════════════════════════════════════════════════════ -->
 <section class="contato" id="contato">
   <div class="container">
-
     <div class="cabecalho-secao">
       <span class="etiqueta">Acesse o Sistema</span>
       <h2>Pronto para proteger suas receitas?</h2>
       <p>Nenhum dado é compartilhado com terceiros. Retorno em até 1 dia útil.</p>
     </div>
-
-    <!-- novalidate desativa as mensagens de erro padrão do
-         navegador (aquelas caixas feias). A validação visual
-         é feita pelo CSS (:focus) e o feedback ao enviar é
-         feito pelo JavaScript (script.js).
-         id="formularioContato" = gancho do JavaScript.     -->
     <form id="formularioContato" novalidate>
-
-      <!-- linha-formulario = CSS Grid de 2 colunas lado a lado -->
       <div class="linha-formulario">
-        <!-- "campo" agrupa label + input em coluna flex -->
         <div class="campo">
           <label>Nome *</label>
-          <!-- type="text" = campo de texto livre.
-               required = campo obrigatório (validação HTML5).
-               placeholder = texto guia que some ao digitar. -->
           <input type="text" name="nome" placeholder="Seu nome completo" required>
         </div>
         <div class="campo">
           <label>E-mail *</label>
-          <!-- type="email" valida automaticamente o formato
-               de e-mail (deve conter @ e domínio válido).  -->
           <input type="email" name="email" placeholder="seu@email.com" required>
         </div>
       </div>
-
       <div class="linha-formulario">
         <div class="campo">
           <label>Empresa *</label>
@@ -599,20 +300,13 @@
         </div>
         <div class="campo">
           <label>Telefone *</label>
-          <!-- type="tel" indica campo de telefone ao navegador -->
           <input type="tel" name="telefone" placeholder="(00) 00000-0000" required>
         </div>
       </div>
-
       <div class="linha-formulario">
         <div class="campo">
           <label>Já vende em marketplace? *</label>
-          <!-- <select> = lista suspensa (dropdown).
-               required impede envio sem selecionar opção.  -->
           <select name="marketplace" required>
-            <!-- value="" + disabled + selected = opção
-                 placeholder que não pode ser selecionada
-                 e começa selecionada por padrão.           -->
             <option value="" disabled selected>Selecione</option>
             <option>Sim</option>
             <option>Não</option>
@@ -621,7 +315,6 @@
         </div>
         <div class="campo">
           <label>Como conheceu o ConcliX?</label>
-          <!-- Sem required: campo opcional (sem asterisco)  -->
           <select name="origem">
             <option value="" disabled selected>Selecione</option>
             <option>Google</option><option>Indicação</option><option>Redes Sociais</option>
@@ -629,56 +322,28 @@
           </select>
         </div>
       </div>
-
-      <!-- Campo único (largura total) para texto livre       -->
       <div class="campo">
         <label>Conte-nos o seu desafio *</label>
-        <!-- <textarea> = caixa de texto multilinha.
-             rows="4" define a altura inicial (4 linhas).
-             O CSS permite redimensionar apenas verticalmente. -->
         <textarea name="desafio" rows="4" placeholder="Descreva sua principal dificuldade com conciliação..." required></textarea>
       </div>
-
-
-
-      <!-- type="submit" dispara o evento "submit" do formulário,
-           capturado pelo JavaScript para mostrar o feedback. -->
       <button type="submit" class="botao botao-primario botao-grande">Fale agora</button>
-
     </form>
   </div>
 </section>
 
 
-<!-- ════════════════════════════════════════════════════════
-     RODAPÉ DO SITE
-     <footer> é semântico — marca o rodapé da página.
-     class="rodape-site" permite ao CSS diferenciar este
-     rodapé de outros elementos <footer> que possam existir
-     dentro de seções (ex: dentro de <blockquote>).
-════════════════════════════════════════════════════════ -->
 <footer class="rodape-site">
-
-  <!-- grade-rodape = CSS Grid 1fr 2fr (logo+contato | links) -->
   <div class="container grade-rodape">
-
-    <!-- Coluna esquerda: logo, descrição e contatos -->
     <div>
       <a href="#" class="logo">
         <img src="midias/LogoEscrita.svg" alt="ConcliX">
       </a>
       <p>Simplifique sua conciliação financeira de marketplaces agora mesmo.</p>
-      <!-- Links de contato direto: WhatsApp e e-mail.
-           wa.me é o link universal do WhatsApp.
-           mailto: abre o cliente de e-mail do usuário.   -->
       <a href="https://wa.me/5544998860226" class="link-contato">💬 (44) 99886-0226</a>
       <a href="https://wa.me/5544999048703" class="link-contato">💬 (44) 99904-8703</a>
       <a href="mailto:fg0139784@gmail.com" class="link-contato">✉ fg0139784@gmail.com</a>
       <a href="mailto:nhdds699@gmail.com" class="link-contato">✉ nhdds699@gmail.com</a>
     </div>
-
-    <!-- Coluna direita: <nav> semântico com 3 grupos de links.
-         links-rodape = CSS Grid de 3 colunas (Produto|Empresa|Contato) -->
     <nav class="links-rodape">
       <div>
         <h4>Produto</h4>
@@ -699,33 +364,17 @@
         <a href="mailto:comercial@conclix.com.br">E-mail</a>
       </div>
     </nav>
-
   </div>
-
-  <!-- Barra inferior: copyright + botão -->
   <div class="container rodape-inferior">
     <p>
-      <!-- &copy; é a entidade HTML para o símbolo ©         -->
       &copy;
-      <!-- <span id="ano"> começa vazio. O JavaScript insere
-           o ano atual aqui via .textContent = new Date().getFullYear()
-           — assim o copyright nunca fica desatualizado.   -->
       <span id="ano"></span> ConcliX. Todos os direitos reservados.
     </p>
-    <!-- botao-fantasma = visual transparente (sem preenchimento).
-         botao-pequeno = padding reduzido para encaixar na barra
-         inferior sem dominar o espaço do copyright.       -->
     <a href="#contato" class="botao botao-fantasma botao-pequeno">Experimente agora</a>
   </div>
-
 </footer>
 
 
-<!-- <script> carrega o JavaScript ao final do <body>.
-     Colocar aqui (e não no <head>) garante que todo o HTML
-     já foi lido pelo navegador antes do JS tentar acessar
-     os elementos por getElementById — evita erros de
-     "elemento não encontrado".                            -->
 <script src="script.js"></script>
 
 </body>
