@@ -30,6 +30,9 @@
        Não afeta o ranking, mas influencia o clique do usuário. -->
   <meta name="description" content="ConcliX — Sistema conciliador de marketplaces. Audite e valide repasses financeiros automaticamente.">
 
+  <!-- Ícone exibido na aba do navegador, favoritos e atalhos  -->
+  <link rel="icon" type="image/png" href="midias/favicon.png">
+
   <!-- preconnect avisa o navegador para abrir a conexão com
        o servidor do Google Fonts antecipadamente, reduzindo
        o tempo de carregamento das fontes.
@@ -76,11 +79,12 @@
        logo + menu + botão em linha horizontal.            -->
   <div class="container container-nav">
 
-    <!-- Logo em texto puro (sem imagem).
-         href="#" rola suavemente até o topo da página.
-         O <span> envolve o "X" para colorir só essa letra
-         via CSS (.logo span { color: var(--realce-h); })   -->
-    <a href="#" class="logo">Concli<span>X</span></a>
+    <!-- href="#" rola suavemente até o topo da página.
+         alt="ConcliX" descreve a imagem para leitores de tela
+         (substitui o texto que a logo representa).           -->
+    <a href="#" class="logo">
+      <img src="midias/LogoEscrita.svg" alt="ConcliX">
+    </a>
 
     <!-- <nav> é semântico: marca esta área como navegação
          principal. Os href="#ancora" rolam suavemente até
@@ -660,7 +664,9 @@
 
     <!-- Coluna esquerda: logo, descrição e contatos -->
     <div>
-      <a href="#" class="logo">Concli<span>X</span></a>
+      <a href="#" class="logo">
+        <img src="midias/LogoEscrita.svg" alt="ConcliX">
+      </a>
       <p>Simplifique sua conciliação financeira de marketplaces agora mesmo.</p>
       <!-- Links de contato direto: WhatsApp e e-mail.
            wa.me é o link universal do WhatsApp.
