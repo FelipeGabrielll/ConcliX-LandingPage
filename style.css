@@ -214,6 +214,10 @@ header.rolado { box-shadow: var(--sombra); border-bottom: 1px solid rgba(191,195
 /* O <span> dentro do logo recebe cor de destaque (o "X")      */
 .logo span { color: var(--realce-h); }
 
+/* Controla o tamanho do SVG quando a logo é uma imagem.
+   display: block remove a lacuna de linha-base do <img>.      */
+.logo img { height: 1.75rem; width: auto; display: block; }
+
 /* flex: 1 faz o nav crescer e ocupar todo o espaço disponível
    entre o logo e os botões do lado direito.                   */
 nav { flex: 1; }
@@ -575,6 +579,10 @@ details > p { padding: 1.25rem 1.5rem; font-size: 1rem; color: rgba(191,195,186,
 
 /* O <form> em si tem layout de coluna para empilhar os campos  */
 form { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.25rem; }
+
+/* align-self: center centraliza o botão no eixo transversal do
+   flex-column, sem afetar os outros campos (que continuam 100%) */
+form [type="submit"] { align-self: center; }
 
 /* Linha com 2 campos lado a lado (nome + email, empresa + tel)  */
 .linha-formulario { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
