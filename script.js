@@ -5,6 +5,24 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 
 
+const botaoMenu = document.getElementById('botaoMenu');
+const menuNav   = document.getElementById('menuNav');
+
+if (botaoMenu && menuNav) {
+  botaoMenu.addEventListener('click', () => {
+    const aberto = menuNav.classList.toggle('aberto');
+    botaoMenu.setAttribute('aria-expanded', aberto);
+  });
+
+  menuNav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      menuNav.classList.remove('aberto');
+      botaoMenu.setAttribute('aria-expanded', 'false');
+    });
+  });
+}
+
+
 const elementoAno = document.getElementById('ano');
 if (elementoAno) elementoAno.textContent = new Date().getFullYear();
 
