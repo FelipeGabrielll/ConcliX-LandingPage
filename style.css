@@ -1,3 +1,9 @@
+/* ===================================================================
+   01. VARIÁVEIS GLOBAIS
+   Aqui ficam TODAS as cores, tamanhos e espaçamentos do site.
+   Se precisar trocar uma cor ou medida, troca só aqui e atualiza
+   em todo o site automaticamente.
+   =================================================================== */
 :root {
   --primaria:    #2F2235;
   --secundaria:  #3F3244;
@@ -30,8 +36,19 @@
 }
 
 
+/* ===================================================================
+   02. RESET UNIVERSAL
+   Remove margens e espaçamentos padrão do navegador, para que
+   todo elemento comece "zerado" e seja controlado só pelo nosso CSS.
+   =================================================================== */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+
+/* ===================================================================
+   03. CONFIGURAÇÕES BASE (html, body, títulos, links, listas, imagens)
+   Define a fonte padrão do site, cor do texto, e comportamento
+   geral de rolagem, links e imagens.
+   =================================================================== */
 html { scroll-behavior: smooth; }
 
 body { font-family: 'Inter', sans-serif; color: var(--texto-b); background: var(--branco); line-height: 1.65; -webkit-font-smoothing: antialiased; }
@@ -45,11 +62,21 @@ ul, ol { list-style: none; }
 img, svg { display: block; max-width: 100%; }
 
 
+/* ===================================================================
+   04. CONTAINER E ESPAÇAMENTO DAS SEÇÕES
+   .container limita a largura do conteúdo e centraliza na tela.
+   "section" define o espaço vertical padrão entre cada bloco da página.
+   =================================================================== */
 .container { max-width: var(--largura-max); margin: 0 auto; padding-inline: var(--espacamento); }
 
 section { padding-block: 5rem; }
 
 
+/* ===================================================================
+   05. ETIQUETA (badge/selo pequeno)
+   É aquele rótulo pequeno e arredondado, tipo "NOVO" ou "RECURSO",
+   usado no topo de várias seções para destacar uma palavra-chave.
+   =================================================================== */
 .etiqueta {
   display: inline-block;
   font-size: .75rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
@@ -60,6 +87,12 @@ section { padding-block: 5rem; }
 .etiqueta.clara { background: rgba(47,34,53,.1); color: var(--primaria); }
 
 
+/* ===================================================================
+   06. CABEÇALHO DE SEÇÃO
+   Padrão de título + texto de apoio que aparece no topo da maioria
+   das seções. ".esquerda" é a variação alinhada à esquerda em vez
+   de centralizada.
+   =================================================================== */
 .cabecalho-secao { text-align: center; max-width: 640px; margin: 0 auto 3rem; display: flex; flex-direction: column; align-items: center; }
 .cabecalho-secao h2 { font-size: var(--fs-h2); margin-bottom: 1rem; }
 .cabecalho-secao p { font-size: 1.125rem; color: var(--texto-m); margin-bottom: 1.5rem; }
@@ -67,6 +100,13 @@ section { padding-block: 5rem; }
 .cabecalho-secao.esquerda { text-align: left; align-items: flex-start; max-width: none; margin: 0 0 2rem; }
 
 
+/* ===================================================================
+   07. BOTÕES
+   Estilo base de todos os botões do site + variações:
+   - primário (cor de destaque, usado em CTAs principais)
+   - fantasma (transparente, usado em fundos escuros)
+   - grande / pequeno (tamanhos alternativos)
+   =================================================================== */
 .botao {
   display: inline-flex; align-items: center; gap: .5rem;
   padding: .75rem 1.5rem; border-radius: var(--raio); border: 2px solid transparent;
@@ -84,6 +124,11 @@ section { padding-block: 5rem; }
 .botao-pequeno { padding: .5rem 1rem; font-size: .75rem; }
 
 
+/* ===================================================================
+   08. BLOCO RESERVADO (placeholder)
+   Caixa com borda pontilhada usada como espaço reservado, por exemplo
+   para uma imagem ou vídeo que ainda vai ser inserido depois.
+   =================================================================== */
 .reservado {
   width: 100%; min-height: 360px; border-radius: 16px;
   border: 2px dashed rgba(191,195,186,.25); background: rgba(255,255,255,.04);
@@ -94,11 +139,22 @@ section { padding-block: 5rem; }
 .reservado.escuro { background: rgba(47,34,53,.35); border-color: rgba(96,73,90,.25); }
 
 
+/* ===================================================================
+   09. CTA CENTRALIZADO E GRUPO DE BOTÕES
+   Usado para centralizar uma chamada de ação e organizar dois ou
+   mais botões lado a lado.
+   =================================================================== */
 .cta-centro { text-align: center; }
 
 .grupo-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
 
 
+/* ===================================================================
+   10. HEADER (barra superior fixa do site)
+   Fica fixo no topo da página mesmo durante a rolagem.
+   "header.rolado" é o estado quando o usuário já rolou a página
+   (adiciona sombra e linha de separação).
+   =================================================================== */
 header {
   position: fixed; inset: 0 0 auto;
   height: var(--altura-cab); background: var(--primaria); z-index: 100;
@@ -115,6 +171,12 @@ header.rolado { box-shadow: var(--sombra); border-bottom: 1px solid rgba(191,195
 
 .logo img { height: 1.75rem; width: auto; display: block; }
 
+
+/* ===================================================================
+   11. NAVEGAÇÃO (menu do header)
+   Links do menu principal e bloco final do header (geralmente
+   onde fica o botão "Entrar" ou "Começar agora").
+   =================================================================== */
 nav { flex: 1; }
 
 nav a { font-size: .875rem; font-weight: 500; color: rgba(191,195,186,.75); margin-right: 2rem; position: relative; transition: color var(--transicao); }
@@ -123,10 +185,22 @@ nav a:hover { color: var(--clara); }
 .fim-nav { display: flex; align-items: center; gap: 1rem; margin-left: auto; }
 
 
+/* ===================================================================
+   12. SEÇÃO DESTAQUE / HERO
+   É o banner principal logo abaixo do header, com o título de
+   impacto da página. Grade de 2 colunas: texto de um lado, painel
+   demonstrativo do outro.
+   =================================================================== */
 .destaque { background: var(--primaria); padding-top: calc(var(--altura-cab) + 5rem); padding-bottom: 5rem; }
 
 .grade-destaque { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
 
+
+/* ===================================================================
+   13. TEXTO DO HERO
+   Título grande (h1), texto de apoio e a tag de destaque que
+   aparecem no lado esquerdo do banner principal.
+   =================================================================== */
 .texto-destaque { display: flex; flex-direction: column; align-items: flex-start; }
 .texto-destaque .etiqueta { background: rgba(191,195,186,.1); color: var(--clara); }
 
@@ -136,6 +210,11 @@ nav a:hover { color: var(--clara); }
 .texto-destaque p { font-size: 1.125rem; color: rgba(191,195,186,.85); margin-bottom: 2rem; }
 
 
+/* ===================================================================
+   14. PAINEL DEMO (mock de dashboard dentro do hero)
+   Simula uma tela de produto/dashboard ao lado do texto do hero,
+   com uma barra superior estilo "janela de app".
+   =================================================================== */
 .painel-demo { background: #1A1020; border-radius: 16px; border: 1px solid rgba(96,73,90,.35); overflow: hidden; box-shadow: var(--sombra-g); }
 
 .barra-painel { display: flex; align-items: center; gap: .75rem; padding: .75rem 1.25rem; background: rgba(47,34,53,.8); border-bottom: 1px solid rgba(96,73,90,.2); font-family: monospace; font-size: .7rem; color: rgba(191,195,186,.45); }
@@ -146,6 +225,12 @@ nav a:hover { color: var(--clara); }
 .ponto.y { background: #C8A127; }
 .ponto.g { background: var(--sucesso); }
 
+
+/* ===================================================================
+   15. INDICADORES (cards de métricas dentro do painel demo)
+   Pequenos cartões de número/indicador (ex: "Vendas +12%") mostrados
+   dentro da tela simulada do painel demo.
+   =================================================================== */
 .grade-indicadores { display: grid; grid-template-columns: repeat(3,1fr); gap: .75rem; padding: 1.25rem; }
 
 .indicador { background: rgba(63,50,68,.5); border: 1px solid rgba(96,73,90,.3); border-radius: var(--raio); padding: 1rem; display: flex; flex-direction: column; gap: .25rem; }
@@ -155,6 +240,12 @@ nav a:hover { color: var(--clara); }
 .indicador em.sucesso { color: var(--sucesso-b); }
 .indicador em.erro    { color: var(--erro-b); }
 
+
+/* ===================================================================
+   16. REGISTRO / LOG (lista de eventos dentro do painel demo)
+   Simula uma lista de logs/atividades (ex: "Pagamento aprovado",
+   "Erro ao processar"), com cor de borda indicando sucesso ou erro.
+   =================================================================== */
 .registro { display: flex; flex-direction: column; gap: .5rem; padding: 0 1.25rem 1.25rem; }
 
 .registro p { display: flex; align-items: center; gap: .75rem; font-family: monospace; font-size: .72rem; color: rgba(191,195,186,.7); padding: .5rem .75rem; border-radius: 4px; background: rgba(47,34,53,.5); border-left: 3px solid transparent; }
@@ -166,6 +257,11 @@ nav a:hover { color: var(--clara); }
 .registro p.erro    b { background: rgba(180,75,75,.18); color: var(--erro-b); }
 
 
+/* ===================================================================
+   17. PROVA SOCIAL (citação em destaque)
+   Faixa com uma citação grande de cliente/parceiro, usada como
+   prova de credibilidade logo após o hero.
+   =================================================================== */
 .prova-social { background: var(--secundaria); padding-block: 3rem; }
 .prova-social blockquote { max-width: 780px; margin: 0 auto; text-align: center; font-size: 1.125rem; font-style: italic; color: rgba(191,195,186,.88); line-height: 1.75; }
 
@@ -173,6 +269,11 @@ nav a:hover { color: var(--clara); }
 .prova-social blockquote footer strong { display: block; font-size: 1rem; color: var(--clara); margin-bottom: .25rem; }
 
 
+/* ===================================================================
+   18. PROPOSTA DE VALOR (seção com cards de diferenciais)
+   Seção de fundo branco com 3 cartões lado a lado destacando os
+   principais diferenciais do produto/serviço.
+   =================================================================== */
 .proposta-valor { background: var(--branco); }
 
 .proposta-valor h2, .proposta-valor h3 { color: var(--texto-d); }
@@ -180,6 +281,12 @@ nav a:hover { color: var(--clara); }
 
 .grade-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-top: 2.5rem; }
 
+
+/* ===================================================================
+   19. CARTÕES (cards genéricos reutilizáveis)
+   Estilo base de "card" usado em várias seções (proposta de valor,
+   benefícios, etc). ".cartao-escuro" é a variação com fundo escuro.
+   =================================================================== */
 .cartao { background: var(--branco); border: 1px solid rgba(47,34,53,.12); border-radius: 16px; padding: 2rem; display: flex; flex-direction: column; gap: 1rem; transition: transform var(--transicao), box-shadow var(--transicao); }
 
 .cartao:hover { transform: translateY(-3px); box-shadow: var(--sombra-g); }
@@ -192,9 +299,20 @@ nav a:hover { color: var(--clara); }
 .cartao h3 { font-size: 1.25rem; }
 .cartao p  { font-size: 1rem; color: var(--texto-b); }
 
+
+/* ===================================================================
+   20. ÍCONE (caixinha de ícone usada dentro dos cards)
+   Quadrado pequeno e arredondado que serve de fundo para o
+   ícone/emoji exibido no topo de cada card.
+   =================================================================== */
 .icone { width: 48px; height: 48px; border-radius: var(--raio); background: rgba(96,73,90,.1); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; }
 
 
+/* ===================================================================
+   21. INTEGRAÇÕES (seção com logos de parceiros/ferramentas)
+   Mostra uma lista de "pílulas" com nomes de ferramentas com as
+   quais o produto se integra (ex: WhatsApp, Google, etc).
+   =================================================================== */
 .integracoes { background: var(--primaria); }
 .integracoes h2 { color: var(--branco); }
 .integracoes .etiqueta { background: rgba(191,195,186,.1); color: var(--clara); }
@@ -210,6 +328,11 @@ nav a:hover { color: var(--clara); }
 .logos .mais { border-style: dashed; color: rgba(191,195,186,.35); font-style: italic; }
 
 
+/* ===================================================================
+   22. RELATÓRIOS (seção com cards de relatórios/exemplos)
+   Grade de 2 colunas mostrando exemplos de relatórios gerados,
+   cada um como um pequeno cartão clicável.
+   =================================================================== */
 .relatorios { background: var(--secundaria); }
 .relatorios h2 { color: var(--branco); }
 .relatorios .etiqueta { background: rgba(191,195,186,.1); color: var(--clara); }
@@ -222,6 +345,11 @@ nav a:hover { color: var(--clara); }
 .cartao-relatorio:hover { background: rgba(96,73,90,.25); }
 
 
+/* ===================================================================
+   23. BENEFÍCIOS (seção com lista de vantagens)
+   Grade de 2 colunas com cartões de benefício (ícone + título +
+   texto). ".completo" faz um benefício ocupar a largura toda.
+   =================================================================== */
 .beneficios { background: var(--branco); }
 .beneficios h2 { color: var(--texto-d); }
 .beneficios .cabecalho-secao p { color: var(--texto-b); }
@@ -238,6 +366,11 @@ nav a:hover { color: var(--clara); }
 .beneficio p  { font-size: .875rem; color: var(--texto-b); }
 
 
+/* ===================================================================
+   24. PÚBLICO-ALVO (seção com checklist de "para quem é")
+   Lado a lado: texto descrevendo o público ideal + uma lista com
+   marcações de "✓" (checklist) indicando para quem o produto serve.
+   =================================================================== */
 .publico { background: var(--primaria); }
 
 .grade-publico { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
@@ -254,6 +387,11 @@ nav a:hover { color: var(--clara); }
 .texto-publico > p > strong { font-size: 1.125rem; color: var(--clara); display: block; margin-bottom: 1.5rem; }
 
 
+/* ===================================================================
+   25. MÉTODO / PASSOS (linha do tempo numerada)
+   Mostra o passo a passo de como o produto funciona, com números
+   em círculo conectados por uma linha vertical.
+   =================================================================== */
 .metodo { background: var(--secundaria); }
 .metodo h2 { color: var(--branco); }
 .metodo .etiqueta { background: rgba(191,195,186,.1); color: var(--clara); }
@@ -273,6 +411,11 @@ nav a:hover { color: var(--clara); }
 .passos li p  { font-size: .875rem; color: rgba(191,195,186,.65); }
 
 
+/* ===================================================================
+   26. DEPOIMENTOS (cards de clientes)
+   Logos de clientes no topo + cards com depoimento, nome e avatar
+   (círculo com a inicial do nome).
+   =================================================================== */
 .depoimentos { background: var(--branco); }
 .depoimentos h2 { color: var(--texto-d); }
 
@@ -289,6 +432,11 @@ nav a:hover { color: var(--clara); }
 .avatar { width: 42px; height: 42px; border-radius: 50%; background: var(--realce); color: var(--branco); font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.125rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 
 
+/* ===================================================================
+   27. FAQ (perguntas e respostas expansíveis)
+   Usa a tag HTML <details>/<summary>: clicando na pergunta, a
+   resposta abre/fecha. O "+" vira um "x" quando está aberto.
+   =================================================================== */
 .faq { background: var(--primaria); }
 .faq h2 { color: var(--branco); }
 .faq .etiqueta { background: rgba(191,195,186,.1); color: var(--clara); }
@@ -309,6 +457,11 @@ details[open] summary::after { transform: rotate(45deg); }
 details > p { padding: 1.25rem 1.5rem; font-size: 1rem; color: rgba(191,195,186,.78); line-height: 1.7; }
 
 
+/* ===================================================================
+   28. CHAMADA FINAL (CTA de conversão antes do rodapé)
+   Faixa colorida de destaque com título, texto e botão final
+   incentivando a ação (ex: "Comece agora").
+   =================================================================== */
 .chamada-final { background: var(--realce); padding-block: 5rem; }
 
 .chamada-final .cta-centro { max-width: 700px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
@@ -320,6 +473,11 @@ details > p { padding: 1.25rem 1.5rem; font-size: 1rem; color: rgba(191,195,186,
 .chamada-final .botao-primario:hover { background: var(--secundaria); border-color: var(--secundaria); }
 
 
+/* ===================================================================
+   29. CONTATO (formulário)
+   Estilo do formulário de contato: campos em grade de 2 colunas,
+   inputs com fundo escuro e foco destacado em roxo ao clicar.
+   =================================================================== */
 .contato { background: var(--secundaria); }
 .contato h2 { color: var(--branco); }
 .contato .cabecalho-secao p { color: rgba(191,195,186,.65); }
@@ -347,6 +505,12 @@ form [type="submit"] { align-self: center; }
 .privacidade a { color: var(--realce-h); text-decoration: underline; }
 
 
+/* ===================================================================
+   30. RODAPÉ (footer)
+   Última seção da página: logo + descrição curta de um lado,
+   colunas de links úteis do outro, e uma linha final com
+   copyright/direitos.
+   =================================================================== */
 .rodape-site { background: var(--primaria); padding-block: 4rem 2rem; border-top: 1px solid rgba(96,73,90,.2); }
 
 .grade-rodape { display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(96,73,90,.18); margin-bottom: 2rem; }
@@ -365,6 +529,119 @@ form [type="submit"] { align-self: center; }
 .rodape-inferior p { font-size: .75rem; color: rgba(191,195,186,.38); }
 
 
+/* ===================================================================
+   31. HAMBÚRGUER
+   Botão de menu oculto por padrão no desktop. Aparece nas media
+   queries abaixo, quando o menu de navegação colapsa.
+   =================================================================== */
+.hamburguer {
+  display: none;
+  flex-direction: column; justify-content: center; gap: 5px;
+  width: 40px; height: 40px; margin-left: auto; flex-shrink: 0;
+  background: transparent; border: none; cursor: pointer; padding: 4px;
+}
+.hamburguer span {
+  display: block; width: 24px; height: 2px;
+  background: var(--clara); border-radius: 2px;
+  transition: transform var(--transicao), opacity var(--transicao);
+}
+/* Animação das 3 linhas → X quando o menu está aberto */
+.hamburguer[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburguer[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.hamburguer[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+
+/* ===================================================================
+   32. RESPONSIVIDADE
+   Dois pontos de quebra:
+   – Tablet : até 1023px (iPad, notebooks pequenos)
+   – Mobile : até 639px  (smartphones, iPhone mini inclusive)
+   =================================================================== */
+
+/* ── TABLET (até 1023px) ─────────────────────────────────────────── */
+@media (max-width: 1023px) {
+
+  /* Nav: hambúrguer aparece, links colapsam para dropdown e botão
+     "Agendar demo" do header some (o menu já tem o link #contato) */
+  .hamburguer { display: flex; }
+  .fim-nav    { display: none; }
+
+  nav#menuNav {
+    display: none;
+    flex-direction: column;
+    position: absolute; top: 100%; left: 0; right: 0;
+    background: var(--primaria);
+    border-top: 1px solid rgba(96,73,90,.2);
+    padding: .5rem var(--espacamento) 1rem;
+    box-shadow: var(--sombra);
+  }
+  nav#menuNav.aberto { display: flex; }
+  nav#menuNav a {
+    margin-right: 0; padding: .875rem 0;
+    border-bottom: 1px solid rgba(96,73,90,.15);
+    font-size: 1rem; color: var(--clara);
+  }
+  nav#menuNav a:last-child { border-bottom: none; }
+
+  /* Espaçamento vertical das seções */
+  section        { padding-block: 3.5rem; }
+  .destaque      { padding-top: calc(var(--altura-cab) + 3rem); padding-bottom: 3rem; }
+  .chamada-final { padding-block: 3.5rem; }
+  .prova-social  { padding-block: 2.5rem; }
+
+  /* Hero: texto acima, painel demo abaixo */
+  .grade-destaque { grid-template-columns: 1fr; gap: 2.5rem; }
+
+  /* Proposta de valor: 3 → 2 colunas */
+  .grade-3 { grid-template-columns: repeat(2, 1fr); }
+
+  /* Grids pesados: coluna única */
+  .grade-relatorios { grid-template-columns: 1fr; gap: 2.5rem; }
+  .grade-publico    { grid-template-columns: 1fr; gap: 2.5rem; }
+  .grade-metodo     { grid-template-columns: 1fr; gap: 2.5rem; }
+
+  /* Rodapé */
+  .grade-rodape { grid-template-columns: 1fr; gap: 2rem; }
+  .grade-rodape > div > p { max-width: none; }
+}
+
+/* ── MOBILE (até 639px) ─────────────────────────────────────────── */
+@media (max-width: 639px) {
+
+  /* Espaçamento vertical reduzido */
+  section        { padding-block: 2.5rem; }
+  .destaque      { padding-top: calc(var(--altura-cab) + 2rem); padding-bottom: 2.5rem; }
+  .chamada-final { padding-block: 2.5rem; }
+  .prova-social  { padding-block: 2rem; }
+  .cabecalho-secao { margin-bottom: 2rem; }
+
+  /* Tudo em coluna única */
+  .grade-3          { grid-template-columns: 1fr; }
+  .grade-2          { grid-template-columns: 1fr; }
+  .grade-beneficios { grid-template-columns: 1fr; }
+  .linha-formulario { grid-template-columns: 1fr; }
+
+  /* Benefício que ocupa as 2 colunas volta ao normal em 1 coluna */
+  .beneficio.completo { grid-column: auto; }
+
+  /* Painel demo: indicadores em 2 colunas em vez de 3 */
+  .grade-indicadores { grid-template-columns: repeat(2, 1fr); }
+
+  /* Rodapé: links em 2 colunas; linha inferior empilhada */
+  .links-rodape  { grid-template-columns: repeat(2, 1fr); }
+  .rodape-inferior { flex-direction: column; gap: 1rem; text-align: center; }
+
+  /* Hero: centraliza texto e botões no celular */
+  .texto-destaque          { align-items: center; text-align: center; }
+  .texto-destaque .grupo-cta { justify-content: center; }
+}
+
+
+/* ===================================================================
+   33. ACESSIBILIDADE
+   Se o usuário tiver ativado "reduzir movimento" no sistema dele,
+   desliga todas as transições/animações do site.
+   =================================================================== */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; }
 }
