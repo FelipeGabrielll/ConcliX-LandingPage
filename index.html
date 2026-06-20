@@ -20,7 +20,7 @@
     <a href="#" class="logo">
       <img src="midias/LogoEscrita.svg" alt="ConcliX">
     </a>
-    <nav>
+    <nav id="menuNav">
       <a href="#conciliacao">Conciliação</a>
       <a href="#integracoes">Integrações</a>
       <a href="#como-funciona">Como funciona</a>
@@ -29,6 +29,11 @@
     <div class="fim-nav">
       <a href="#contato" class="botao botao-primario">Agendar demo</a>
     </div>
+    <!-- Botão hambúrguer: visível apenas em telas menores (via CSS).
+         aria-expanded comunica ao leitor de tela se o menu está aberto. -->
+    <button id="botaoMenu" class="hamburguer" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
 
