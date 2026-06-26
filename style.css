@@ -37,9 +37,7 @@
 
 
 /* ===================================================================
-   02. RESET UNIVERSAL
-   Remove margens e espaçamentos padrão do navegador, para que
-   todo elemento comece "zerado" e seja controlado só pelo nosso CSS.
+   02. RESET 
    =================================================================== */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
